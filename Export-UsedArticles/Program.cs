@@ -12,7 +12,7 @@ namespace Export_UsedArticles
 	class Program
 	{
 		private static string Database = "Joost_Dev";
-		private static string OutputPath = "\\\\Rommeldijk\\Data\\Articles.json";
+		private static readonly string OutputPath = "\\\\Rommeldijk\\Data\\Articles.json";
 
 		public static JournalDbContext Db { get; private set; }
 
@@ -59,7 +59,6 @@ namespace Export_UsedArticles
 				stream.Write(json);
 			}
 		}
-
 
 	}
 }

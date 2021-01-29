@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Export-UsedArticles", "Export-UsedArticles\Export-UsedArticles.csproj", "{B994DDB8-6CCD-49DE-8409-4C284604F918}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-TranslatedUserArticles", "Import-TranslatedUserArticles\Import-TranslatedUserArticles.csproj", "{1CE6FC96-4F4C-422C-9181-0DC72EA5CC3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-TranslatedUsedArticles", "Import-TranslatedUsedArticles\Import-TranslatedUsedArticles.csproj", "{1CE6FC96-4F4C-422C-9181-0DC72EA5CC3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-QuickLog", "Import-QuickLog\Import-QuickLog.csproj", "{11A8F599-B5AC-4D2E-BEC3-48E5630A7C19}"
 EndProject
