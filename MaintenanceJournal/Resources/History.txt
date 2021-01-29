@@ -1,0 +1,55 @@
+﻿Version 2.0.0.15 (2021-01-29)
+* Use the renamed article ('Oploskoffie, pot').
+* Moved to Maintenance Joost solution and renamed MaintJournal to MaintenanceJournal.
+
+Version 1.0.8.14 (2020-12-09)
+* Bug fix: The 'Fallen rain' needed twice a decimal.Parse(x.Message, style, provider) solution.
+
+Version 1.0.8.13 (2020-12-09)
+* Another computer uses a different culture setting. Changing these where reset after a reboot. The 'Fallen rain' gave strange numbers. The parse is now forced to use the en-US culture.
+
+Version 1.0.8.12 (2020-12-02)
+* Reopen the restored database.
+
+Version 1.0.8.11 (2020-11-14)
+* CoffeeUsage: Corrected the number of days and counts the number of cups coffee including the time of opening of the 'Pot oploskoffie'.
+* Added report 'Calendar'.
+
+Version 1.0.7.10 (2020-10-25)
+* Show the day name of the date.
+* Extended filter options.
+
+Version 1.0.6.9 (2020-10-23)
+* Added report 'Fallen rain'.
+
+Version 1.0.5.8 (2020-09-28)
+* Bug fix: Text of 'Event filter' was reset at a `NotifyPropertyChanged`.
+
+Version 1.0.5.7 (2020-09-27)
+* Added Goto, Previous and Next buttons.
+
+Version 1.0.4.6 (2020-09-26)
+* Updated StatusBar, showing count of filtered record.
+* Added Restore, it is not possible for the production version.
+* Bug fix: Expectation in report 'Coffee usage' by a day after a 'Pot oploskoffie' is opened.
+
+Version 1.0.3.5 (2020-09-24)
+* Extended report 'Coffee usage' with min and max.
+
+Version 1.0.3.4 (2020-09-24)
+* Added report 'Coffee usage'.
+
+Version 1.0.2.3 (2020-09-23)
+* Bug fix: MainDataGrid was not refreshed it has focus.
+* Enabled new journal record.
+* Enabled multi selection.
+* Added OpenJournal (double click).
+
+Version 1.0.1.2 (2020-09-19)
+* Added report 'Opened articles'.
+
+Version 1.0.0.1 (2020-09-18)
+* Filter implemented.
+
+Version 1.0.0.0 (2020-09-17)
+* Initial version.

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-QuickLog", "Import-Q
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickLog", "QuickLog\QuickLog.csproj", "{2074EBC7-A019-402D-8E4E-4E0751E66013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceJournal", "MaintenanceJournal\MaintenanceJournal.csproj", "{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2074EBC7-A019-402D-8E4E-4E0751E66013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2074EBC7-A019-402D-8E4E-4E0751E66013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2074EBC7-A019-402D-8E4E-4E0751E66013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

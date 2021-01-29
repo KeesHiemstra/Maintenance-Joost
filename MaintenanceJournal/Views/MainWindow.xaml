@@ -1,0 +1,220 @@
+﻿<Window
+  x:Class="MaintenanceJournal.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmd="clr-namespace:MaintenanceJournal.Commands"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:MaintenanceJournal"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="clr-namespace:MaintenanceJournal.ViewModels"
+  Title="Journal maintenance"
+  Width="1000"
+  Height="450"
+  Closing="Window_Closing"
+  mc:Ignorable="d">
+
+  <Window.CommandBindings>
+    <CommandBinding
+      CanExecute="ExitCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Exit"
+      Executed="ExitCommand_Execute" />
+    <CommandBinding
+      CanExecute="OptionsCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Options"
+      Executed="OptionsCommand_Execute" />
+    <CommandBinding
+      CanExecute="BackupCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Backup"
+      Executed="BackupCommand_Execute" />
+    <CommandBinding
+      CanExecute="RestoreCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Restore"
+      Executed="RestoreCommand_Execute" />
+    <CommandBinding
+      CanExecute="RefreshJournals_CanExecute"
+      Command="cmd:MainWindowCommands.RefreshJournals"
+      Executed="RefreshJournals_Execute" />
+    <CommandBinding
+      CanExecute="NewRecordCommand_CanExecute"
+      Command="cmd:MainWindowCommands.NewRecord"
+      Executed="NewRecordCommand_Executed" />
+    <CommandBinding
+      CanExecute="ReportOpenedArticlesCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportOpenedArticles"
+      Executed="ReportOpenedArticlesCommand_Executed" />
+    <CommandBinding
+      CanExecute="ReportCoffeeUsageCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportCoffeeUsage"
+      Executed="ReportCoffeeUsageCommand_Executed" />
+    <CommandBinding
+      CanExecute="ReportFallenRainCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportFallenRain"
+      Executed="ReportFallenRainCommand_Executed" />
+    <CommandBinding
+      CanExecute="ReportCalendarCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportCalendar"
+      Executed="ReportCalendarCommand_Executed" />
+  </Window.CommandBindings>
+
+  <Grid>
+    <Grid.Resources>
+      <vm:OptionsViewModel x:Key="Options" />
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <Menu>
+      <MenuItem Header="_File">
+        <MenuItem Command="cmd:MainWindowCommands.Options" />
+        <MenuItem Command="cmd:MainWindowCommands.Backup" />
+        <MenuItem Command="cmd:MainWindowCommands.Restore" />
+        <Separator />
+        <MenuItem Command="cmd:MainWindowCommands.Exit" />
+      </MenuItem>
+
+      <MenuItem Header="_Journal">
+        <MenuItem Command="cmd:MainWindowCommands.RefreshJournals" />
+        <Separator />
+        <MenuItem Command="cmd:MainWindowCommands.NewRecord" />
+      </MenuItem>
+
+      <MenuItem Header="_Reports">
+        <MenuItem Command="cmd:MainWindowCommands.ReportOpenedArticles" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportCoffeeUsage" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportFallenRain" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportCalendar" />
+      </MenuItem>
+    </Menu>
+
+    <StatusBar Grid.Row="3">
+      <StatusBarItem>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Database = " />
+          <TextBlock Text="{Binding Options.DbName}" />
+        </StackPanel>
+      </StatusBarItem>
+      <Separator />
+      <StatusBarItem>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Count = " />
+          <StackPanel
+            x:Name="FilterStatus"
+            Orientation="Horizontal"
+            Visibility="Hidden">
+            <TextBlock Text="{Binding FilteredCount}" />
+            <TextBlock Text=" of " />
+          </StackPanel>
+          <TextBlock x:Name="JournalsCount" Text="{Binding JournalsCount}" />
+        </StackPanel>
+      </StatusBarItem>
+      <StatusBarItem />
+    </StatusBar>
+
+    <Border
+      Name="FilterBorden"
+      Grid.Row="1"
+      Background="LightGray"
+      KeyUp="FilterBorden_KeyUp">
+      <StackPanel Margin="5,5,5,5" Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+          <TextBlock VerticalAlignment="Center" Text="Message: " />
+          <TextBox
+            Name="FilterMessageTextBox"
+            Width="150"
+            Margin="0,0,10,0"
+            TextChanged="FilterMessageTextBox_TextChanged" />
+
+          <TextBlock VerticalAlignment="Center" Text="Event: " />
+          <ComboBox
+            Name="FilterEventComboBox"
+            Width="250"
+            Margin="0,0,10,0"
+            IsEditable="False"
+            IsReadOnly="True"
+            SelectionChanged="FilterEventComboBox_SelectionChanged" />
+
+          <TextBlock VerticalAlignment="Center" Text="From: " />
+          <DatePicker
+            x:Name="FilterFromDatePicker"
+            Margin="0,0,5,0"
+            FirstDayOfWeek="Monday" />
+
+          <TextBlock VerticalAlignment="Center" Text="to: " />
+          <DatePicker
+            x:Name="FilterToDatePicker"
+            Margin="0,0,10,0"
+            FirstDayOfWeek="Monday" />
+
+          <Button
+            Name="ApplyButton"
+            Width="40"
+            Margin="0,0,10,0"
+            Click="ApplyButton_Click"
+            Content="Filter" />
+          <Button
+            Name="ClearButton"
+            Width="40"
+            Margin="0,0,10,0"
+            Click="ClearButton_Click"
+            Content="Clear" />
+          <Border
+            x:Name="GotoBorder"
+            BorderThickness="0"
+            Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+              <Button
+                Name="GotoButton"
+                Width="40"
+                Margin="0,0,5,0"
+                Click="GotoButton_Click"
+                Content="Goto" />
+              <Button
+                Name="PreviousButton"
+                Width="20"
+                Margin="0,0,5,0"
+                Click="PreviousButton_Click"
+                Content="&lt;"
+                Visibility="Collapsed" />
+              <Button
+                Name="NextButton"
+                Width="20"
+                Margin="0,0,10,0"
+                Click="NextButton_Click"
+                Content="&gt;"
+                Visibility="Collapsed" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <DataGrid
+      Name="MainDataGrid"
+      Grid.Row="2"
+      AutoGenerateColumns="False"
+      CanUserAddRows="False"
+      IsReadOnly="True"
+      MouseDoubleClick="MainDataGrid_MouseDoubleClick">
+      <DataGrid.Columns>
+        <DataGridTextColumn
+          Width="130"
+          Binding="{Binding DTStart, StringFormat=yyyy-MM-dd HH:mm ddd}"
+          Header="Time" />
+        <DataGridTextColumn
+          Width="125"
+          Binding="{Binding Event}"
+          Header="Event" />
+        <DataGridTextColumn
+          Width="*"
+          Binding="{Binding Message}"
+          Header="Message" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+  </Grid>
+</Window>
