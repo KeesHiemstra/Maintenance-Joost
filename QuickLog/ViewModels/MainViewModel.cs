@@ -57,7 +57,7 @@ namespace QuickLog.ViewModels
 		{
 			View.LogsDataGrid.ItemsSource = null;
 
-			DateTime time = DateTime.Parse($"{View.DateDatePicker.DisplayDate.Date:yyyy-MM-dd} " +
+			DateTime time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
 				$"{View.TimeTextBox.Text}");
 
 			Logs.Insert(0, new QLog()
@@ -76,15 +76,6 @@ namespace QuickLog.ViewModels
 				.OrderByDescending(x => x.Time);
 		}
 
-		internal void SaveLogs()
-		{
-			using (var writer = new StreamWriter(InputPath))
-			using (var csv = new CsvWriter(writer, Config))
-			{
-				csv.WriteRecords(Logs.OrderBy(x => x.Time));
-			}
-		}
-
 		private void LoadLogs()
 		{
 			if (!File.Exists(InputPath)) { return; }
@@ -95,5 +86,15 @@ namespace QuickLog.ViewModels
 				Logs = new List<QLog>(logs);
 			}
 		}
+
+		internal void SaveLogs()
+		{
+			using (var writer = new StreamWriter(InputPath))
+			using (var csv = new CsvWriter(writer, Config))
+			{
+				csv.WriteRecords(Logs.OrderBy(x => x.Time));
+			}
+		}
+
 	}
 }

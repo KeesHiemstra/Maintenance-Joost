@@ -113,6 +113,7 @@
       Grid.Row="5"
       Grid.ColumnSpan="4"
       AutoGenerateColumns="False"
+      IsReadOnly="True"
       CanUserAddRows="False">
       <DataGrid.Columns>
         <DataGridTextColumn Binding="{Binding Time, StringFormat=yyyy-MM-dd HH:mm}" Header="Time" />

@@ -105,6 +105,11 @@ namespace QuickLog
 			((TextBox)e.Source).Text = text.Insert(text.Length - 2, ":");
 		}
 
+		private void MessageTextBox_GotFocus(object sender, RoutedEventArgs e)
+		{
+			((TextBox)e.OriginalSource).SelectAll();
+		}
+
 		private void AddButton_Click(object sender, RoutedEventArgs e)
 		{
 			VM.AddRecord();
@@ -115,9 +120,5 @@ namespace QuickLog
 			VM.SaveLogs();
 		}
 
-		private void MessageTextBox_GotFocus(object sender, RoutedEventArgs e)
-		{
-			((TextBox)e.OriginalSource).SelectAll();
-		}
 	}
 }
