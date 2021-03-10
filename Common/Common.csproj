@@ -8,7 +8,7 @@
     <ProjectGuid>{660DFF94-0475-47C5-B555-4D08B1E0C293}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Common</RootNamespace>
-    <AssemblyName>Common</AssemblyName>
+    <AssemblyName>Joost common</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
