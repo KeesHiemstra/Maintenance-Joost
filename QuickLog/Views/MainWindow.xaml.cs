@@ -33,6 +33,23 @@ namespace QuickLog
 			TimeTextBox.Focus();
 		}
 
+		#region Menu MainCommands
+
+		#region Exit command
+		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void ExitCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
+
+		#endregion
+
+		#endregion
+
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			if (VM.Logs != null && VM.Logs.Count > 0)
