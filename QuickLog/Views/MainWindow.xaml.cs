@@ -89,12 +89,12 @@ namespace QuickLog
 		{
 			if (sender == null) { return; }
 
-			if ((e.Key == Key.OemPlus) || (e.Key == Key.Space))
+			if ((e.Key == Key.OemPlus) || (e.Key == Key.Space) || (e.Key == Key.Add))
 			{
 				DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(1);
 				DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
 			}
-			else if (e.Key == Key.OemMinus)
+			else if (e.Key == Key.OemMinus || (e.Key == Key.Subtract))
 			{
 				DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(-1);
 				DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
