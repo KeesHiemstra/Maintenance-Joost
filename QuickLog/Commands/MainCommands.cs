@@ -16,5 +16,16 @@ namespace QuickLog.Commands
 				}
 			);
 
+		public static readonly RoutedUICommand Rename = new RoutedUICommand
+			(
+				"_Rename",
+				"Rename",
+				typeof(MainCommands),
+				new InputGestureCollection()
+				{
+					new KeyGesture(Key.F12),
+				}
+			);
+
 	}
 }

@@ -48,6 +48,19 @@ namespace QuickLog
 
 		#endregion
 
+		#region Rename command
+		private void RenameCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void RenameCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.Rename();
+		}
+
+		#endregion
+
 		#endregion
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)

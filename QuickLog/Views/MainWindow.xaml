@@ -7,12 +7,16 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:cmd="clr-namespace:QuickLog.Commands"
   Title="Quick log"
-  Width="366"
+  Width="370"
   Height="450"
   Loaded="Window_Loaded"
   mc:Ignorable="d">
 
   <Window.CommandBindings>
+    <CommandBinding
+      CanExecute="RenameCommand_CanExecute"
+      Command="cmd:MainCommands.Rename"
+      Executed="RenameCommand_Execute" />
     <CommandBinding
       CanExecute="ExitCommand_CanExecute"
       Command="cmd:MainCommands.Exit"
@@ -41,6 +45,8 @@
       Grid.Row="0"
       Grid.ColumnSpan="2">
       <MenuItem Header="_File">
+        <MenuItem Command="cmd:MainCommands.Rename"/>
+        <Separator/>
         <MenuItem Command="cmd:MainCommands.Exit" />
       </MenuItem>
     </Menu>

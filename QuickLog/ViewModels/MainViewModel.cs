@@ -1,23 +1,26 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 
+using Microsoft.Win32;
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace QuickLog.ViewModels
 {
 	public class MainViewModel
 	{
-		private static string InputPath = "\\\\Rommeldijk\\Data\\QuickLog.csv";
+		private static string QuickLogPath = "\\\\Rommeldijk\\Data\\QuickLog.csv";
 		private readonly MainWindow View;
-		private readonly CsvConfiguration Config = 
+		private readonly CsvConfiguration Config =
 			new CsvConfiguration(CultureInfo.CurrentUICulture)
-		{
-			Delimiter = "\t",
-		};
+			{
+				Delimiter = "\t",
+			};
 
 		public List<QLog> Logs { get; set; } = new List<QLog>();
 		public List<string> Items { get; set; } = new List<string>();
@@ -32,7 +35,7 @@ namespace QuickLog.ViewModels
 
 		private void UpdateItems()
 		{
-			if (View.EventComboBox != null) 
+			if (View.EventComboBox != null)
 			{
 				View.EventComboBox.ItemsSource = null;
 			}
@@ -78,21 +81,47 @@ namespace QuickLog.ViewModels
 
 		private void LoadLogs()
 		{
-			if (!File.Exists(InputPath)) { return; }
-			using (var reader = new StreamReader(InputPath))
-			using (var cvs = new CsvReader(reader, Config))
-			{
-				var logs = cvs.GetRecords<QLog>();
-				Logs = new List<QLog>(logs);
-			}
+			if (!File.Exists(QuickLogPath)) { return; }
+			using var reader = new StreamReader(QuickLogPath);
+			using var cvs = new CsvReader(reader, Config);
+			var logs = cvs.GetRecords<QLog>();
+			Logs = new List<QLog>(logs);
 		}
 
 		internal void SaveLogs()
 		{
-			using (var writer = new StreamWriter(InputPath))
-			using (var csv = new CsvWriter(writer, Config))
+			using var writer = new StreamWriter(QuickLogPath);
+			using var csv = new CsvWriter(writer, Config);
+			csv.WriteRecords(Logs.OrderBy(x => x.Time));
+		}
+
+		internal void Rename()
+		{
+			//Request a new name
+			SaveFileDialog saveFileDialog = new SaveFileDialog()
 			{
-				csv.WriteRecords(Logs.OrderBy(x => x.Time));
+				Title = "Rename",
+				DefaultExt = ".csv",
+				Filter = "comma separated values (.csv)|*.csv",
+				FileName = QuickLogPath,
+			};
+
+			bool? result = saveFileDialog.ShowDialog();
+			if (!result.Value) { return; }
+			if (saveFileDialog.FileName == QuickLogPath) { return; }
+
+			//Rename the QuickLogPath to the new name
+			try
+			{
+				File.Move(QuickLogPath, saveFileDialog.FileName);
+				QuickLogPath = saveFileDialog.FileName;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error {saveFileDialog.FileName}:/n{ex.Message}",
+					"Error renaming",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error);
 			}
 		}
 
