@@ -21,6 +21,10 @@
       CanExecute="ExitCommand_CanExecute"
       Command="cmd:MainCommands.Exit"
       Executed="ExitCommand_Execute" />
+    <CommandBinding
+      CanExecute="SaveCommand_CanExecute"
+      Command="cmd:MainCommands.Save"
+      Executed="SaveCommand_Execute" />
   </Window.CommandBindings>
 
   <Grid Margin="10">
@@ -45,6 +49,7 @@
       Grid.Row="0"
       Grid.ColumnSpan="2">
       <MenuItem Header="_File">
+        <MenuItem Command="cmd:MainCommands.Save"/>
         <MenuItem Command="cmd:MainCommands.Rename"/>
         <Separator/>
         <MenuItem Command="cmd:MainCommands.Exit" />
@@ -122,14 +127,6 @@
         Click="AddButton_Click"
         Content="Add" />
 
-      <Button
-        x:Name="SaveButton"
-        Width="75"
-        Height="24"
-        Margin="0,0,10,0"
-        HorizontalAlignment="Left"
-        Click="SaveButton_Click"
-        Content="Save" />
     </StackPanel>
 
 

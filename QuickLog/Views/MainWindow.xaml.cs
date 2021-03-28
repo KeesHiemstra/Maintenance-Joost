@@ -61,6 +61,19 @@ namespace QuickLog
 
 		#endregion
 
+		#region Save command
+		private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void SaveCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.SaveLogs();
+		}
+
+		#endregion
+
 		#endregion
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)

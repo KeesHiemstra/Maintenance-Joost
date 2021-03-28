@@ -56,6 +56,9 @@ namespace QuickLog.ViewModels
 			}
 		}
 
+		/// <summary>
+		/// Add a log entry to QuickLog data.
+		/// </summary>
 		internal void AddRecord()
 		{
 			View.LogsDataGrid.ItemsSource = null;
@@ -79,6 +82,9 @@ namespace QuickLog.ViewModels
 				.OrderByDescending(x => x.Time);
 		}
 
+		/// <summary>
+		/// Load the QuickLog data.
+		/// </summary>
 		private void LoadLogs()
 		{
 			if (!File.Exists(QuickLogPath)) { return; }
@@ -88,6 +94,9 @@ namespace QuickLog.ViewModels
 			Logs = new List<QLog>(logs);
 		}
 
+		/// <summary>
+		/// Save the QuickLog data.
+		/// </summary>
 		internal void SaveLogs()
 		{
 			using var writer = new StreamWriter(QuickLogPath);
@@ -95,6 +104,9 @@ namespace QuickLog.ViewModels
 			csv.WriteRecords(Logs.OrderBy(x => x.Time));
 		}
 
+		/// <summary>
+		/// Rename the QuickLog.csv file.
+		/// </summary>
 		internal void Rename()
 		{
 			//Request a new name

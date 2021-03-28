@@ -27,5 +27,16 @@ namespace QuickLog.Commands
 				}
 			);
 
+		public static readonly RoutedUICommand Save = new RoutedUICommand
+			(
+				"_Save",
+				"Save",
+				typeof(MainCommands),
+				new InputGestureCollection()
+				{
+					new KeyGesture(Key.S, ModifierKeys.Control)
+				}
+			);
+
 	}
 }
