@@ -74,6 +74,19 @@ namespace QuickLog
 
 		#endregion
 
+		#region Clear command
+		private void ClearCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void ClearCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ClearLogs();
+		}
+
+		#endregion
+
 		#endregion
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -156,11 +169,6 @@ namespace QuickLog
 		private void AddButton_Click(object sender, RoutedEventArgs e)
 		{
 			VM.AddRecord();
-		}
-
-		private void SaveButton_Click(object sender, RoutedEventArgs e)
-		{
-			VM.SaveLogs();
 		}
 
 	}

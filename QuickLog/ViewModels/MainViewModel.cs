@@ -83,6 +83,23 @@ namespace QuickLog.ViewModels
 		}
 
 		/// <summary>
+		/// Clear QuickLog and save the data.
+		/// </summary>
+		internal void ClearLogs()
+		{
+			if (MessageBox.Show("Clear QuickLog data?",
+				"",
+				MessageBoxButton.YesNo,
+				MessageBoxImage.Question,
+				MessageBoxResult.No) != MessageBoxResult.Yes) { return; }
+
+			View.LogsDataGrid.ItemsSource = null;
+			Logs.Clear();
+			SaveLogs();
+			View.LogsDataGrid.ItemsSource = Logs;
+		}
+
+		/// <summary>
 		/// Load the QuickLog data.
 		/// </summary>
 		private void LoadLogs()

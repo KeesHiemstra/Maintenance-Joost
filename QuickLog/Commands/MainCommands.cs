@@ -38,5 +38,13 @@ namespace QuickLog.Commands
 				}
 			);
 
+		public static readonly RoutedUICommand Clear = new RoutedUICommand
+			(
+				"_Clear",
+				"Clear",
+				typeof(MainCommands),
+				new InputGestureCollection() { }
+			);
+
 	}
 }

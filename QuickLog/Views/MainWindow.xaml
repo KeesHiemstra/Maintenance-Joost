@@ -14,6 +14,14 @@
 
   <Window.CommandBindings>
     <CommandBinding
+      CanExecute="SaveCommand_CanExecute"
+      Command="cmd:MainCommands.Save"
+      Executed="SaveCommand_Execute" />
+    <CommandBinding
+      CanExecute="ClearCommand_CanExecute"
+      Command="cmd:MainCommands.Clear"
+      Executed="ClearCommand_Execute" />
+    <CommandBinding
       CanExecute="RenameCommand_CanExecute"
       Command="cmd:MainCommands.Rename"
       Executed="RenameCommand_Execute" />
@@ -21,10 +29,6 @@
       CanExecute="ExitCommand_CanExecute"
       Command="cmd:MainCommands.Exit"
       Executed="ExitCommand_Execute" />
-    <CommandBinding
-      CanExecute="SaveCommand_CanExecute"
-      Command="cmd:MainCommands.Save"
-      Executed="SaveCommand_Execute" />
   </Window.CommandBindings>
 
   <Grid Margin="10">
@@ -50,6 +54,7 @@
       Grid.ColumnSpan="2">
       <MenuItem Header="_File">
         <MenuItem Command="cmd:MainCommands.Save"/>
+        <MenuItem Command="cmd:MainCommands.Clear"/>
         <MenuItem Command="cmd:MainCommands.Rename"/>
         <Separator/>
         <MenuItem Command="cmd:MainCommands.Exit" />
