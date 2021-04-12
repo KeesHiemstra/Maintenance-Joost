@@ -101,6 +101,7 @@ namespace MaintenanceJournal.ViewModels
 			{
 				Log.Write($"Loaded Journal table");
 			}
+
 		}
 
 		public void EditRecord(int? logId)
@@ -196,88 +197,90 @@ namespace MaintenanceJournal.ViewModels
 			if (MessageBox.Show($"Do you restore the file '{Options.RestoreFile}?'",
 				"Restore",
 				MessageBoxButton.YesNoCancel,
-				MessageBoxImage.Question) == MessageBoxResult.Yes)
+				MessageBoxImage.Question) != MessageBoxResult.Yes) { return; }
+
+			string temp = "C:\\Temp\\RestoreFile.bak";
+
+			//Delete existing temp
+			if (File.Exists(temp))
 			{
-				string temp = "C:\\Temp\\RestoreFile.bak";
-
-				if (File.Exists(temp))
+				Log.Write($"Previous copy '{temp}' does still exist");
+				if (MessageBox.Show($"Previous copy '{temp}' does still exist." +
+					$"Do you overwrite the file?",
+					"Restore",
+					MessageBoxButton.YesNoCancel,
+					MessageBoxImage.Question) == MessageBoxResult.Yes)
 				{
-					Log.Write($"Previous copy '{temp}' does still exist");
-					if (MessageBox.Show($"Previous copy '{temp}' does still exist." +
-						$"Do you overwrite the file?",
-						"Restore",
-						MessageBoxButton.YesNoCancel,
-						MessageBoxImage.Question) == MessageBoxResult.Yes)
-					{
-						try
-						{
-							File.Delete(temp);
-							Log.Write($"{temp} is deleted");
-						}
-						catch (Exception ex)
-						{
-							Log.Write($"Can not delete {temp}", ex.Message);
-							MessageBox.Show($"Can not delete {temp}\n{ex.Message}");
-							return;
-						}
-					}
-				}
-
-				//Copy semi-remote backup
-				try
-				{
-					File.Copy(Options.RestoreFile.TranslatePath(), temp);
-					Log.Write($"'{Options.RestoreFile}' is copied to '{temp}'");
-				}
-				catch (Exception ex)
-				{
-					Log.Write($"Error copying '{Options.RestoreFile.TranslatePath()}' to " +
-						$"'{temp}'", ex.Message);
-					MessageBox.Show($"Error copying {Options.RestoreFile}\nto {temp}",
-						"Restore",
-						MessageBoxButton.OK,
-						MessageBoxImage.Error);
-					return;
-				}
-
-				string sql = $"USE [master] ALTER DATABASE [{Options.DbName}] " +
-					$"SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE [{Options.DbName}] " +
-					$"FROM DISK = N'{temp}' WITH FILE = 1, NOUNLOAD, REPLACE, STATS = 5 " +
-					$"ALTER DATABASE [{Options.DbName}] SET MULTI_USER";
-
-				//Restore the copied backup
-				try
-				{
-					Db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, sql);
-
-					Log.Write($"'{Options.RestoreFile}' is restored");
-					MessageBox.Show($"Restore is successful",
-						"Restore",
-						MessageBoxButton.OK,
-						MessageBoxImage.Information);
-
 					try
 					{
 						File.Delete(temp);
+						Log.Write($"{temp} is deleted");
 					}
 					catch (Exception ex)
 					{
-						Log.Write($"Can not delete '{temp}'", ex.Message);
+						Log.Write($"Can not delete {temp}", ex.Message);
+						MessageBox.Show($"Can not delete {temp}\n{ex.Message}");
+						return;
 					}
+				}
+			}
+
+			//Copy semi-remote backup
+			try
+			{
+				File.Copy(Options.RestoreFile.TranslatePath(), temp);
+				Log.Write($"'{Options.RestoreFile}' is copied to '{temp}'");
+			}
+			catch (Exception ex)
+			{
+				Log.Write($"Error copying '{Options.RestoreFile.TranslatePath()}' to " +
+					$"'{temp}'", ex.Message);
+				MessageBox.Show($"Error copying {Options.RestoreFile}\nto {temp}",
+					"Restore",
+					MessageBoxButton.OK,
+					MessageBoxImage.Error);
+				return;
+			}
+
+			string sql = $"USE [master] ALTER DATABASE [{Options.DbName}] " +
+			$"SET SINGLE_USER WITH ROLLBACK IMMEDIATE RESTORE DATABASE [{Options.DbName}] " +
+			$"FROM DISK = N'{temp}' WITH FILE = 1, NOUNLOAD, REPLACE, STATS = 5 " +
+			$"ALTER DATABASE [{Options.DbName}] SET MULTI_USER";
+
+			//Restore the copied backup
+			try
+			{
+				Db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, sql);
+
+				Log.Write($"'{Options.RestoreFile}' is restored");
+				MessageBox.Show($"Restore is successful",
+					"Restore",
+					MessageBoxButton.OK,
+					MessageBoxImage.Information);
+
+				try
+				{
+					File.Delete(temp);
 				}
 				catch (Exception ex)
 				{
-					Log.Write($"Error restore the file {Options.RestoreFile}", ex.Message);
-					MessageBox.Show(ex.Message,
-						"Restore exception",
-						MessageBoxButton.OK,
-						MessageBoxImage.Exclamation);
-					return;
+					Log.Write($"Can not delete '{temp}'", ex.Message);
 				}
-
-				//Reopen the restored database
-				GetJournals();
 			}
+			catch (Exception ex)
+			{
+				Log.Write($"Error restore the file {Options.RestoreFile}", ex.Message);
+				MessageBox.Show(ex.Message,
+					"Restore exception",
+					MessageBoxButton.OK,
+					MessageBoxImage.Exclamation);
+				return;
+			}
+
+			//Reopen the restored database and refresh view
+			View.MainDataGrid.ItemsSource = null;
+			GetJournals();
+			View.MainDataGrid.ItemsSource = Journals;
 		}
 
 		#endregion

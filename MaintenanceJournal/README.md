@@ -28,4 +28,5 @@ Is a dynamic object. The basis is not so difficult, but it show in grid was a ch
 
 - [ ] The first record was saved, but additional records was not saved.
 - [ ] The number are right aligned, inclusive the first column. The first column should be left aligned.
+- [X] The records are not updated after restore a database.
 - [X] Text of 'Event filter' was reset at a `NotifyPropertyChanged`.

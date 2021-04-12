@@ -74,7 +74,7 @@ namespace MaintenanceJournal.ViewModels
 				Report.Add(new OpenedArticles
 				{
 					Opened = null,
-					Days = (int)(DateTime.Now - articles.First().DTStart.Value).TotalDays
+					Days = (int)(DateTime.Now - articles.First().DTStart.Value.Date).TotalDays
 				});
 			}
 
@@ -83,7 +83,7 @@ namespace MaintenanceJournal.ViewModels
 				Report.Add(new OpenedArticles
 				{
 					Opened = articles[i].DTStart,
-					Days = (int)(articles[i].DTStart.Value - articles[i + 1].DTStart.Value).TotalDays
+					Days = (int)(articles[i].DTStart.Value.Date - articles[i + 1].DTStart.Value.Date).TotalDays
 				});
 			}
 

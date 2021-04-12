@@ -1,4 +1,9 @@
-﻿Version 2.0.0.15 (2021-01-29)
+﻿Version 2.0.0.16 (2021-04-12)
+* Refresh view after restore.
+* Set focus ArticleComboBox after opening OpenedArticlesWindow.
+* Improved the days count in OpenedArticlesWindow.
+
+Version 2.0.0.15 (2021-01-29)
 * Use the renamed article ('Oploskoffie, pot').
 * Moved to Maintenance Joost solution and renamed MaintJournal to MaintenanceJournal.
 

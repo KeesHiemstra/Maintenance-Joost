@@ -17,6 +17,7 @@ namespace MaintenanceJournal.Views
 
 			ArticlesVM = articlesVM;
 			DataContext = articlesVM;
+			ArticleComboBox.Focus();
 		}
 
 		private void ArticleComboBox_Selected(object sender, RoutedEventArgs e)

@@ -1,168 +1,192 @@
-﻿<Window x:Class="MaintenanceJournal.Views.CalendarWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MaintenanceJournal.Views"
-        mc:Ignorable="d"
-        Title="Calender" 
-        Height="450" 
-        Width="1057">
+﻿<Window
+  x:Class="MaintenanceJournal.Views.CalendarWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:MaintenanceJournal.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Title="Calender"
+  Width="1057"
+  Height="450"
+  mc:Ignorable="d">
   <Grid Margin="5">
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="Auto"/>
-      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="Auto"/>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <StatusBar Margin="-5,0,-5,-5"
-               Grid.ColumnSpan="5"
-               Grid.Column="0"
-               Grid.Row="5">
+    <StatusBar
+      Grid.Row="5"
+      Grid.Column="0"
+      Grid.ColumnSpan="5"
+      Margin="-5,0,-5,-5">
       <StatusBarItem>
         <StackPanel Orientation="Horizontal">
-          <TextBlock Text="Count = "/>
-          <TextBlock Text="{Binding CalendarCount}"/>
+          <TextBlock Text="Count = " />
+          <TextBlock Text="{Binding CalendarCount}" />
         </StackPanel>
       </StatusBarItem>
       <StatusBarItem />
     </StatusBar>
 
-    <TextBlock Text="Date from: "
-               VerticalAlignment="Center"
-               Margin="0,5,0,0"
-               Grid.Column="0"
-               Grid.Row="0"/>
+    <TextBlock
+      Grid.Row="0"
+      Grid.Column="0"
+      Margin="0,5,0,0"
+      VerticalAlignment="Center"
+      Text="Date from: " />
 
-    <DatePicker x:Name="FilterFromDatePicker"
-                FirstDayOfWeek="Monday"
-                Margin="0,5,0,0"
-                VerticalAlignment="Center"
-                Grid.Column="1"
-                Grid.Row="0"/>
+    <DatePicker
+      x:Name="FilterFromDatePicker"
+      Grid.Row="0"
+      Grid.Column="1"
+      Margin="0,5,0,0"
+      VerticalAlignment="Center"
+      FirstDayOfWeek="Monday" />
 
-    <TextBlock Text=" to: "
-               VerticalAlignment="Center"
-               Margin="0,5,0,0"
-               Grid.Column="2"
-               Grid.Row="0"/>
+    <TextBlock
+      Grid.Row="0"
+      Grid.Column="2"
+      Margin="0,5,0,0"
+      VerticalAlignment="Center"
+      Text=" to: " />
 
-    <DatePicker x:Name="FilterToDatePicker"
-                FirstDayOfWeek="Monday"
-                Margin="0,5,0,0"
-                Grid.Column="3"
-                Grid.Row="0"/>
+    <DatePicker
+      x:Name="FilterToDatePicker"
+      Grid.Row="0"
+      Grid.Column="3"
+      Margin="0,5,0,0"
+      FirstDayOfWeek="Monday" />
 
-    <TextBlock Text="Event: "
-               VerticalAlignment="Center"
-               Margin="0,5,0,0"
-               Grid.Column="0"
-               Grid.Row="1"/>
+    <TextBlock
+      Grid.Row="1"
+      Grid.Column="0"
+      Margin="0,5,0,0"
+      VerticalAlignment="Center"
+      Text="Event: " />
 
-    <ComboBox x:Name="FilterEvent1ComboBox"
-              IsEditable="True"
-              IsReadOnly="True"
-              Width="200"
-              Margin="0,5,0,0"
-              Grid.Column="1"
-              Grid.Row="1"/>
+    <ComboBox
+      x:Name="FilterEvent1ComboBox"
+      Grid.Row="1"
+      Grid.Column="1"
+      Width="200"
+      Margin="0,5,0,0"
+      IsEditable="True"
+      IsReadOnly="True" />
 
-    <TextBlock Text=" of "
-               VerticalAlignment="Center"
-               Margin="0,5,0,0"
-               Grid.Column="2"
-               Grid.Row="1"/>
+    <TextBlock
+      Grid.Row="1"
+      Grid.Column="2"
+      Margin="0,5,0,0"
+      VerticalAlignment="Center"
+      Text=" of " />
 
-    <ComboBox x:Name="FilterEvent2ComboBox"
-              IsEditable="True"
-              IsReadOnly="True"
-              Width="200"
-              Margin="0,5,0,0"
-              Grid.Column="3"
-              Grid.Row="1"/>
+    <ComboBox
+      x:Name="FilterEvent2ComboBox"
+      Grid.Row="1"
+      Grid.Column="3"
+      Width="200"
+      Margin="0,5,0,0"
+      IsEditable="True"
+      IsReadOnly="True" />
 
-    <TextBlock Text="Message"
-               VerticalAlignment="Center"
-               Margin="0,5,0,0"
-               Grid.Column="0"
-               Grid.Row="2"/>
+    <TextBlock
+      Grid.Row="2"
+      Grid.Column="0"
+      Margin="0,5,0,0"
+      VerticalAlignment="Center"
+      Text="Message" />
 
-    <TextBox x:Name="FilterMessageTextBox"
-             Width="200"
-             Height="22"
-             Margin="0,5,0,0"
-             Grid.Column="1"
-             Grid.Row="2"/>
+    <TextBox
+      x:Name="FilterMessageTextBox"
+      Grid.Row="2"
+      Grid.Column="1"
+      Width="200"
+      Height="22"
+      Margin="0,5,0,0" />
 
-    <StackPanel Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                Grid.Column="3"
-                Grid.Row="3">
-      
-      <Button x:Name="FilterButton"
-              Content="_Filter"
-              Width="40"
-              Height="22"
-              Click="FilterButton_Click"/>
-      
+    <StackPanel
+      Grid.Row="3"
+      Grid.Column="3"
+      HorizontalAlignment="Right"
+      Orientation="Horizontal">
+
+      <Button
+        x:Name="FilterButton"
+        Width="40"
+        Height="22"
+        Click="FilterButton_Click"
+        Content="_Filter" />
+
     </StackPanel>
 
-    <DataGrid x:Name="CalendarDataGrid"
-              AutoGenerateColumns="False"
-              IsReadOnly="True"
-              CanUserAddRows="False"
-              CanUserDeleteRows="False"
-              Margin="0,5,0,5"
-              Grid.ColumnSpan="5"
-              Grid.Column="0"
-              Grid.Row="4">
+    <DataGrid
+      x:Name="CalendarDataGrid"
+      Grid.Row="4"
+      Grid.Column="0"
+      Grid.ColumnSpan="5"
+      Margin="0,5,0,5"
+      AutoGenerateColumns="False"
+      CanUserAddRows="False"
+      CanUserDeleteRows="False"
+      IsReadOnly="True">
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Week"
-                            Binding="{Binding Week}"
-                            MinWidth="65"/>
-        <DataGridTextColumn Header="Date"
-                            Binding="{Binding Date, StringFormat=yyyy-MM-dd}"
-                            MinWidth="61"/>
-        <DataGridTextColumn Header="Monday"
-                            Binding="{Binding Mo}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
-        <DataGridTextColumn Header="Tuesday"
-                            Binding="{Binding Tu}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
-        <DataGridTextColumn Header="Wednesday"
-                            Binding="{Binding We}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
-        <DataGridTextColumn Header="Thursday"
-                            Binding="{Binding Th}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
-        <DataGridTextColumn Header="Friday"
-                            Binding="{Binding Fr}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
-        <DataGridTextColumn Header="Saturday"
-                            Binding="{Binding Sa}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
-        <DataGridTextColumn Header="Sunday"
-                            Binding="{Binding Su}"
-                            MinWidth="61"
-                            MaxWidth="131"/>
+        <DataGridTextColumn
+          MinWidth="65"
+          Binding="{Binding Week}"
+          Header="Week" />
+        <DataGridTextColumn
+          MinWidth="61"
+          Binding="{Binding Date, StringFormat=yyyy-MM-dd}"
+          Header="Date" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding Mo}"
+          Header="Monday" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding Tu}"
+          Header="Tuesday" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding We}"
+          Header="Wednesday" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding Th}"
+          Header="Thursday" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding Fr}"
+          Header="Friday" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding Sa}"
+          Header="Saturday" />
+        <DataGridTextColumn
+          MinWidth="61"
+          MaxWidth="131"
+          Binding="{Binding Su}"
+          Header="Sunday" />
       </DataGrid.Columns>
     </DataGrid>
-    
+
   </Grid>
 </Window>

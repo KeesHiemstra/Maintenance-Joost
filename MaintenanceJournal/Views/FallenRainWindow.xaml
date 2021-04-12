@@ -6,7 +6,7 @@
   xmlns:local="clr-namespace:MaintenanceJournal.Views"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Title="Fallen rain"
-  Width="250"
+  Width="300"
   Height="315"
   mc:Ignorable="d">
   <Grid>
