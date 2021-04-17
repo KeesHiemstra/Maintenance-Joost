@@ -1,4 +1,7 @@
-﻿Version 2.0.0.16 (2021-04-12)
+﻿Version 2.0.1.17
+* Add DefecateWindow.
+
+Version 2.0.0.16 (2021-04-12)
 * Refresh view after restore.
 * Set focus ArticleComboBox after opening OpenedArticlesWindow.
 * Improved the days count in OpenedArticlesWindow.
