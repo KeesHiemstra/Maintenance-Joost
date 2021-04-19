@@ -1,16 +1,15 @@
 ﻿<Window
-	x:Class="MaintenanceJournal.Views.OptionsWindow"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:local="clr-namespace:MaintenanceJournal.Views"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	Title="Options"
-	Width="600"
-	Height="200"
-	mc:Ignorable="d">
-  <Grid
-		Margin="5,5,5,5">
+  x:Class="MaintenanceJournal.Views.OptionsWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:MaintenanceJournal.Views"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Title="Options"
+  Width="600"
+  Height="200"
+  mc:Ignorable="d">
+  <Grid Margin="5,5,5,5">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
       <ColumnDefinition Width="*" />
@@ -25,61 +24,61 @@
     </Grid.RowDefinitions>
 
     <TextBlock
-			Grid.Row="0"
-			Grid.Column="0"
-			Margin="0,0,10,0"
-			Text="Database connection" />
+      Grid.Row="0"
+      Grid.Column="0"
+      Margin="0,0,10,0"
+      Text="Database connection" />
     <TextBox
-			Name="DbConnectionTextBox"
-			Grid.Row="0"
-			Grid.Column="1"
-			Text="{Binding DbConnection}" />
+      Name="DbConnectionTextBox"
+      Grid.Row="0"
+      Grid.Column="1"
+      Text="{Binding DbConnection}" />
 
     <TextBlock
-			Grid.Row="3"
-			Grid.Column="0"
-			Margin="0,0,10,0"
-			VerticalAlignment="Center"
-			Text="Backup path" />
+      Grid.Row="3"
+      Grid.Column="0"
+      Margin="0,0,10,0"
+      VerticalAlignment="Center"
+      Text="Backup path" />
     <TextBox
-			Name="BackupPathTextBox"
-			Grid.Row="3"
-			Grid.Column="1"
-			Margin="0,5,0,0"
-			Text="{Binding BackupPath}" />
+      Name="BackupPathTextBox"
+      Grid.Row="3"
+      Grid.Column="1"
+      Margin="0,5,0,0"
+      Text="{Binding BackupPath}" />
 
     <TextBlock
       Grid.Row="4"
       Grid.Column="0"
       Margin="0,0,10,0"
       VerticalAlignment="Center"
-      Text="Restore file"/>
+      Text="Restore file" />
     <TextBox
       x:Name="RestoreFileTextBox"
       Grid.Row="4"
       Grid.Column="1"
       Margin="0,5,0,0"
-      Text="{Binding RestoreFile}"/>
+      Text="{Binding RestoreFile}" />
 
     <StackPanel
-			Grid.Row="5"
-			Grid.Column="0"
-			Grid.ColumnSpan="2"
-			Margin="0,10,0,0"
-			HorizontalAlignment="Right"
-			VerticalAlignment="Bottom"
-			Orientation="Horizontal">
+      Grid.Row="5"
+      Grid.Column="0"
+      Grid.ColumnSpan="2"
+      Margin="0,10,0,0"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Bottom"
+      Orientation="Horizontal">
       <Button
-				Name="OKButton"
-				Width="75"
-				Margin="0,0,5,0"
-				Click="OKButton_Click"
-				Content="_OK" />
+        Name="OKButton"
+        Width="75"
+        Margin="0,0,5,0"
+        Click="OKButton_Click"
+        Content="_OK" />
       <Button
-				Name="CancelButton"
-				Width="75"
-				Click="CancelButton_Click"
-				Content="_Cancel" />
+        Name="CancelButton"
+        Width="75"
+        Click="CancelButton_Click"
+        Content="_Cancel" />
     </StackPanel>
 
   </Grid>

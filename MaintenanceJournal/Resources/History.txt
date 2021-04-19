@@ -1,4 +1,7 @@
-﻿Version 2.0.0.16 (2021-04-12)
+﻿Version 2.0.0.17 (2021-04-19)
+* Enhanced OpenArticles report. e.g. Tissues [100 pcs] (living room), box => Tissues (living room), box | 100 pcs.
+
+Version 2.0.0.16 (2021-04-12)
 * Refresh view after restore.
 * Set focus ArticleComboBox after opening OpenedArticlesWindow.
 * Improved the days count in OpenedArticlesWindow.
