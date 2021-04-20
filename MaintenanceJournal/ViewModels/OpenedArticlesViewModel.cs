@@ -93,7 +93,7 @@ namespace MaintenanceJournal.ViewModels
 
 			Report = new List<OpenedArticles>();
 
-			if ((DateTime.Now - articles.First().DTStart.Value).TotalDays > 2)
+			if ((DateTime.Now - articles.First().DTStart.Value).TotalDays > 0)
 			{
 				Report.Add(new OpenedArticles
 				{
