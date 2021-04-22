@@ -5,6 +5,7 @@ using MaintenanceJournal.Views;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -12,17 +13,70 @@ using System.Windows.Controls;
 
 namespace MaintenanceJournal.ViewModels
 {
-	public class OpenedArticlesViewModel
+	public class OpenedArticlesViewModel : INotifyPropertyChanged
 	{
 
 		#region [ Fields ]
 
 		private readonly MainViewModel VM;
 		private OpenedArticlesWindow View;
+		private int count;
+		private double avg;
+		private int min;
+		private int max;
 
 		#endregion
 
 		#region [ Properties ]
+
+		public int Count 
+		{ 
+			get => count;
+			set
+			{
+				if (count != value)
+				{
+					count = value;
+					NotifyPropertyChanged("Count");
+				}
+			}
+		}
+		public double Avg 
+		{ 
+			get => avg;
+			set
+			{
+				if (avg != value)
+				{
+					avg = value;
+					NotifyPropertyChanged("Avg");
+				}
+			}
+		}
+		public int Min 
+		{ 
+			get => min; 
+			set
+			{
+				if (min != value)
+				{
+					min = value;
+					NotifyPropertyChanged("Min");
+				}
+			}
+		}
+		public int Max 
+		{ 
+			get => max;
+			set
+			{
+				if (max != value)
+				{
+					max = value;
+					NotifyPropertyChanged("Max");
+				}
+			}
+		}
 
 		public List<OpenedArticles> Report { get; private set; } = new List<OpenedArticles>();
 
@@ -37,6 +91,16 @@ namespace MaintenanceJournal.ViewModels
 
 		#endregion
 
+		#region [ Notification ]
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void NotifyPropertyChanged(string propertyName = "")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		#endregion
+
 		public void ShowReport()
 		{
 			OpenedArticlesWindow view = new OpenedArticlesWindow(this)
@@ -47,6 +111,7 @@ namespace MaintenanceJournal.ViewModels
 			View = view;
 
 			CollectArticles();
+			CollectOverviewReport();
 			View.Show();
 		}
 
@@ -77,31 +142,75 @@ namespace MaintenanceJournal.ViewModels
 		{
 			if (sender == null) { return; }
 
-			CollectReportAsync(((ComboBox)e.Source).SelectedValue.ToString().ToLower().SplitArticle().Article);
+			CollectDetailedReport(((ComboBox)e.Source).SelectedValue.ToString().SplitArticle().Article);
 		}
 
-		private void CollectReportAsync(string article)
+		private List<Journal> GetArticles(string article)
+		{
+			return VM.Journals
+					.Where(x => x.Event == "Aangebroken")
+					.Where(x => x.Message.SplitArticle().Article == article)
+					.OrderByDescending(x => x.DTStart)
+					.Select(x => x)
+					.ToList();
+		}
+
+		private void CollectOverviewReport()
 		{
 			View.ReportDataGrid.ItemsSource = null;
 
-			List<Journal> articles = VM.Journals
-				.Where(x => x.Event == "Aangebroken")
-				.Where(x => x.Message.ToLower().SplitArticle().Article == article)
-				.OrderByDescending(x => x.DTStart)
-				.Select(x => x)
-				.ToList();
-
 			Report = new List<OpenedArticles>();
 
-			if ((DateTime.Now - articles.First().DTStart.Value).TotalDays > 0)
+			foreach (string item in View.ArticleComboBox.ItemsSource)
 			{
-				Report.Add(new OpenedArticles
+				List<Journal> articles = GetArticles(item);
+				if (articles.Count <= 1) { continue; }
+
+				List<OpenedArticles> report = new List<OpenedArticles>();
+
+				for (int i = 0; i < articles.Count - 1; i++)
 				{
-					Opened = null,
-					Days = (int)(DateTime.Now - articles.First().DTStart.Value.Date).TotalDays,
-					Number = Extensions.SplitArticle(articles.First().Message).Number,
+					report.Add(new OpenedArticles
+					{
+						Opened = articles[i].DTStart,
+						Days = (int)(articles[i].DTStart.Value.Date - articles[i + 1].DTStart.Value.Date).TotalDays,
+					});
+				}
+
+				Report.Add(new OpenedArticles()
+				{
+					Article = item,
+					Count = report.Count,
+					Avg = report.Average(x => x.Days),
+					Min = report.Min(x => x.Days),
+					Max = report.Max(x => x.Days),
 				});
+
 			}
+
+			#region Show/hide columns
+
+			for (int i = 0; i < 5; i++)
+			{
+				View.ReportDataGrid.Columns[i].Visibility = Visibility.Visible;
+			}
+			for (int i = 5; i < 8; i++)
+			{
+				View.ReportDataGrid.Columns[i].Visibility = Visibility.Collapsed;
+			}
+
+			#endregion
+
+			View.ReportDataGrid.ItemsSource = Report;
+		}
+
+		private void CollectDetailedReport(string article)
+		{
+			View.ReportDataGrid.ItemsSource = null;
+
+			List<Journal> articles = GetArticles(article);
+
+			Report = new List<OpenedArticles>();
 
 			for (int i = 0; i < articles.Count - 1; i++)
 			{
@@ -113,15 +222,57 @@ namespace MaintenanceJournal.ViewModels
 				});
 			}
 
+			View.OverviewBorder.Visibility = Visibility.Collapsed;
+
+			#region Show/hide columns
+
+			for (int i = 0; i < 5; i++)
+			{
+				View.ReportDataGrid.Columns[i].Visibility = Visibility.Collapsed;
+			}
+			for (int i = 5; i < 7; i++)
+			{
+				View.ReportDataGrid.Columns[i].Visibility = Visibility.Visible;
+			}
+
+			if (Report.Count > 0)
+			{
+				if (Report[0].Number == "")
+				{
+					View.ReportDataGrid.Columns[7].Visibility = Visibility.Collapsed;
+				}
+				else
+				{
+					View.ReportDataGrid.Columns[7].Visibility = Visibility.Visible;
+				}
+
+				#endregion
+
+				if (Report[0].Number == "")
+				{
+					//Summary
+					Count = Report.Count;
+					Avg = Report.Average(x => x.Days);
+					Min = Report.Min(x => x.Days);
+					Max = Report.Max(x => x.Days);
+
+					//Show summary
+					View.OverviewBorder.Visibility = Visibility.Visible;
+				}
+			}
+
+			//Add just opened article
+			if ((DateTime.Now - articles.First().DTStart.Value).TotalDays > 0)
+			{
+				Report.Insert(0, new OpenedArticles
+				{
+					Opened = null,
+					Days = (int)(DateTime.Now.Date - articles.First().DTStart.Value.Date).TotalDays,
+					Number = Extensions.SplitArticle(articles.First().Message).Number,
+				});
+			}
+
 			View.ReportDataGrid.ItemsSource = Report;
-			if (Report[0].Number == "")
-			{
-				View.ReportDataGrid.Columns[2].Visibility = Visibility.Collapsed;
-			}
-			else
-			{
-				View.ReportDataGrid.Columns[2].Visibility = Visibility.Visible;
-			}
 		}
 
 	}

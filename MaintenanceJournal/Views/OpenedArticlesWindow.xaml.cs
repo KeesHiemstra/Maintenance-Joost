@@ -9,7 +9,7 @@ namespace MaintenanceJournal.Views
 	/// </summary>
 	public partial class OpenedArticlesWindow : Window
 	{
-		readonly OpenedArticlesViewModel ArticlesVM;
+		public OpenedArticlesViewModel ArticlesVM { get; private set; }
 
 		public OpenedArticlesWindow(OpenedArticlesViewModel articlesVM)
 		{

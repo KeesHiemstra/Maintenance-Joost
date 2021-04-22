@@ -1,4 +1,7 @@
-﻿Version 2.0.0.18 (2021-04-20)
+﻿Version 2.0.0.19 (2021-04-22)
+* Opened articles report: Add overview with count, average, minimum en maximal.
+
+Version 2.0.0.18 (2021-04-20)
 * Corrected the opened articles, it exclude to much articles.
 
 Version 2.0.0.17 (2021-04-19)
