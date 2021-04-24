@@ -20,66 +20,76 @@
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <TextBlock Text="Article:"
-               Padding="5 0 5 0"
-               VerticalAlignment="Center" />
+    <TextBlock
+      Padding="5,0,5,0"
+      VerticalAlignment="Center"
+      Text="Article:" />
     <ComboBox
       Name="ArticleComboBox"
       Grid.Column="1"
       Margin="0,2.5,0,5"
       SelectionChanged="ArticleComboBox_Selected" />
 
-    <Border x:Name="OverviewBorder"
-            Visibility="Collapsed"
-            Grid.Row="1">
+    <Border
+      x:Name="OverviewBorder"
+      Grid.Row="1"
+      Visibility="Collapsed">
       <Grid Margin="5">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
-          <ColumnDefinition/>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Count"
-                   Padding="0 0 5 0"
-                   Grid.Row="0"/>
-        <TextBlock Text="{Binding Count}"
-                   Grid.Column="1"
-                   Grid.Row="0"/>
-        <TextBlock Text="Average"
-                   Padding="0 0 5 0"
-                   Grid.Row="1"/>
-        <TextBlock Text="{Binding Avg, StringFormat=0.0}"
-                   Grid.Column="1"
-                   Grid.Row="1"/>
-        <TextBlock Text="Minimum"
-                   Padding="0 0 5 0"
-                   Grid.Row="2"/>
-        <TextBlock Text="{Binding Min}"
-                   Grid.Column="1"
-                   Grid.Row="2"/>
-        <TextBlock Text="Maximum"
-                   Padding="0 0 5 0"
-                   Grid.Row="3"/>
-        <TextBlock Text="{Binding Max}"
-                   Grid.Column="1"
-                   Grid.Row="3"/>
+        <TextBlock
+          Grid.Row="0"
+          Padding="0,0,5,0"
+          Text="Count" />
+        <TextBlock
+          Grid.Row="0"
+          Grid.Column="1"
+          Text="{Binding Count}" />
+        <TextBlock
+          Grid.Row="1"
+          Padding="0,0,5,0"
+          Text="Average" />
+        <TextBlock
+          Grid.Row="1"
+          Grid.Column="1"
+          Text="{Binding Avg, StringFormat=0.0}" />
+        <TextBlock
+          Grid.Row="2"
+          Padding="0,0,5,0"
+          Text="Minimum" />
+        <TextBlock
+          Grid.Row="2"
+          Grid.Column="1"
+          Text="{Binding Min}" />
+        <TextBlock
+          Grid.Row="3"
+          Padding="0,0,5,0"
+          Text="Maximum" />
+        <TextBlock
+          Grid.Row="3"
+          Grid.Column="1"
+          Text="{Binding Max}" />
       </Grid>
     </Border>
-    
+
     <DataGrid
       Name="ReportDataGrid"
       Grid.Row="2"
       Grid.Column="0"
       Grid.ColumnSpan="2"
       AutoGenerateColumns="False"
-      IsReadOnly="True"
       CanUserAddRows="False"
-      CanUserDeleteRows="False">
+      CanUserDeleteRows="False"
+      IsReadOnly="True">
       <DataGrid.Columns>
         <DataGridTextColumn Binding="{Binding Article}" Header="Article" />
         <DataGridTextColumn Binding="{Binding Count}" Header="Count" />

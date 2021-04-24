@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{660DFF94-0475-47C5-B555-4D08B1E0C293}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Export-UsedArticles", "Export-UsedArticles\Export-UsedArticles.csproj", "{B994DDB8-6CCD-49DE-8409-4C284604F918}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-TranslatedUsedArticles", "Import-TranslatedUsedArticles\Import-TranslatedUsedArticles.csproj", "{1CE6FC96-4F4C-422C-9181-0DC72EA5CC3C}"
@@ -15,16 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickLog", "QuickLog\QuickL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceJournal", "MaintenanceJournal\MaintenanceJournal.csproj", "{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common-Joost", "Common-Joost\Common-Joost.csproj", "{5E79336C-CB3B-4592-AFDA-FF5A8CFFB7E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{660DFF94-0475-47C5-B555-4D08B1E0C293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{660DFF94-0475-47C5-B555-4D08B1E0C293}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{660DFF94-0475-47C5-B555-4D08B1E0C293}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{660DFF94-0475-47C5-B555-4D08B1E0C293}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B994DDB8-6CCD-49DE-8409-4C284604F918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B994DDB8-6CCD-49DE-8409-4C284604F918}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B994DDB8-6CCD-49DE-8409-4C284604F918}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94380B7B-5B99-4A4B-9B21-E7FCBFB2B225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E79336C-CB3B-4592-AFDA-FF5A8CFFB7E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E79336C-CB3B-4592-AFDA-FF5A8CFFB7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E79336C-CB3B-4592-AFDA-FF5A8CFFB7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E79336C-CB3B-4592-AFDA-FF5A8CFFB7E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

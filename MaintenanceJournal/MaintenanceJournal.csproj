@@ -172,9 +172,9 @@
     <Resource Include="Resources\History.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{660dff94-0475-47c5-b555-4d08b1e0c293}</Project>
-      <Name>Common</Name>
+    <ProjectReference Include="..\Common-Joost\Common-Joost.csproj">
+      <Project>{5e79336c-cb3b-4592-afda-ff5a8cffb7e0}</Project>
+      <Name>Common-Joost</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
