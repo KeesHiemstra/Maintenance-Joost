@@ -234,14 +234,12 @@ namespace MaintenanceJournal.ViewModels
 			{
 				View.ReportDataGrid.Columns[i].Visibility = Visibility.Visible;
 			}
+			//Number column
+			View.ReportDataGrid.Columns[7].Visibility = Visibility.Collapsed;
 
 			if (Report.Count > 0)
 			{
-				if (Report[0].Number == "")
-				{
-					View.ReportDataGrid.Columns[7].Visibility = Visibility.Collapsed;
-				}
-				else
+				if (Report[0].Number != "")
 				{
 					View.ReportDataGrid.Columns[7].Visibility = Visibility.Visible;
 				}
