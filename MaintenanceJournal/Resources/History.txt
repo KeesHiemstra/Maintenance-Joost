@@ -1,4 +1,7 @@
-﻿Version 2.0.0.19 (2021-04-22)
+﻿Version 2.0.0.20 (2021-05-04)
+* Updated Journal class, implemented interface IJournal.
+
+Version 2.0.0.19 (2021-04-22)
 * Opened articles report: Add overview with count, average, minimum en maximal.
 
 Version 2.0.0.18 (2021-04-20)

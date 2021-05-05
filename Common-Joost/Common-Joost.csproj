@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IJournal.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="JournalDbContext.cs" />
     <Compile Include="Program.cs" />
