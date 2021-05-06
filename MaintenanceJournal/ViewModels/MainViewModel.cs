@@ -320,6 +320,12 @@ namespace MaintenanceJournal.ViewModels
 			report.ShowReport();
 		}
 
+		internal void ReportGotUpTime()
+		{
+			GotUpTimeViewModel report = new GotUpTimeViewModel(this);
+			report.ShowReport();
+		}
+
 		#endregion
 
 		internal void FilterKeyboard(object sender, KeyEventArgs e)

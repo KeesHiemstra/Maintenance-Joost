@@ -76,11 +76,13 @@
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\CoffeeUsage.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\GotUpTime.cs" />
     <Compile Include="Models\OpenedArticles.cs" />
     <Compile Include="ViewModels\CalendarViewModel.cs" />
     <Compile Include="ViewModels\CoffeeUsageViewModel.cs" />
     <Compile Include="ViewModels\DateInfo.cs" />
     <Compile Include="ViewModels\FallenRainViewModel.cs" />
+    <Compile Include="ViewModels\GotUpTimeViewModel.cs" />
     <Compile Include="ViewModels\JournalViewModel.cs" />
     <Compile Include="ViewModels\OpenedArticlesViewModel.cs" />
     <Compile Include="Views\CalendarWindow.cs">
@@ -91,6 +93,9 @@
     </Compile>
     <Compile Include="Views\FallenRainWindow.xaml.cs">
       <DependentUpon>FallenRainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GotUpTimeWindow.xaml.cs">
+      <DependentUpon>GotUpTimeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JournalWindow.xaml.cs">
       <DependentUpon>JournalWindow.xaml</DependentUpon>
@@ -110,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FallenRainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GotUpTimeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +167,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="NewWindow.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

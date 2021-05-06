@@ -184,6 +184,20 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region ReportGotUpTime
+
+		private void ReportGotUpTimeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void ReportGotUpTimeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ReportGotUpTime();
+		}
+
+		#endregion
+
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			VM.CloseWindow();

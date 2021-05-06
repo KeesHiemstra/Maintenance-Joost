@@ -99,5 +99,13 @@ namespace MaintenanceJournal.Commands
 				new InputGestureCollection() { }
 			);
 
+		public static readonly RoutedUICommand ReportGotUpTime = new RoutedUICommand
+			(
+				"_Got up time",
+				"ReportGotUpTime",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 	}
 }

@@ -54,6 +54,10 @@
       CanExecute="ReportCalendarCommand_CanExecute"
       Command="cmd:MainWindowCommands.ReportCalendar"
       Executed="ReportCalendarCommand_Executed" />
+    <CommandBinding
+      CanExecute="ReportGotUpTimeCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportGotUpTime"
+      Executed="ReportGotUpTimeCommand_Executed" />
   </Window.CommandBindings>
 
   <Grid>
@@ -88,6 +92,7 @@
         <MenuItem Command="cmd:MainWindowCommands.ReportCoffeeUsage" />
         <MenuItem Command="cmd:MainWindowCommands.ReportFallenRain" />
         <MenuItem Command="cmd:MainWindowCommands.ReportCalendar" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportGotUpTime" />
       </MenuItem>
     </Menu>
 

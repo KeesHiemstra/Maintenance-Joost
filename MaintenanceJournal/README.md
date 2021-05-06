@@ -1,12 +1,14 @@
 ﻿# MaintenanceJournal
 
-I wanted more learn C# with Visual Studio 2017 in 2018. I used ASP.Net. I created a log system using the browser.
+I wanted more learn C# with Visual Studio 2017 in 2018. I used ASP.Net. 
+I created a log system using the browser.
 
 This experiment uses WPF to use the log system in the same way.
 
 ## MainDataGrid
 
-An update of the list is not visible if there a focus on the `MainDataGrid`. The `SaveRecord()` forced to the focus outside of `MainDataGrid`.
+An update of the list is not visible if there a focus on the `MainDataGrid`. 
+The `SaveRecord()` forced to the focus outside of `MainDataGrid`.
 
 ## Reports
 
