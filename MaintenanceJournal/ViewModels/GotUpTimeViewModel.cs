@@ -15,15 +15,17 @@ namespace MaintenanceJournal.ViewModels
 
 		private readonly MainViewModel VM;
 		private GotUpTimeWindow View;
-		private List<(DateTime Date, TimeSpan Time, string Message)> _Journals;
+		private List<(DateTime Date, TimeSpan Time)> _Journals;
 
 		#endregion
 
 		#region [ Properties ]
 
 		public GotUpTime Overall { get; set; } = new GotUpTime();
+		public GotUpTime WorkWeek { get; set; } = new GotUpTime();
+		public GotUpTime Weekend { get; set; } = new GotUpTime();
 		public List<GotUpTime> Months { get; set; } = new List<GotUpTime>();
-		public List<GotUpTime> Weeks { get; set; } = new List<GotUpTime>();
+		//public List<GotUpTime> Weeks { get; set; } = new List<GotUpTime>();
 
 		#endregion
 
@@ -36,10 +38,9 @@ namespace MaintenanceJournal.ViewModels
 
 		#endregion
 
-
 		#region [ Public methods ]
 
-		public async void ShowReport()
+		public void ShowReport()
 		{
 			GotUpTimeWindow view = new GotUpTimeWindow(this)
 			{
@@ -56,16 +57,33 @@ namespace MaintenanceJournal.ViewModels
 
 		#endregion
 
-		private Task CollectData()
+		private void CollectData()
 		{
 			_Journals = VM.Journals
 				.Where(x => x.Event == "Opgestaan")
-				.Select(x => (x.DTStart.Value.Date, x.DTStart.Value.TimeOfDay, x.Message))
+				.Select(x => (x.DTStart.Value.Date, x.DTStart.Value.TimeOfDay))
 				.ToList();
 
 			Overall = CollectPeriode(_Journals);
+			WorkWeek = CollectWeek();
+			Weekend = CollectWeekEnd();
 			CollectMonths();
-			return null;
+		}
+
+		private GotUpTime CollectWeek()
+		{
+			List<(DateTime Date, TimeSpan Time)> journal = _Journals
+				.Where(x => x.Date.DayOfWeek >= DayOfWeek.Monday && x.Date.DayOfWeek <= DayOfWeek.Friday)
+				.ToList();
+			return CollectPeriode(journal);
+		}
+
+		private GotUpTime CollectWeekEnd()
+		{
+			List<(DateTime Date, TimeSpan Time)> journal = _Journals
+				.Where(x => x.Date.DayOfWeek < DayOfWeek.Monday || x.Date.DayOfWeek > DayOfWeek.Friday)
+				.ToList();
+			return CollectPeriode(journal);
 		}
 
 		private void CollectMonths()
@@ -86,7 +104,12 @@ namespace MaintenanceJournal.ViewModels
 			}
 		}
 
-		private GotUpTime CollectPeriode(List<(DateTime Date, TimeSpan Time, string Message)> _journals)
+		/// <summary>
+		/// Collect the date and time from Journals.
+		/// </summary>
+		/// <param name="_journals"></param>
+		/// <returns></returns>
+		private GotUpTime CollectPeriode(List<(DateTime Date, TimeSpan Time)> _journals)
 		{
 			GotUpTime result = new GotUpTime()
 			{

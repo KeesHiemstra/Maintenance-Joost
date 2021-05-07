@@ -26,6 +26,17 @@ Creating the reports learns about LINQ.
 
 Is a dynamic object. The basis is not so difficult, but it show in grid was a challenge.
 
+### Got up time
+
+The report shows the minimum, average, and maximum got up times.
+
+The challenge in this report to calculate with the average `TimeSpan`.
+It is done with convert the time in `double` TotalSeconds.
+
+```
+Avg = TimeSpan.FromSeconds(Math.Round(_journals.Average(x => (double)x.Time.TotalSeconds)))
+``` 
+
 # Wish list
 
 - [ ] The first record was saved, but additional records was not saved.
