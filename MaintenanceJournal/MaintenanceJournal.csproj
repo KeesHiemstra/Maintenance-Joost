@@ -94,8 +94,11 @@
     <Compile Include="Views\FallenRainWindow.xaml.cs">
       <DependentUpon>FallenRainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\GotUpTimeWindow.xaml.cs">
-      <DependentUpon>GotUpTimeWindow.xaml</DependentUpon>
+    <Compile Include="Views\GotUpTimeGraphWindow.xaml.cs">
+      <DependentUpon>GotUpTimeGraphWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GotUpTimeReportWindow.cs">
+      <DependentUpon>GotUpTimeReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\JournalWindow.xaml.cs">
       <DependentUpon>JournalWindow.xaml</DependentUpon>
@@ -118,7 +121,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\GotUpTimeWindow.xaml">
+    <Page Include="Views\GotUpTimeGraphWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GotUpTimeReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

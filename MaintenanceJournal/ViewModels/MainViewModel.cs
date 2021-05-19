@@ -326,6 +326,12 @@ namespace MaintenanceJournal.ViewModels
 			report.ShowReport();
 		}
 
+		internal void GraphGotUpTime()
+		{
+			GotUpTimeViewModel graph = new GotUpTimeViewModel(this);
+			graph.ShowGraph();
+		}
+
 		#endregion
 
 		internal void FilterKeyboard(object sender, KeyEventArgs e)

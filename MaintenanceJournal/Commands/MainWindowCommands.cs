@@ -67,6 +67,8 @@ namespace MaintenanceJournal.Commands
 				}
 			);
 
+		#region Reports
+
 		public static readonly RoutedUICommand ReportOpenedArticles = new RoutedUICommand
 			(
 				"_Opened articles",
@@ -106,6 +108,20 @@ namespace MaintenanceJournal.Commands
 				typeof(MainWindowCommands),
 				new InputGestureCollection() { }
 			);
+
+		#endregion
+
+		#region Graphs
+
+		public static readonly RoutedUICommand GraphGotUpTime = new RoutedUICommand
+			(
+				"_Got up time",
+				"GraphGotUpTime",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
+		#endregion
 
 	}
 }

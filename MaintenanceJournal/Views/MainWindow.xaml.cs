@@ -42,6 +42,10 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region ==Menu==
+
+		#region +File
+
 		#region Exit command
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
@@ -93,6 +97,10 @@ namespace MaintenanceJournal
 		}
 		#endregion
 
+		#endregion
+
+		#region +Journal
+
 		#region RefreshJournals
 
 		private void RefreshJournals_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -122,6 +130,10 @@ namespace MaintenanceJournal
 		}
 
 		#endregion
+
+		#endregion
+
+		#region +Reports
 
 		#region ReportOpenedArticles
 
@@ -195,6 +207,28 @@ namespace MaintenanceJournal
 		{
 			VM.ReportGotUpTime();
 		}
+
+		#endregion
+
+		#region +Graphs
+
+		#region GraphGotUpTime
+
+		private void GraphGotUpTimeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void GraphGotUpTimeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.GraphGotUpTime();
+		}
+
+		#endregion
+
+		#endregion
+
+		#endregion
 
 		#endregion
 

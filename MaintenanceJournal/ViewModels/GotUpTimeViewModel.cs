@@ -5,7 +5,6 @@ using MaintenanceJournal.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MaintenanceJournal.ViewModels
 {
@@ -14,7 +13,8 @@ namespace MaintenanceJournal.ViewModels
 		#region [ Fields ]
 
 		private readonly MainViewModel VM;
-		private GotUpTimeWindow View;
+		private GotUpTimeReportWindow View;
+		private GotUpTimeGraphWindow Graph;
 		private List<(DateTime Date, TimeSpan Time)> _Journals;
 
 		#endregion
@@ -25,7 +25,7 @@ namespace MaintenanceJournal.ViewModels
 		public GotUpTime WorkWeek { get; set; } = new GotUpTime();
 		public GotUpTime Weekend { get; set; } = new GotUpTime();
 		public List<GotUpTime> Months { get; set; } = new List<GotUpTime>();
-		//public List<GotUpTime> Weeks { get; set; } = new List<GotUpTime>();
+		public Dictionary<int, int> TimeCount = new Dictionary<int, int>();
 
 		#endregion
 
@@ -42,7 +42,7 @@ namespace MaintenanceJournal.ViewModels
 
 		public void ShowReport()
 		{
-			GotUpTimeWindow view = new GotUpTimeWindow(this)
+			GotUpTimeReportWindow view = new GotUpTimeReportWindow(this)
 			{
 				Left = VM.View.Left + 100,
 				Top = VM.View.Top + 20,
@@ -52,18 +52,47 @@ namespace MaintenanceJournal.ViewModels
 
 			//Collect the window data
 			CollectData();
-			View.Show();
+			CollectReportData();
+			View.ShowDialog();
+		}
+
+		public void ShowGraph()
+		{
+			GotUpTimeGraphWindow graph = new GotUpTimeGraphWindow(this)
+			{
+				Left = VM.View.Left + 100,
+				Top = VM.View.Top + 20,
+			};
+			Graph = graph;
+			Graph.DataContext = this;
+
+			//Collect the window data
+			CollectData();
+			CollectGraphData();
+			Graph.BuildGraph();
+			View.ShowDialog();
 		}
 
 		#endregion
 
+		/// <summary>
+		/// The data is used for both report and graph.
+		/// </summary>
 		private void CollectData()
 		{
 			_Journals = VM.Journals
 				.Where(x => x.Event == "Opgestaan")
 				.Select(x => (x.DTStart.Value.Date, x.DTStart.Value.TimeOfDay))
 				.ToList();
+		}
 
+		#region Report
+
+		/// <summary>
+		/// The data for report.
+		/// </summary>
+		private void CollectReportData()
+		{
 			Overall = CollectPeriode(_Journals);
 			WorkWeek = CollectWeek();
 			Weekend = CollectWeekEnd();
@@ -120,6 +149,35 @@ namespace MaintenanceJournal.ViewModels
 
 			return result;
 		}
+
+		#endregion
+
+		#region Graph
+
+		private void CollectGraphData()
+		{
+			int MinBlock = TimeBlock(_Journals.Min(x => x.Time));
+			foreach (var item in _Journals)
+			{
+				int block = TimeBlock(item.Time) - MinBlock;
+				if (TimeCount.ContainsKey(block))
+				{
+					TimeCount[block]++;
+				}
+				else
+				{
+					TimeCount.Add(block, 1);
+				}
+			}
+		}
+
+		private int TimeBlock(TimeSpan time) 
+		{
+			return (int)time.TotalMinutes / 5;
+		}
+
+
+		#endregion
 
 	}
 }

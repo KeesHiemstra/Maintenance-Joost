@@ -58,6 +58,10 @@
       CanExecute="ReportGotUpTimeCommand_CanExecute"
       Command="cmd:MainWindowCommands.ReportGotUpTime"
       Executed="ReportGotUpTimeCommand_Executed" />
+    <CommandBinding
+      CanExecute="GraphGotUpTimeCommand_CanExecute"
+      Command="cmd:MainWindowCommands.GraphGotUpTime"
+      Executed="GraphGotUpTimeCommand_Executed" />
   </Window.CommandBindings>
 
   <Grid>
@@ -93,6 +97,10 @@
         <MenuItem Command="cmd:MainWindowCommands.ReportFallenRain" />
         <MenuItem Command="cmd:MainWindowCommands.ReportCalendar" />
         <MenuItem Command="cmd:MainWindowCommands.ReportGotUpTime" />
+      </MenuItem>
+
+      <MenuItem Header="_Graphs">
+        <MenuItem Command="cmd:MainWindowCommands.GraphGotUpTime" />
       </MenuItem>
     </Menu>
 
