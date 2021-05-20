@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Contacts.ViewModels;
+
+using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Contacts
 {
@@ -20,10 +11,26 @@ namespace Contacts
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		#region [ Fields ]
+
+		private readonly MainViewModel VM;
+
+		#endregion
+
+		#region [ Construction ]
+
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			Title = $"Contacts ({version})";
+
+			VM = new MainViewModel(this);
+			DataContext = VM;
 		}
+
+		#endregion
 
 		#region [ Menu methods ]
 
@@ -46,13 +53,26 @@ namespace Contacts
 			e.CanExecute = true;
 		}
 
-		private void NewContactCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		private void NewContactCommand_Execute(object sender, ExecutedRoutedEventArgs e)
 		{
-			//VM.EditContact(null);
+			VM.EditContact(null);
 		}
 
 		#endregion
 
 		#endregion
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (VM.ContactsIsChanged)
+			{
+				VM.SaveContacts();
+			}
+		}
+
+		private void DataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			VM.DoubleClickDataGrid(sender, e);
+		}
 	}
 }

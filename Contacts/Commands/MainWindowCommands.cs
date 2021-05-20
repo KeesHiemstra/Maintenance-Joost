@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace Contacts.Commands
 {
@@ -23,7 +18,7 @@ namespace Contacts.Commands
 
 		public static readonly RoutedUICommand NewContact = new RoutedUICommand
 			(
-				"_New",
+				"_New contact",
 				"NewContact",
 				typeof(MainWindowCommands),
 				new InputGestureCollection()
