@@ -1,17 +1,11 @@
-﻿using Contacts.Views;
-
+﻿
 using Joost;
 
 using Newtonsoft.Json;
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -21,8 +15,7 @@ namespace Contacts.ViewModels
 	{
 		#region [ Fields ]
 
-		private static string ContactsPath = "\\\\Rommeldijk\\Data\\Contacts.json";
-		private readonly MainWindow View;
+		private static readonly string ContactsPath = "\\\\Rommeldijk\\Data\\Contacts.json";
 
 		#endregion
 
@@ -38,12 +31,6 @@ namespace Contacts.ViewModels
 
 		public MainViewModel()
 		{
-		}
-
-		public MainViewModel(MainWindow view)
-		{
-			View = view;
-
 			LoadContacts();
 		}
 
@@ -96,6 +83,12 @@ namespace Contacts.ViewModels
 			{
 				EditContact(item);
 			}
+		}
+
+		internal void ClearContacts()
+		{
+			Contacts.Clear();
+			SaveContacts();
 		}
 
 	}

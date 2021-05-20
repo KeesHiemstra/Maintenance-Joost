@@ -79,8 +79,7 @@ namespace Contacts.ViewModels
 			}
 
 			//Save the date and time to DTStart
-			TimeSpan time = new TimeSpan();
-			TimeSpan.TryParse(Time, out time);
+			TimeSpan.TryParse(Time, out TimeSpan time);
 			Contact.DTStart = Date.Date.AddMinutes(time.TotalMinutes);
 
 			VM.ContactsIsChanged = true;

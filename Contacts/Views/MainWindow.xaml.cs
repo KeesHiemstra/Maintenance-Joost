@@ -26,7 +26,7 @@ namespace Contacts
 			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			Title = $"Contacts ({version})";
 
-			VM = new MainViewModel(this);
+			VM = new MainViewModel();
 			DataContext = VM;
 		}
 
@@ -35,6 +35,7 @@ namespace Contacts
 		#region [ Menu methods ]
 
 		#region Exit command
+
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = true;
@@ -44,6 +45,21 @@ namespace Contacts
 		{
 			Application.Current.Shutdown();
 		}
+
+		#endregion
+
+		#region ClearContacts command
+
+		private void ClearContactsCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = VM.Contacts.Count > 0;
+		}
+
+		private void ClearContactsCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ClearContacts();
+		}
+		
 		#endregion
 
 		#region NewContact command

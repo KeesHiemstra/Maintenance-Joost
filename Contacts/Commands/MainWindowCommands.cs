@@ -16,6 +16,14 @@ namespace Contacts.Commands
 				}
 			);
 
+		public static readonly RoutedUICommand ClearContacts = new RoutedUICommand
+			(
+				"_Clear list",
+				"ClearContacts",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 		public static readonly RoutedUICommand NewContact = new RoutedUICommand
 			(
 				"_New contact",
