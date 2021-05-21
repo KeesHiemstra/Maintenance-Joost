@@ -3,6 +3,7 @@ using Joost;
 
 using Newtonsoft.Json;
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -16,6 +17,7 @@ namespace Contacts.ViewModels
 		#region [ Fields ]
 
 		private static readonly string ContactsPath = "\\\\Rommeldijk\\Data\\Contacts.json";
+		private static readonly string EventsPath = "\\\\Rommeldijk\\Data\\JoostEvents.json";
 
 		#endregion
 
@@ -23,6 +25,7 @@ namespace Contacts.ViewModels
 
 		public ObservableCollection<Journal> Contacts { get; set; } = 
 			new ObservableCollection<Journal>();
+		public List<string> Events { get; set; } = new List<string>();
 		public bool ContactsIsChanged { get; set; }
 
 		#endregion
@@ -32,6 +35,7 @@ namespace Contacts.ViewModels
 		public MainViewModel()
 		{
 			LoadContacts();
+			LoadEvents();
 		}
 
 		#endregion
@@ -57,6 +61,17 @@ namespace Contacts.ViewModels
 			}
 		}
 
+		private void LoadEvents()
+		{
+			if (!File.Exists(EventsPath)) return;
+
+			using (StreamReader stream = File.OpenText(EventsPath))
+			{
+				string json = stream.ReadToEnd();
+				Events = JsonConvert.DeserializeObject<List<string>>(json);
+			}
+		}
+
 		public void SaveContacts()
 		{
 			string json = JsonConvert.SerializeObject(Contacts, Formatting.Indented);
@@ -66,6 +81,15 @@ namespace Contacts.ViewModels
 			}
 
 			ContactsIsChanged = false;
+		}
+
+		public void SaveEvents()
+		{
+			string json = JsonConvert.SerializeObject(Events, Formatting.Indented);
+			using (StreamWriter stream = new StreamWriter(EventsPath))
+			{
+				stream.Write(json);
+			}
 		}
 
 		//ToDo: ExportToJoost()

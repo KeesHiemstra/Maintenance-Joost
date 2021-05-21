@@ -1,9 +1,9 @@
-﻿using Joost;
+﻿using Contacts.Views;
 
-using Contacts.Views;
+using Joost;
 
 using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Contacts.ViewModels
 {
@@ -14,6 +14,7 @@ namespace Contacts.ViewModels
 		private readonly MainViewModel VM;
 		private EditContactWindow View;
 		private bool IsNewRecord;
+		public bool IsEditEvent;
 
 		#endregion
 
@@ -22,6 +23,7 @@ namespace Contacts.ViewModels
 		public Journal Contact { get; set; }
 		public DateTime Date { get; set; }
 		public string Time { get; set; }
+		public List<string> Events { get; set; }
 
 		#endregion
 
@@ -30,6 +32,7 @@ namespace Contacts.ViewModels
 		public EditContactViewModel(MainViewModel mainVM)
 		{
 			VM = mainVM;
+			Events = VM.Events;
 		}
 
 		#endregion
@@ -82,10 +85,18 @@ namespace Contacts.ViewModels
 			TimeSpan.TryParse(Time, out TimeSpan time);
 			Contact.DTStart = Date.Date.AddMinutes(time.TotalMinutes);
 
+			//Handle event items
+			if (!Events.Contains(Contact.Event))
+			{
+				Events.Add(Contact.Event);
+				//ToDo: Save list
+				VM.SaveEvents();
+			}
+
 			VM.ContactsIsChanged = true;
 			View.Close();
 		}
-		
+
 		internal void CancelContact()
 		{
 			Contact = null;

@@ -67,6 +67,7 @@
       Text="Event: " />
     <ComboBox
       x:Name="EventComboBox"
+      ItemsSource="{Binding Events}"
       Grid.Row="2"
       Grid.Column="1"
       Grid.ColumnSpan="3"
