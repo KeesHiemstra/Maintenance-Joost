@@ -1,0 +1,75 @@
+﻿<Window
+  x:Class="Contacts.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:cmd="clr-namespace:Contacts.Commands"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:Contacts"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Title="Contacts"
+  Width="400"
+  Height="450"
+  Closing="Window_Closing"
+  mc:Ignorable="d">
+
+  <Window.CommandBindings>
+    <CommandBinding
+      CanExecute="ExitCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Exit"
+      Executed="ExitCommand_Execute" />
+    <CommandBinding
+      CanExecute="ClearContactsCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ClearContacts"
+      Executed="ClearContactsCommand_Execute" />
+    <CommandBinding
+      CanExecute="ExportCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Export"
+      Executed="ExportCommand_Execute" />
+    <CommandBinding
+      CanExecute="NewContactCommand_CanExecute"
+      Command="cmd:MainWindowCommands.NewContact"
+      Executed="NewContactCommand_Execute" />
+  </Window.CommandBindings>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <Menu>
+      <MenuItem Header="_File">
+        <MenuItem Command="cmd:MainWindowCommands.ClearContacts" />
+        <MenuItem Command="cmd:MainWindowCommands.Export" />
+        <Separator />
+        <MenuItem Command="cmd:MainWindowCommands.Exit" />
+      </MenuItem>
+
+      <MenuItem Header="_Contact">
+        <MenuItem Command="cmd:MainWindowCommands.NewContact" />
+      </MenuItem>
+    </Menu>
+
+    <StatusBar Grid.Row="3" />
+
+    <DataGrid
+      Grid.Row="2"
+      Grid.Column="0"
+      Margin="5"
+      AutoGenerateColumns="False"
+      CanUserAddRows="False"
+      CanUserDeleteRows="True"
+      IsReadOnly="True"
+      ItemsSource="{Binding Contacts}"
+      MouseDoubleClick="DataGrid_MouseDoubleClick">
+      <DataGrid.Columns>
+        <DataGridTextColumn Binding="{Binding DTStart, StringFormat=yyyy-MM-dd HH:mm}" Header="Date/Time" />
+        <DataGridTextColumn Binding="{Binding Event}" Header="Event" />
+        <DataGridTextColumn Binding="{Binding Message}" Header="Message" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+  </Grid>
+</Window>
