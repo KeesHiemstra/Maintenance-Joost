@@ -59,7 +59,21 @@ namespace Contacts
 		{
 			VM.ClearContacts();
 		}
-		
+
+		#endregion
+
+		#region Export command
+
+		private void ExportCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = VM.Contacts.Count > 0;
+		}
+
+		private void ExportCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ExportToJoost();
+		}
+
 		#endregion
 
 		#region NewContact command

@@ -92,7 +92,10 @@ namespace Contacts.ViewModels
 			}
 		}
 
-		//ToDo: ExportToJoost()
+		internal void ExportToJoost()
+		{
+			_ = new ProcessContactsToJoost(this);
+		}
 
 		internal void EditContact(Journal contact)
 		{

@@ -22,6 +22,10 @@
       Command="cmd:MainWindowCommands.ClearContacts"
       Executed="ClearContactsCommand_Execute" />
     <CommandBinding
+      CanExecute="ExportCommand_CanExecute"
+      Command="cmd:MainWindowCommands.Export"
+      Executed="ExportCommand_Execute" />
+    <CommandBinding
       CanExecute="NewContactCommand_CanExecute"
       Command="cmd:MainWindowCommands.NewContact"
       Executed="NewContactCommand_Execute" />
@@ -38,6 +42,7 @@
     <Menu>
       <MenuItem Header="_File">
         <MenuItem Command="cmd:MainWindowCommands.ClearContacts" />
+        <MenuItem Command="cmd:MainWindowCommands.Export" />
         <Separator />
         <MenuItem Command="cmd:MainWindowCommands.Exit" />
       </MenuItem>

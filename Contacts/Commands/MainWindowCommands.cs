@@ -24,6 +24,14 @@ namespace Contacts.Commands
 				new InputGestureCollection() { }
 			);
 
+		public static readonly RoutedUICommand Export = new RoutedUICommand
+			(
+				"_Export to Joost",
+				"Export",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 		public static readonly RoutedUICommand NewContact = new RoutedUICommand
 			(
 				"_New contact",
