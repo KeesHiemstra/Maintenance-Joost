@@ -3,10 +3,12 @@ using Joost;
 
 using Newtonsoft.Json;
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -94,7 +96,14 @@ namespace Contacts.ViewModels
 
 		internal void ExportToJoost()
 		{
-			_ = new ProcessContactsToJoost(this);
+			try
+			{
+				_ = new ProcessContactsToJoost(this);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Export to Joost", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			}
 		}
 
 		internal void EditContact(Journal contact)

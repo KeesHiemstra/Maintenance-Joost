@@ -56,8 +56,12 @@ namespace Contacts.ViewModels
 			{
 				foreach (Journal record in VM.Contacts)
 				{
+					//A stored DTCreation can difference of 2 milliseconds
+					DateTime min = record.DTCreation.Value.AddMilliseconds(-2);
+					DateTime max = record.DTCreation.Value.AddMilliseconds(2);
+
 					List<Journal> search = Db.Journals
-						.Where(x => x.DTCreation == record.DTCreation &&
+						.Where(x => x.DTCreation >= min && x.DTCreation <= max &&
 							x.Event == record.Event)
 						.ToList();
 
