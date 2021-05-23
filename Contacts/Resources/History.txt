@@ -1,4 +1,7 @@
-﻿Version 1.0.0.2 (2021-05-23)
+﻿Version 1.0.0.3 (2021-05-23)
+* Corrected the layout of EditContactWindow; it caused a strange layout if there a lot text.
+
+Version 1.0.0.2 (2021-05-23)
 * ExportToJoost added always the new record. It was 'corrected' by adding a range of -/+ 2 milliseconds.
 * By a Release version caused it sometime a exception. The application stopped and the data was loss.
 
