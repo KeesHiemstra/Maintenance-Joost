@@ -61,10 +61,25 @@ namespace QuickLog.ViewModels
 		/// </summary>
 		internal void AddRecord()
 		{
-			View.LogsDataGrid.ItemsSource = null;
+			DateTime time;
 
-			DateTime time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
-				$"{View.TimeTextBox.Text}");
+			try
+			{
+				time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
+					$"{View.TimeTextBox.Text}");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message,
+					"Process the entered time",
+					MessageBoxButton.OK,
+					MessageBoxImage.Exclamation);
+
+				View.TimeTextBox.Focus();
+				return;
+			}
+		
+			View.LogsDataGrid.ItemsSource = null;
 
 			Logs.Insert(0, new QLog()
 			{
