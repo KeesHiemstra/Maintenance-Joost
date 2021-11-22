@@ -1,5 +1,6 @@
 ﻿using QuickLog.ViewModels;
 
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,12 @@ namespace QuickLog
 
 			DataContext = VM;
 
+			string[] args = Environment.GetCommandLineArgs();
+			if (args.Length > 1)
+			{
+				ProcessCommandLineArgs(args);
+			}
+
 			//if (LogsDataGrid.ItemsSource != null)
 			{
 				LogsDataGrid.ItemsSource = VM.Logs
@@ -31,6 +38,21 @@ namespace QuickLog
 			EventComboBox.ItemsSource = VM.Items;
 
 			TimeTextBox.Focus();
+		}
+
+		private void ProcessCommandLineArgs(string[] args)
+		{
+			foreach (string item in args)
+			{
+				if (item.ToLower() == "/calender")
+				{
+					VM.SetCalendarOnly();
+				}
+				else
+				{
+					VM.QuickLogPath = item;
+				}
+			}
 		}
 
 		#region Menu MainCommands
@@ -96,6 +118,8 @@ namespace QuickLog
 				DateDatePicker.SelectedDate = VM.Logs.Last().Time.Date;
 				EventComboBox.Text = VM.Logs.Last().Event;
 			}
+
+			VM.MainViewModel_Loaded();
 		}
 
 		private void TimeTextBox_KeyUp(object sender, KeyEventArgs e)
@@ -180,6 +204,16 @@ namespace QuickLog
 		{
 			//I filled 2 times the logs. It costs a lot, but I didn't use the auto save.
 			VM.SaveLogs();
+		}
+
+		private void CalendarOnlyCheckBox_Checked(object sender, RoutedEventArgs e)
+		{
+			VM.SetCalendarOnly();
+		}
+
+		private void CalendarOnlyCheckBox_Unchecked(object sender, RoutedEventArgs e)
+		{
+			VM.ClearCalendarOnly();
 		}
 	}
 }

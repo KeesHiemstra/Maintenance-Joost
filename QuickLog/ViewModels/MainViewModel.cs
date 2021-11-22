@@ -14,7 +14,6 @@ namespace QuickLog.ViewModels
 {
 	public class MainViewModel
 	{
-		private static string QuickLogPath = "\\\\Rommeldijk\\Data\\QuickLog.csv";
 		private readonly MainWindow View;
 		private readonly CsvConfiguration Config =
 			new CsvConfiguration(CultureInfo.CurrentUICulture)
@@ -24,13 +23,31 @@ namespace QuickLog.ViewModels
 
 		public List<QLog> Logs { get; set; } = new List<QLog>();
 		public List<string> Items { get; set; } = new List<string>();
+		public string QuickLogPath = "\\\\Rommeldijk\\Data\\QuickLog.csv";
 
 		public MainViewModel(MainWindow view)
 		{
 			View = view;
+		}
 
+		internal void MainViewModel_Loaded()
+		{
 			LoadLogs();
 			UpdateItems();
+		}
+
+		internal void SetCalendarOnly()
+		{
+			View.CalendarOnlyCheckBox.IsChecked = true;
+			View.TimeTextBox.IsEnabled = false;
+			View.MessageTextBox.Focus();
+		}
+
+		internal void ClearCalendarOnly()
+		{
+			View.CalendarOnlyCheckBox.IsChecked = false;
+			View.TimeTextBox.IsEnabled = true;
+			View.TimeTextBox.Focus();
 		}
 
 		private void UpdateItems()
@@ -39,6 +56,7 @@ namespace QuickLog.ViewModels
 			{
 				View.EventComboBox.ItemsSource = null;
 			}
+			View.LogsDataGrid.ItemsSource = null;
 
 			if (Logs != null && Logs.Count > 0)
 			{
@@ -49,11 +67,22 @@ namespace QuickLog.ViewModels
 					.ToList();
 			}
 
-			if (View.EventComboBox != null)
+			if (View.EventComboBox != null && Logs.Count > 0)
 			{
 				View.EventComboBox.ItemsSource = Items;
-				View.EventComboBox.SelectedItem = Logs.Last().Event;
+				View.EventComboBox.SelectedItem = Logs.LastOrDefault().Event;
+
+				if (View.CalendarOnlyCheckBox.IsChecked.Value)
+				{
+					View.DateDatePicker.SelectedDate = Logs.LastOrDefault().Time.AddDays(1);
+				}
+				else
+				{
+					View.DateDatePicker.SelectedDate = Logs.LastOrDefault().Time.Date;
+				}
 			}
+
+			View.LogsDataGrid.ItemsSource = Logs;
 		}
 
 		/// <summary>
@@ -109,6 +138,7 @@ namespace QuickLog.ViewModels
 			using var cvs = new CsvReader(reader, Config);
 			var logs = cvs.GetRecords<QLog>();
 			Logs = new List<QLog>(logs);
+
 		}
 
 		/// <summary>
