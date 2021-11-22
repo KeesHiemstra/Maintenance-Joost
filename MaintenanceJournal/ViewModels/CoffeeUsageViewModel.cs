@@ -88,20 +88,24 @@ namespace MaintenanceJournal.ViewModels
 
 			foreach (CoffeeUsage coffee in Report)
 			{
-				var query = VM.Journals
-					.Where(x => x.DTStart <= coffee.Opened && x.DTStart >= coffee.LastOpened && 
+				IEnumerable<Journal> query = VM.Journals
+					.Where(x => x.DTStart <= coffee.Opened && x.DTStart >= coffee.LastOpened &&
 					x.Event == "Kop koffie");
 
 				coffee.Cups = query.Sum(x => int.Parse(x.Message));
 				coffee.ActualDays = VM.Journals
-					.Where(x => x.DTStart <= coffee.Opened && x.DTStart >= coffee.LastOpened && 
+					.Where(x => x.DTStart <= coffee.Opened && x.DTStart >= coffee.LastOpened &&
 					x.Event == "Kop koffie")
 					.GroupBy(date => date.DTStart.Value.Date).Count();
-				coffee.CupsPerDay = (decimal)coffee.Cups / coffee.ActualDays;
-				coffee.CupsMin = query
-					.GroupBy(date => date.DTStart.Value.Date).Min(x => x.Sum(x => int.Parse(x.Message)));
-				coffee.CupsMax = query
-					.GroupBy(date => date.DTStart.Value.Date).Max(x => x.Sum(x => int.Parse(x.Message)));
+				
+				if (coffee.ActualDays > 0)
+				{
+					coffee.CupsPerDay = (decimal)coffee.Cups / coffee.ActualDays;
+					coffee.CupsMin = query
+						.GroupBy(date => date.DTStart.Value.Date).Min(x => x.Sum(x => int.Parse(x.Message)));
+					coffee.CupsMax = query
+						.GroupBy(date => date.DTStart.Value.Date).Max(x => x.Sum(x => int.Parse(x.Message)));
+				}
 			}
 
 			if (Report[0].NewOpened) { Report[0].Opened = null; }

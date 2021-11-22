@@ -10,6 +10,7 @@
   Width="370"
   Height="450"
   Loaded="Window_Loaded"
+  Closing="Window_Closing"
   mc:Ignorable="d">
 
   <Window.CommandBindings>

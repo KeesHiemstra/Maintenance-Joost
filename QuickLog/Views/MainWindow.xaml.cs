@@ -21,7 +21,7 @@ namespace QuickLog
 			InitializeComponent();
 
 			DataContext = VM;
-			
+
 			//if (LogsDataGrid.ItemsSource != null)
 			{
 				LogsDataGrid.ItemsSource = VM.Logs
@@ -102,12 +102,12 @@ namespace QuickLog
 		{
 			if (sender == null) { return; }
 
-			if ((e.Key == Key.OemPlus) || (e.Key == Key.Space) || (e.Key == Key.Add))
+			if (e.Key is Key.OemPlus or Key.Space or Key.Add)
 			{
 				DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(1);
 				DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
 			}
-			else if (e.Key == Key.OemMinus || (e.Key == Key.Subtract))
+			else if (e.Key is Key.OemMinus or Key.Subtract)
 			{
 				DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(-1);
 				DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
@@ -124,7 +124,7 @@ namespace QuickLog
 			//Prevent errors
 			string text = ((TextBox)e.Source).Text;
 			if (string.IsNullOrEmpty(text)) { return; }
-			
+
 			//Keep the caret position
 			int caretIndex = ((TextBox)e.Source).CaretIndex;
 
@@ -139,7 +139,7 @@ namespace QuickLog
 			//Allow only numbers
 			foreach (char check in text)
 			{
-				if (check < '0' || check > '9')
+				if (check is < '0' or > '9')
 				{
 					((TextBox)e.Source).Text = text.Replace(check.ToString(), "");
 					((TextBox)e.Source).CaretIndex = caretIndex;
@@ -171,5 +171,15 @@ namespace QuickLog
 			VM.AddRecord();
 		}
 
+		/// <summary>
+		/// Auto save the logs.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			//I filled 2 times the logs. It costs a lot, but I didn't use the auto save.
+			VM.SaveLogs();
+		}
 	}
 }
