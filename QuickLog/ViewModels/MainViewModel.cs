@@ -33,10 +33,7 @@ namespace QuickLog.ViewModels
 		internal void MainViewModel_Loaded()
 		{
 			LoadLogs();
-			View.DateDatePicker.SelectedDate =
-				Logs
-					.OrderByDescending(x => x.Time)
-					.FirstOrDefault().Time.Date; ;
+			View.DateDatePicker.SelectedDate = Logs.First().Time.Date; 
 			UpdateItems();
 		}
 
@@ -78,11 +75,11 @@ namespace QuickLog.ViewModels
 
 				if (View.CalendarOnlyCheckBox.IsChecked.Value)
 				{
-					View.DateDatePicker.SelectedDate = Logs.LastOrDefault().Time.AddDays(1);
+					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.AddDays(1);
 				}
 				else
 				{
-					View.DateDatePicker.SelectedDate = Logs.LastOrDefault().Time.Date;
+					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.Date;
 				}
 			}
 
@@ -94,25 +91,22 @@ namespace QuickLog.ViewModels
 		/// </summary>
 		internal void AddRecord()
 		{
-			DateTime time = View.DateDatePicker.SelectedDate.Value.Date.Date;
+			DateTime time;
 
-			if (!View.CalendarOnlyCheckBox.IsChecked.Value)
+			try
 			{
-				try
-				{
-					time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
-						$"{View.TimeTextBox.Text}");
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message,
-						"Process the entered time",
-						MessageBoxButton.OK,
-						MessageBoxImage.Exclamation);
+				time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
+					$"{View.TimeTextBox.Text}");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message,
+					"Process the entered time",
+					MessageBoxButton.OK,
+					MessageBoxImage.Exclamation);
 
-					View.TimeTextBox.Focus();
-					return;
-				}
+				View.TimeTextBox.Focus();
+				return;
 			}
 
 			View.LogsDataGrid.ItemsSource = null;
@@ -133,7 +127,6 @@ namespace QuickLog.ViewModels
 			}
 			else
 			{
-				View.DateDatePicker.SelectedDate = View.DateDatePicker.SelectedDate.Value.Date.Date.AddDays(1);
 				View.MessageTextBox.Focus();
 			}
 
@@ -166,9 +159,9 @@ namespace QuickLog.ViewModels
 			if (!File.Exists(QuickLogPath)) { return; }
 			using var reader = new StreamReader(QuickLogPath);
 			using var cvs = new CsvReader(reader, Config);
-			var logs = cvs.GetRecords<QLog>();
+			var logs = cvs.GetRecords<QLog>()
+				.OrderByDescending(x => x.Time);
 			Logs = new List<QLog>(logs);
-
 		}
 
 		/// <summary>

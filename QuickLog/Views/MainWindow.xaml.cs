@@ -113,11 +113,13 @@ namespace QuickLog
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (VM.Logs != null && VM.Logs.Count > 0)
-			{
-				DateDatePicker.SelectedDate = VM.Logs.Last().Time.Date;
-				EventComboBox.Text = VM.Logs.Last().Event;
-			}
+			//if (VM.Logs != null && VM.Logs.Count > 0)
+			//{
+			//	DateDatePicker.SelectedDate = VM
+			//		.Logs.OrderByDescending(x => x.Time)
+			//		.Last().Time.Date;
+			//	EventComboBox.Text = VM.Logs.Last().Event;
+			//}
 
 			VM.MainViewModel_Loaded();
 		}
