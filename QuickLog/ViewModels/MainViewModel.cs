@@ -33,6 +33,10 @@ namespace QuickLog.ViewModels
 		internal void MainViewModel_Loaded()
 		{
 			LoadLogs();
+			View.DateDatePicker.SelectedDate =
+				Logs
+					.OrderByDescending(x => x.Time)
+					.FirstOrDefault().Time.Date; ;
 			UpdateItems();
 		}
 
@@ -90,24 +94,27 @@ namespace QuickLog.ViewModels
 		/// </summary>
 		internal void AddRecord()
 		{
-			DateTime time;
+			DateTime time = View.DateDatePicker.SelectedDate.Value.Date.Date;
 
-			try
+			if (!View.CalendarOnlyCheckBox.IsChecked.Value)
 			{
-				time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
-					$"{View.TimeTextBox.Text}");
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message,
-					"Process the entered time",
-					MessageBoxButton.OK,
-					MessageBoxImage.Exclamation);
+				try
+				{
+					time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
+						$"{View.TimeTextBox.Text}");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message,
+						"Process the entered time",
+						MessageBoxButton.OK,
+						MessageBoxImage.Exclamation);
 
-				View.TimeTextBox.Focus();
-				return;
+					View.TimeTextBox.Focus();
+					return;
+				}
 			}
-		
+
 			View.LogsDataGrid.ItemsSource = null;
 
 			Logs.Insert(0, new QLog()
@@ -119,8 +126,16 @@ namespace QuickLog.ViewModels
 
 			UpdateItems();
 
-			View.TimeTextBox.Text = "";
-			View.TimeTextBox.Focus();
+			if (!View.CalendarOnlyCheckBox.IsChecked.Value)
+			{
+				View.TimeTextBox.Text = "";
+				View.TimeTextBox.Focus();
+			}
+			else
+			{
+				View.DateDatePicker.SelectedDate = View.DateDatePicker.SelectedDate.Value.Date.Date.AddDays(1);
+				View.MessageTextBox.Focus();
+			}
 
 			View.LogsDataGrid.ItemsSource = Logs
 				.OrderByDescending(x => x.Time);
