@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts", "Contacts\Contac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Export-Huishouden", "Export-Huishouden\Export-Huishouden.csproj", "{4D6B0B8A-6F01-4702-9668-5CF215390237}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-KleineBoodschap", "Import-KleineBoodschap\Import-KleineBoodschap.csproj", "{4ACEEA0D-8119-4482-B686-2ACB267564B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-Urine", "Import-Urine\Import-Urine.csproj", "{564D853A-C445-4952-93A2-0023C166CE6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,10 +64,10 @@ Global
 		{4D6B0B8A-6F01-4702-9668-5CF215390237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D6B0B8A-6F01-4702-9668-5CF215390237}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D6B0B8A-6F01-4702-9668-5CF215390237}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4ACEEA0D-8119-4482-B686-2ACB267564B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4ACEEA0D-8119-4482-B686-2ACB267564B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4ACEEA0D-8119-4482-B686-2ACB267564B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4ACEEA0D-8119-4482-B686-2ACB267564B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564D853A-C445-4952-93A2-0023C166CE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564D853A-C445-4952-93A2-0023C166CE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564D853A-C445-4952-93A2-0023C166CE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564D853A-C445-4952-93A2-0023C166CE6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

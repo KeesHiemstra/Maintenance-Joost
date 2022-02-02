@@ -13,12 +13,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace Import_KleineBoodschap
+namespace Import_Urine
 {
 	internal class Program
 	{
 		private static string Database = "Joost_Dev";
-		private static string InputPath = "%OneDrive%\\Data\\KleineBoodschap.csv";
+		private static readonly string InputPath = "%OneDrive%\\Data\\KleineBoodschap.csv";
 		private static readonly CsvConfiguration Config =
 			new CsvConfiguration(CultureInfo.CurrentUICulture)
 			{
@@ -30,7 +30,7 @@ namespace Import_KleineBoodschap
 
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Import-KleineBoodschap\n");
+			Console.WriteLine("Import-Urine\n");
 			if (Environment.MachineName == "ROMMELDIJK")
 			{
 				Database = "Joost";
@@ -40,7 +40,6 @@ namespace Import_KleineBoodschap
 
 			Console.Write("\nPress any key...");
 			Console.ReadKey();
-
 		}
 
 		private static void ImportQuickLog()
