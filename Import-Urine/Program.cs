@@ -79,16 +79,17 @@ namespace Import_Urine
 				{
 					DateTime peeTime;
 					//A record is a date without time, search for a date of 'Opgestaan', substrack a minute
-					DateTime nextDay = record.Time.AddDays(1);
+					DateTime timeDay = record.Time.AddDays(1);
+					DateTime nextDay = timeDay.AddDays(1);
 					List<Journal> exist = Db.Journals
-						.Where(x => x.DTStart.Value >= record.Time &&
+						.Where(x => x.DTStart.Value >= timeDay &&
 									 x.DTStart.Value < nextDay &&
 									 x.Event == "Opgestaan")
 						.ToList();
 					if (exist.Count == 0)
 					{
 						//No record found
-						peeTime = record.Time.AddMinutes(500);
+						peeTime = timeDay.AddMinutes(500);
 						missed++;
 					}
 					else
