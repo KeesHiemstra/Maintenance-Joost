@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="Urine report" 
         Height="450" 
-        Width="380">
+        Width="500">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
@@ -31,6 +31,7 @@
           <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
             <DataGridTextColumn Binding="{Binding Total}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Total}" Header="Day" />
             <DataGridTextColumn Binding="{Binding Night}" Header="Night" />
             <DataGridTextColumn Binding="{Binding Info}" Header="Info" />
           </DataGrid.Columns>
@@ -52,6 +53,9 @@
             <DataGridTextColumn Binding="{Binding TotalMin}" Header="T Min" />
             <DataGridTextColumn Binding="{Binding TotalAvg, StringFormat=0.0}" Header="T Avg" />
             <DataGridTextColumn Binding="{Binding TotalMax}" Header="T Max" />
+            <DataGridTextColumn Binding="{Binding DayMin}" Header="D Min" />
+            <DataGridTextColumn Binding="{Binding DayAvg, StringFormat=0.0}" Header="D Avg" />
+            <DataGridTextColumn Binding="{Binding DayMax}" Header="D Max" />
             <DataGridTextColumn Binding="{Binding NightMin}" Header="N Min" />
             <DataGridTextColumn Binding="{Binding NightAvg, StringFormat=0.0}" Header="N Avg" />
             <DataGridTextColumn Binding="{Binding NightMax}" Header="N Max" />
@@ -74,6 +78,9 @@
             <DataGridTextColumn Binding="{Binding TotalMin}" Header="T Min" />
             <DataGridTextColumn Binding="{Binding TotalAvg, StringFormat=0.0}" Header="T Avg" />
             <DataGridTextColumn Binding="{Binding TotalMax}" Header="T Max" />
+            <DataGridTextColumn Binding="{Binding DayMin}" Header="D Min" />
+            <DataGridTextColumn Binding="{Binding DayAvg, StringFormat=0.0}" Header="D Avg" />
+            <DataGridTextColumn Binding="{Binding DayMax}" Header="D Max" />
             <DataGridTextColumn Binding="{Binding NightMin}" Header="N Min" />
             <DataGridTextColumn Binding="{Binding NightAvg, StringFormat=0.0}" Header="N Avg" />
             <DataGridTextColumn Binding="{Binding NightMax}" Header="N Max" />

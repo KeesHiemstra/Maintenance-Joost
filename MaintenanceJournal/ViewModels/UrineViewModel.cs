@@ -81,6 +81,7 @@ namespace MaintenanceJournal.ViewModels
 				{
 					day.Info = raw[2];
 				}
+				day.Day = (byte)(day.Total - day.Night);
 				UrineDays.Add(day);
 			}
 		}
@@ -118,6 +119,9 @@ namespace MaintenanceJournal.ViewModels
 				urineReport.TotalMin = days.Min(x => x.Total);
 				urineReport.TotalAvg = days.Average(x => x.Total);
 				urineReport.TotalMax = days.Max(x => x.Total);
+				urineReport.DayMin = days.Min(x => x.Day);
+				urineReport.DayAvg = days.Average(x => x.Day);
+				urineReport.DayMax = days.Max(x => x.Day);
 				urineReport.NightMin = days.Min(x => x.Night);
 				urineReport.NightAvg = days.Average(x => x.Night);
 				urineReport.NightMax = days.Max(x => x.Night);
@@ -155,6 +159,9 @@ namespace MaintenanceJournal.ViewModels
 				urineReport.TotalMin = days.Min(x => x.Total);
 				urineReport.TotalAvg = days.Average(x => x.Total);
 				urineReport.TotalMax = days.Max(x => x.Total);
+				urineReport.DayMin = days.Min(x => x.Day);
+				urineReport.DayAvg = days.Average(x => x.Day);
+				urineReport.DayMax = days.Max(x => x.Day);
 				urineReport.NightMin = days.Min(x => x.Night);
 				urineReport.NightAvg = days.Average(x => x.Night);
 				urineReport.NightMax = days.Max(x => x.Night);

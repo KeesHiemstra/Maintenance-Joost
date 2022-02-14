@@ -10,6 +10,7 @@ namespace MaintenanceJournal.Models
 	{
 		public DateTime Date { get; set; }
 		public byte Total { get; set; }
+		public byte Day { get; set; }
 		public byte Night { get; set; }
 		public string Info { get; set; }
 	}

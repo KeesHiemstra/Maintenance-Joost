@@ -1,4 +1,7 @@
-﻿Version 2.0.2.23 ()
+﻿Version 2.0.3.24 (2022-02-14)
+* Extended Urine report with the counts for the day.
+
+Version 2.0.2.23 (2022-02-10)
 * Add Urine report window.
 
 Version 2.0.1.22 (2021-05-07)
