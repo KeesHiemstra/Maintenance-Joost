@@ -68,6 +68,8 @@
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\GotUpTime.cs" />
     <Compile Include="Models\OpenedArticles.cs" />
+    <Compile Include="Models\UrineDay.cs" />
+    <Compile Include="Models\UrineReport.cs" />
     <Compile Include="ViewModels\CalendarViewModel.cs" />
     <Compile Include="ViewModels\CoffeeUsageViewModel.cs" />
     <Compile Include="ViewModels\DateInfo.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="ViewModels\GotUpTimeViewModel.cs" />
     <Compile Include="ViewModels\JournalViewModel.cs" />
     <Compile Include="ViewModels\OpenedArticlesViewModel.cs" />
+    <Compile Include="ViewModels\UrineViewModel.cs" />
     <Compile Include="Views\CalendarWindow.cs">
       <DependentUpon>CalendarWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,9 @@
     </Compile>
     <Compile Include="Views\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UrineReportWindow.xaml.cs">
+      <DependentUpon>UrineReportWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\CalendarWindow.xaml">
       <SubType>Designer</SubType>
@@ -142,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UrineReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

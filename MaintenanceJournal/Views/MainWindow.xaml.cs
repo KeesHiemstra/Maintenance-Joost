@@ -210,6 +210,20 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region ReportUrine
+
+		private void ReportUrineCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void ReportUrineCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ReportUrine();
+		}
+
+		#endregion
+
 		#region +Graphs
 
 		#region GraphGotUpTime

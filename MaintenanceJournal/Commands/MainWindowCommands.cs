@@ -109,6 +109,14 @@ namespace MaintenanceJournal.Commands
 				new InputGestureCollection() { }
 			);
 
+		public static readonly RoutedUICommand ReportUrine = new RoutedUICommand
+			(
+				"_Urine",
+				"ReportUrine",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 		#endregion
 
 		#region Graphs

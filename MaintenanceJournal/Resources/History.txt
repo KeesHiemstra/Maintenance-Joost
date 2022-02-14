@@ -1,4 +1,7 @@
-﻿Version 2.0.1.22 (2021-05-07)
+﻿Version 2.0.2.23 ()
+* Add Urine report window.
+
+Version 2.0.1.22 (2021-05-07)
 * Improved the "Got up time" report. The times is split in workweek and weekend times.
 
 Version 2.0.1.21 (2021-05-06)

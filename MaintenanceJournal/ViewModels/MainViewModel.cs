@@ -332,6 +332,12 @@ namespace MaintenanceJournal.ViewModels
 			graph.ShowGraph();
 		}
 
+		internal void ReportUrine()
+		{
+			UrineViewModel report = new UrineViewModel(this);
+			report.ShowReport();
+		}
+
 		#endregion
 
 		internal void FilterKeyboard(object sender, KeyEventArgs e)

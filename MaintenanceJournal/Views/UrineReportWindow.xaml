@@ -1,0 +1,86 @@
+﻿<Window x:Class="MaintenanceJournal.Views.UrineReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Urine report" 
+        Height="450" 
+        Width="380">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TabControl
+      SelectedIndex="1"
+      Margin="5"
+      Grid.Row="1">
+      <TabItem
+        Header="Day">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding UrineDays}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Total}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Night}" Header="Night" />
+            <DataGridTextColumn Binding="{Binding Info}" Header="Info" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
+
+      <TabItem
+        Header="Week">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding UrineWeeks}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalMin}" Header="T Min" />
+            <DataGridTextColumn Binding="{Binding TotalAvg, StringFormat=0.0}" Header="T Avg" />
+            <DataGridTextColumn Binding="{Binding TotalMax}" Header="T Max" />
+            <DataGridTextColumn Binding="{Binding NightMin}" Header="N Min" />
+            <DataGridTextColumn Binding="{Binding NightAvg, StringFormat=0.0}" Header="N Avg" />
+            <DataGridTextColumn Binding="{Binding NightMax}" Header="N Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+        
+      </TabItem>
+
+      <TabItem
+        Header="Month">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding UrineMonths}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalMin}" Header="T Min" />
+            <DataGridTextColumn Binding="{Binding TotalAvg, StringFormat=0.0}" Header="T Avg" />
+            <DataGridTextColumn Binding="{Binding TotalMax}" Header="T Max" />
+            <DataGridTextColumn Binding="{Binding NightMin}" Header="N Min" />
+            <DataGridTextColumn Binding="{Binding NightAvg, StringFormat=0.0}" Header="N Avg" />
+            <DataGridTextColumn Binding="{Binding NightMax}" Header="N Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
+    </TabControl>
+  </Grid>
+</Window>

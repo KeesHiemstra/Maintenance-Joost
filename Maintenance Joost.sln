@@ -26,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Export-Huishouden", "Export
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-Urine", "Import-Urine\Import-Urine.csproj", "{564D853A-C445-4952-93A2-0023C166CE6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repair-Urine", "Repair-Urine\Repair-Urine.csproj", "{596EEBB1-BC3C-45CA-973A-343B8AC3A824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +70,10 @@ Global
 		{564D853A-C445-4952-93A2-0023C166CE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{564D853A-C445-4952-93A2-0023C166CE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{564D853A-C445-4952-93A2-0023C166CE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{596EEBB1-BC3C-45CA-973A-343B8AC3A824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{596EEBB1-BC3C-45CA-973A-343B8AC3A824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{596EEBB1-BC3C-45CA-973A-343B8AC3A824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{596EEBB1-BC3C-45CA-973A-343B8AC3A824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
