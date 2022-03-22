@@ -31,7 +31,7 @@
           <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
             <DataGridTextColumn Binding="{Binding Total}" Header="Total" />
-            <DataGridTextColumn Binding="{Binding Total}" Header="Day" />
+            <DataGridTextColumn Binding="{Binding Day}" Header="Day" />
             <DataGridTextColumn Binding="{Binding Night}" Header="Night" />
             <DataGridTextColumn Binding="{Binding Info}" Header="Info" />
           </DataGrid.Columns>

@@ -66,6 +66,8 @@
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\CoffeeUsage.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\DefecateDay.cs" />
+    <Compile Include="Models\DefecateEntry.cs" />
     <Compile Include="Models\GotUpTime.cs" />
     <Compile Include="Models\OpenedArticles.cs" />
     <Compile Include="Models\UrineDay.cs" />

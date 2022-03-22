@@ -33,7 +33,10 @@ namespace QuickLog.ViewModels
 		internal void MainViewModel_Loaded()
 		{
 			LoadLogs();
-			View.DateDatePicker.SelectedDate = Logs.First().Time.Date; 
+			if (Logs.Count > 0)
+			{
+				View.DateDatePicker.SelectedDate = Logs.First().Time.Date;
+			}
 			UpdateItems();
 		}
 
