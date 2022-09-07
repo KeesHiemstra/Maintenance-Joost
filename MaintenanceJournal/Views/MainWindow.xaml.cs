@@ -224,6 +224,20 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region ReportDefecate
+
+		private void ReportDefecateCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void ReportDefecateCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ReportDefecate();
+		}
+
+		#endregion
+
 		#region +Graphs
 
 		#region GraphGotUpTime

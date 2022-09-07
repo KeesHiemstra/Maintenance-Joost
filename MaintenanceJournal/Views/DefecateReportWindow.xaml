@@ -1,0 +1,112 @@
+﻿<Window x:Class="MaintenanceJournal.Views.DefecateReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaintenanceJournal.Views"
+        mc:Ignorable="d"
+        Title="Defecate report" 
+        Height="450" 
+        Width="400">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <TabControl
+      SelectedIndex="1"
+      Margin="5"
+      Grid.Row="1">
+      <TabItem
+        Header="Details">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding DefecateDetails}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Time, StringFormat=yyyy-MM-dd HH:mm}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Wips}" Header="Wips" />
+            <DataGridTextColumn Binding="{Binding Info}" Header="Info" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
+
+      <TabItem
+        Header="Day">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding DefecateDays}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd ddd}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalGoings}" Header="Goings" />
+            <DataGridTextColumn Binding="{Binding TotalWips}" Header="Wips" />
+            <DataGridTextColumn Binding="{Binding MinWips}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgWips, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxWips}" Header="Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
+
+      <TabItem
+        Header="Week">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding DefecateWeeks}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalGoings}" Header="Goings" />
+            <DataGridTextColumn Binding="{Binding MinGoings}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgGoings, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxGoings}" Header="Max" />
+            <DataGridTextColumn Binding="{Binding TotalWips}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding MinWips}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgWips, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxWips}" Header="Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
+
+      <TabItem
+        Header="Month">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding DefecateMonths}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalGoings}" Header="Goings" />
+            <DataGridTextColumn Binding="{Binding MinGoings}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgGoings, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxGoings}" Header="Max" />
+            <DataGridTextColumn Binding="{Binding TotalWips}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding MinWips}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgWips, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxWips}" Header="Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
+    </TabControl>
+
+  </Grid>
+</Window>

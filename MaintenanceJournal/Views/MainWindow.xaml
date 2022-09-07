@@ -59,13 +59,17 @@
       Command="cmd:MainWindowCommands.ReportGotUpTime"
       Executed="ReportGotUpTimeCommand_Executed" />
     <CommandBinding
+      CanExecute="GraphGotUpTimeCommand_CanExecute"
+      Command="cmd:MainWindowCommands.GraphGotUpTime"
+      Executed="GraphGotUpTimeCommand_Executed" />
+    <CommandBinding
       CanExecute="ReportUrineCommand_CanExecute"
       Command="cmd:MainWindowCommands.ReportUrine"
       Executed="ReportUrineCommand_Executed" />
     <CommandBinding
-      CanExecute="GraphGotUpTimeCommand_CanExecute"
-      Command="cmd:MainWindowCommands.GraphGotUpTime"
-      Executed="GraphGotUpTimeCommand_Executed" />
+      CanExecute="ReportDefecateCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportDefecate"
+      Executed="ReportDefecateCommand_Executed" />
   </Window.CommandBindings>
 
   <Grid>
@@ -102,6 +106,7 @@
         <MenuItem Command="cmd:MainWindowCommands.ReportCalendar" />
         <MenuItem Command="cmd:MainWindowCommands.ReportGotUpTime" />
         <MenuItem Command="cmd:MainWindowCommands.ReportUrine" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportDefecate" />
       </MenuItem>
 
       <MenuItem Header="_Graphs">

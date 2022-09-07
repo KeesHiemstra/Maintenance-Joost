@@ -66,8 +66,8 @@
     <Compile Include="Models\Calendar.cs" />
     <Compile Include="Models\CoffeeUsage.cs" />
     <Compile Include="Models\Contact.cs" />
-    <Compile Include="Models\DefecateDay.cs" />
-    <Compile Include="Models\DefecateEntry.cs" />
+    <Compile Include="Models\DefecateReport.cs" />
+    <Compile Include="Models\DefecateDetail.cs" />
     <Compile Include="Models\GotUpTime.cs" />
     <Compile Include="Models\OpenedArticles.cs" />
     <Compile Include="Models\UrineDay.cs" />
@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\CalendarViewModel.cs" />
     <Compile Include="ViewModels\CoffeeUsageViewModel.cs" />
     <Compile Include="ViewModels\DateInfo.cs" />
+    <Compile Include="ViewModels\DefecateViewModel.cs" />
     <Compile Include="ViewModels\FallenRainViewModel.cs" />
     <Compile Include="ViewModels\GotUpTimeViewModel.cs" />
     <Compile Include="ViewModels\JournalViewModel.cs" />
@@ -85,6 +86,9 @@
     </Compile>
     <Compile Include="Views\CoffeeUsageWindow.xaml.cs">
       <DependentUpon>CoffeeUsageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DefecateReportWindow.xaml.cs">
+      <DependentUpon>DefecateReportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FallenRainWindow.xaml.cs">
       <DependentUpon>FallenRainWindow.xaml</DependentUpon>
@@ -112,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CoffeeUsageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DefecateReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

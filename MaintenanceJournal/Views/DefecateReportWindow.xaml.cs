@@ -5,11 +5,11 @@ using System.Windows;
 namespace MaintenanceJournal.Views
 {
 	/// <summary>
-	/// Interaction logic for UrineReportWindow.xaml
+	/// Interaction logic for DefecateReportWindow.xaml
 	/// </summary>
-	public partial class UrineReportWindow : Window
+	public partial class DefecateReportWindow : Window
 	{
-		internal UrineReportWindow(UrineViewModel urineViewModel)
+		internal DefecateReportWindow(DefecateViewModel defecateViewModel)
 		{
 			InitializeComponent();
 		}

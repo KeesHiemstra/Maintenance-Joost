@@ -117,6 +117,14 @@ namespace MaintenanceJournal.Commands
 				new InputGestureCollection() { }
 			);
 
+		public static readonly RoutedUICommand ReportDefecate = new RoutedUICommand
+			(
+				"_Defecate",
+				"ReportDefecate",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 		#endregion
 
 		#region Graphs
