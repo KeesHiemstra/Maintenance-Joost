@@ -1,4 +1,7 @@
-﻿Version 2.0.4.25 (2022-09-07)
+﻿Version 2.0.4.26 (2022-10-01)
+* Bug fix: Exception on not existing date.
+
+Version 2.0.4.25 (2022-09-07)
 * Add Defecate report window.
 
 Version 2.0.3.24 (2022-02-14)

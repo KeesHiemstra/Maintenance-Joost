@@ -126,9 +126,13 @@ namespace MaintenanceJournal.ViewModels
 				gotUpTime = CollectPeriode(_Journals
 					.Where(x => x.Date < date && x.Date >= date.AddMonths(-1))
 					.ToList());
-				gotUpTime.Period = $"{date.AddMonths(-1):yyyy-MMM}";
+				
+				if (gotUpTime != null)
+				{
+					gotUpTime.Period = $"{date.AddMonths(-1):yyyy-MMM}";
+					Months.Add(gotUpTime);
+				}
 
-				Months.Add(gotUpTime);
 				date = date.AddMonths(-1);
 			}
 		}
@@ -140,6 +144,8 @@ namespace MaintenanceJournal.ViewModels
 		/// <returns></returns>
 		private GotUpTime CollectPeriode(List<(DateTime Date, TimeSpan Time)> _journals)
 		{
+			if ( _journals == null || _journals.Count == 0 ) return null; 
+
 			GotUpTime result = new GotUpTime()
 			{
 				Min = _journals.Min(x => x.Time),
