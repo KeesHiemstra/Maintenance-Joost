@@ -1,5 +1,6 @@
 ﻿Version 2.0.4.26 (2022-10-01)
 * Bug fix: Exception on not existing date.
+* Bug fix: "Got up time"-window was not scrolling (caused by a StackPanel).
 
 Version 2.0.4.25 (2022-09-07)
 * Add Defecate report window.

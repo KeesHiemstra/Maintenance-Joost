@@ -120,28 +120,28 @@
       BorderBrush="DarkGray"
       BorderThickness="1"
       CornerRadius="10">
-        <Grid>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-          </Grid.RowDefinitions>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
-          <TextBlock FontWeight="Black" Text="Month" />
-          <DataGrid
-            Grid.Row="1"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            IsReadOnly="True"
-            ItemsSource="{Binding Months}">
-            <DataGrid.Columns>
-              <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
-              <DataGridTextColumn Binding="{Binding Min}" Header="Min" />
-              <DataGridTextColumn Binding="{Binding Avg}" Header="Avg" />
-              <DataGridTextColumn Binding="{Binding Max}" Header="Max" />
-            </DataGrid.Columns>
-          </DataGrid>
-        </Grid>
+        <TextBlock FontWeight="Black" Text="Month" />
+        <DataGrid
+          Grid.Row="1"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding Months}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding Min}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding Avg}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding Max}" Header="Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </Grid>
     </Border>
 
   </Grid>
