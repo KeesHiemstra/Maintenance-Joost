@@ -8,6 +8,7 @@ using MaintenanceJournal.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace MaintenanceJournal.ViewModels
 {
@@ -18,7 +19,6 @@ namespace MaintenanceJournal.ViewModels
 
 		private readonly MainViewModel VM;
 		private JournalWindow View;
-		private bool IsNewRecord;
 
 		#endregion
 
@@ -26,6 +26,7 @@ namespace MaintenanceJournal.ViewModels
 
 		public Journal Record { get; set; }
 		public List<string> Events { get; set; }
+		public bool IsNewRecord;
 
 		#endregion
 
@@ -110,5 +111,27 @@ namespace MaintenanceJournal.ViewModels
 			View.Close();
 		}
 
+		internal void DeleteRecord()
+		{
+			if (MessageBox.Show($"Delete record with ID {Record.LogID.ToString() ?? "<new>"}?",
+				"Delete",
+				MessageBoxButton.YesNoCancel,
+				MessageBoxImage.Question) != MessageBoxResult.Yes) { return; };
+
+			var record = VM.Db.Journals.Find(Record.LogID);
+			if (record != null)
+			{
+				Log.Write($"Delete journal record: {Record.LogID.ToString() ?? "<new>"}");
+				VM.Db.Journals.Remove(record);
+				VM.Db.SaveChanges();
+			}
+
+			View.Close();
+
+			//Reopen the restored database and refresh view
+			VM.View.MainDataGrid.ItemsSource = null;
+			VM.GetJournals();
+			VM.View.MainDataGrid.ItemsSource = VM.Journals;
+		}
 	}
 }

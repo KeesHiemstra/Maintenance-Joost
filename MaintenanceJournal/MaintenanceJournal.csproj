@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\JournalWindowCommands.cs" />
     <Compile Include="Commands\MainWindowCommands.cs" />
     <Compile Include="Extentions\Log.cs" />
     <Compile Include="Extentions\PathExtensions.cs" />
@@ -208,7 +209,7 @@
       <Version>6.4.4</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
+      <Version>13.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
