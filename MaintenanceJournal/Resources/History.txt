@@ -1,4 +1,7 @@
-﻿Version 2.0.5.27 (2023-06-24)
+﻿Version 2.0.6.28 (2023-06-29)
+* Report GetUpTime split in Week and Month tab.
+
+Version 2.0.5.27 (2023-06-24)
 * Added to delete a journal record.
 
 Version 2.0.4.26 (2022-10-01)

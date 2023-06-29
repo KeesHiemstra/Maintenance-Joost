@@ -4,6 +4,7 @@ using MaintenanceJournal.Views;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace MaintenanceJournal.ViewModels
@@ -24,6 +25,7 @@ namespace MaintenanceJournal.ViewModels
 		public GotUpTime Overall { get; set; } = new GotUpTime();
 		public GotUpTime WorkWeek { get; set; } = new GotUpTime();
 		public GotUpTime Weekend { get; set; } = new GotUpTime();
+		public List<GotUpTime> Weeks { get; set; } = new List<GotUpTime>();
 		public List<GotUpTime> Months { get; set; } = new List<GotUpTime>();
 		public Dictionary<int, int> TimeCount = new Dictionary<int, int>();
 
@@ -93,9 +95,10 @@ namespace MaintenanceJournal.ViewModels
 		/// </summary>
 		private void CollectReportData()
 		{
-			Overall = CollectPeriode(_Journals);
+			Overall = CollectPeriod(_Journals);
 			WorkWeek = CollectWeek();
 			Weekend = CollectWeekEnd();
+			CollectWeeks();
 			CollectMonths();
 		}
 
@@ -104,7 +107,7 @@ namespace MaintenanceJournal.ViewModels
 			List<(DateTime Date, TimeSpan Time)> journal = _Journals
 				.Where(x => x.Date.DayOfWeek >= DayOfWeek.Monday && x.Date.DayOfWeek <= DayOfWeek.Friday)
 				.ToList();
-			return CollectPeriode(journal);
+			return CollectPeriod(journal);
 		}
 
 		private GotUpTime CollectWeekEnd()
@@ -112,7 +115,31 @@ namespace MaintenanceJournal.ViewModels
 			List<(DateTime Date, TimeSpan Time)> journal = _Journals
 				.Where(x => x.Date.DayOfWeek < DayOfWeek.Monday || x.Date.DayOfWeek > DayOfWeek.Friday)
 				.ToList();
-			return CollectPeriode(journal);
+			return CollectPeriod(journal);
+		}
+
+		private void CollectWeeks()
+		{
+			DateTime startDate = _Journals.Min(x => x.Date);
+			startDate = startDate.AddDays(-((int)startDate.DayOfWeek) + 1);
+
+			DateTime endDate = _Journals.Max(x => x.Date.Date);
+			while (startDate < endDate)
+			{
+				GotUpTime gotUpTime = new GotUpTime();
+
+				gotUpTime = CollectPeriod(_Journals
+					.Where(x => x.Date >= startDate && x.Date < startDate.AddDays(7))
+					.ToList());
+
+				if (gotUpTime != null)
+				{
+					gotUpTime.Period = WeekNumber(startDate);
+					Weeks.Insert(0, gotUpTime);
+				}
+
+				startDate = startDate.AddDays(7);
+			}
 		}
 
 		private void CollectMonths()
@@ -123,7 +150,7 @@ namespace MaintenanceJournal.ViewModels
 			while (date > _Journals.Min(x => x.Date))
 			{
 				GotUpTime gotUpTime = new GotUpTime();
-				gotUpTime = CollectPeriode(_Journals
+				gotUpTime = CollectPeriod(_Journals
 					.Where(x => x.Date < date && x.Date >= date.AddMonths(-1))
 					.ToList());
 				
@@ -142,7 +169,7 @@ namespace MaintenanceJournal.ViewModels
 		/// </summary>
 		/// <param name="_journals"></param>
 		/// <returns></returns>
-		private GotUpTime CollectPeriode(List<(DateTime Date, TimeSpan Time)> _journals)
+		private GotUpTime CollectPeriod(List<(DateTime Date, TimeSpan Time)> _journals)
 		{
 			if ( _journals == null || _journals.Count == 0 ) return null; 
 
@@ -154,6 +181,34 @@ namespace MaintenanceJournal.ViewModels
 			};
 
 			return result;
+		}
+
+		private string WeekNumber(DateTime date)
+		{
+			DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+			System.Globalization.Calendar cal = dfi.Calendar;
+
+			int year = date.Year;
+			int week = cal.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+			if (week == 52 && date.Month == 1)
+			{
+				year--;
+			}
+			else if (week == 53)
+			{
+				if (date.Month == 12 && date.DayOfWeek <= DayOfWeek.Wednesday)
+				{
+					week = 1;
+					year++;
+				}
+				else if (date.Month == 1 && date.DayOfWeek >= DayOfWeek.Thursday)
+				{
+					year--;
+				}
+			}
+
+			return $"{year}-w{week:00}";
 		}
 
 		#endregion
