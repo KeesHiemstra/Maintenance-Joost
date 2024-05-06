@@ -96,9 +96,10 @@
         <DataGridTextColumn Binding="{Binding Avg, StringFormat=0.0}" Header="Avg" />
         <DataGridTextColumn Binding="{Binding Min}" Header="Min" />
         <DataGridTextColumn Binding="{Binding Max}" Header="Max" />
-        <DataGridTextColumn Binding="{Binding Opened, StringFormat=yyyy-MM-dd HH:mm}" Header="Date/Time" />
+        <DataGridTextColumn Binding="{Binding Opened, StringFormat=yyyy-MM-dd HH:mm}" Header="Opened" />
         <DataGridTextColumn Binding="{Binding Days}" Header="Days" />
         <DataGridTextColumn Binding="{Binding Number}" Header="Number" />
+        <DataGridTextColumn Binding="{Binding Closed, StringFormat=yyyy-MM-dd HH:mm}" Header="Finished" />
       </DataGrid.Columns>
     </DataGrid>
   </Grid>

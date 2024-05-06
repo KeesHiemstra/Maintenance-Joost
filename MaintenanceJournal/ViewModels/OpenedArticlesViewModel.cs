@@ -147,10 +147,11 @@ namespace MaintenanceJournal.ViewModels
 
 		private List<Journal> GetArticles(string article)
 		{
+			//Mix of opened and closes articles
 			return VM.Journals
-					.Where(x => x.Event == "Aangebroken")
+					.Where(x => x.Event == "Aangebroken" || x.Event == "Afgesloten")
 					.Where(x => x.Message.SplitArticle().Article == article)
-					.OrderByDescending(x => x.DTStart)
+					.OrderBy(x => x.DTStart) //Not Descending
 					.Select(x => x)
 					.ToList();
 		}
@@ -173,7 +174,7 @@ namespace MaintenanceJournal.ViewModels
 					report.Add(new OpenedArticles
 					{
 						Opened = articles[i].DTStart,
-						Days = (int)(articles[i].DTStart.Value.Date - articles[i + 1].DTStart.Value.Date).TotalDays,
+						Days = (int)(articles[i + 1].DTStart.Value.Date - articles[i].DTStart.Value.Date).TotalDays,
 					});
 				}
 
@@ -212,20 +213,62 @@ namespace MaintenanceJournal.ViewModels
 
 			Report = new List<OpenedArticles>();
 
-			for (int i = 0; i < articles.Count - 1; i++)
+			for (int i = 0; i < articles.Count; i++)
 			{
-				Report.Add(new OpenedArticles
+				if (i + 1 == articles.Count)
 				{
-					Opened = articles[i].DTStart,
-					Days = (int)(articles[i].DTStart.Value.Date - articles[i + 1].DTStart.Value.Date).TotalDays,
-					Number = Extensions.SplitArticle(articles[i + 1].Message).Number,
-				});
+					//Hit last record
+					if (articles[i].Event == "Aangebroken")
+					{
+						Report.Insert(0, new OpenedArticles
+						{
+							Opened = articles[i].DTStart,
+							Days = (int)(DateTime.Now.Date - articles[i].DTStart.Value.Date).TotalDays,
+							Number = Extensions.SplitArticle(articles[i].Message).Number,
+						});
+					}
+					else
+					{
+					}
+				}
+				else
+				{
+					//More records available
+					if (articles[i].Event == "Aangebroken")
+					{
+						//Opened article has been properly been closed
+						if (articles[i + 1].Event == "Afgesloten")
+						{
+							Report.Insert(0, new OpenedArticles
+							{
+								Closed = articles[i + 1].DTStart,
+								Opened = articles[i].DTStart,
+								Days = (int)((articles[i + 1]).DTStart.Value.Date - 
+									articles[i].DTStart.Value.Date).TotalDays,
+								Number = Extensions.SplitArticle(articles[i + 1].Message).Number,
+							});
+							continue;
+						}
+						//Next article has been openend
+						else
+						{
+							Report.Insert(0, new OpenedArticles
+							{
+								Closed = articles[i + 1].DTStart.Value.Date.AddDays(-1),
+								Opened = articles[i].DTStart,
+								Days = (int)(articles[i + 1].DTStart.Value.Date.AddDays(-1) - 
+									articles[i].DTStart.Value.Date).TotalDays,
+								Number = Extensions.SplitArticle(articles[i + 1].Message).Number,
+							});
+						}
+					}
+				}
 			}
-
-			View.OverviewBorder.Visibility = Visibility.Collapsed;
 
 			#region Show/hide columns
 
+			View.OverviewBorder.Visibility = Visibility.Collapsed;
+			
 			for (int i = 0; i < 5; i++)
 			{
 				View.ReportDataGrid.Columns[i].Visibility = Visibility.Collapsed;
@@ -236,16 +279,14 @@ namespace MaintenanceJournal.ViewModels
 			}
 			//Number column
 			View.ReportDataGrid.Columns[7].Visibility = Visibility.Collapsed;
-
+			
 			if (Report.Count > 0)
 			{
 				if (Report[0].Number != "")
 				{
 					View.ReportDataGrid.Columns[7].Visibility = Visibility.Visible;
 				}
-
-				#endregion
-
+			
 				if (Report[0].Number == "")
 				{
 					//Summary
@@ -253,23 +294,25 @@ namespace MaintenanceJournal.ViewModels
 					Avg = Report.Average(x => x.Days);
 					Min = Report.Min(x => x.Days);
 					Max = Report.Max(x => x.Days);
-
+			
 					//Show summary
 					View.OverviewBorder.Visibility = Visibility.Visible;
 				}
 			}
+			
+			#endregion
 
 			//Add just opened article
-			if ((DateTime.Now - articles.First().DTStart.Value).TotalDays > 0)
-			{
-				Report.Insert(0, new OpenedArticles
-				{
-					Opened = null,
-					Days = (int)(DateTime.Now.Date - articles.First().DTStart.Value.Date).TotalDays,
-					Number = Extensions.SplitArticle(articles.First().Message).Number,
-				});
-			}
-
+			//if ((DateTime.Now - articles.First().DTStart.Value).TotalDays > 0)
+			//{
+			//	Report.Insert(0, new OpenedArticles
+			//	{
+			//		Opened = null,
+			//		Days = (int)(DateTime.Now.Date - articles.First().DTStart.Value.Date).TotalDays,
+			//		Number = Extensions.SplitArticle(articles.First().Message).Number,
+			//	});
+			//}
+			//
 			View.ReportDataGrid.ItemsSource = Report;
 		}
 

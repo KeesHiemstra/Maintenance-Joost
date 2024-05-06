@@ -9,6 +9,7 @@ namespace MaintenanceJournal.Models
 	{
 		public string Article { get; set; }
 		public DateTime? Opened { get; set; }
+		public DateTime? Closed { get; set; } //Added v2.1.0.29
 		public string Number { get; set; }
 		public int Days { get; set; }
 		public int Count { get; set; }
