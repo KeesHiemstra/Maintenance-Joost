@@ -32,7 +32,7 @@
         <DataGridTextColumn Binding="{Binding Opened, StringFormat=yyyy-MM-dd HH:mm}" Header="Date/Time" />
         <DataGridTextColumn Binding="{Binding Days}" Header="Days" />
         <DataGridTextColumn Binding="{Binding Cups}" Header="Cups" />
-        <DataGridTextColumn Binding="{Binding CupsPerDay, StringFormat=0.0}" Header="G" />
+        <DataGridTextColumn Binding="{Binding CupsPerDay, StringFormat=0.0}" Header="A" />
         <DataGridTextColumn Binding="{Binding CupsMin, StringFormat=0}" Header="N" />
         <DataGridTextColumn Binding="{Binding CupsMax, StringFormat=0}" Header="X" />
       </DataGrid.Columns>
