@@ -64,7 +64,8 @@
         Name="DTStartDatePicker"
         Width="100"
         HorizontalAlignment="Left"
-        Text="{Binding Record.DTStart, StringFormat=yyyy-MM-dd HH:mm}" />
+        Text="{Binding Record.DTStart, StringFormat=yyyy-MM-dd HH:mm}"
+        ToolTip="{Binding Record._DTCreation, StringFormat=yyyy-MM-dd HH:mm}"/>
 
       <TextBlock
         Margin="0,5,0,0"

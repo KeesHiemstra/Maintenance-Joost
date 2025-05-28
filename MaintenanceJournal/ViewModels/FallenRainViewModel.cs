@@ -93,10 +93,10 @@ namespace MaintenanceJournal.ViewModels
 				.GroupBy(
 					x => x.DTStart.Value.Year,
 					x => decimal.Parse(x.Message, style, provider),
-					(Year, TotaalRain) => new
+					(Year, TotalRain) => new
 					{
 						Key = Year,
-						Rain = TotaalRain.Sum(x => x)
+						Rain = TotalRain.Sum(x => x)
 					}
 					)
 				.OrderByDescending(x => x.Key);
@@ -116,7 +116,7 @@ namespace MaintenanceJournal.ViewModels
 			row = Data.Tables[0].NewRow();
 			row["Month"] = Names[0];
 
-			List<int> rainYears = new List<int>();
+			List<decimal> rainYears = new List<decimal>();
 			count = 0;
 			foreach (var year in years)
 			{
@@ -131,7 +131,7 @@ namespace MaintenanceJournal.ViewModels
 			TotalMonthFallenRain(rainYears);
 		}
 
-		private void TotalMonthFallenRain(List<int> rainYears)
+		private void TotalMonthFallenRain(List<decimal> rainYears)
 		{
 			var months = VM.Journals
 				.Where(x => x.Event == "Regen")
