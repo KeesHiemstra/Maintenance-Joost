@@ -111,8 +111,8 @@ namespace MaintenanceJournal.ViewModels
 				};
 
 				var days = DefecateDetails
-					.Where(x => x.Time >= startDate && x.Time < startDate.AddDays(1) &&
-								 x.Wips > 0)
+					.Where(x => x.Time >= startDate && x.Time < startDate.AddDays(1) /* &&
+								 x.Wips > 0 */)
 					.ToList();
 				if (days.Count() == 0)
 				{
@@ -147,10 +147,18 @@ namespace MaintenanceJournal.ViewModels
 					Period = WeekNumber(startDate),
 				};
 
-				var days = DefecateDays
-					.Where(x => x.Date >= startDate && x.Date < startDate.AddDays(7) &&
-								 x.TotalWips > 0)
+				var days = DefecateDays 
+					.Where(x => x.Date >= startDate && x.Date < startDate.AddDays(7) /* &&
+								 x.TotalWips > 0 */)
 					.ToList();
+				foreach ( var day in days )
+				{
+					if (day.MinWips == 0)
+					{
+						day.TotalGoings = 0;
+					}
+				}
+
 				if (days.Count() == 0)
 				{
 					startDate = startDate.AddDays(7);
@@ -216,8 +224,8 @@ namespace MaintenanceJournal.ViewModels
 				};
 
 				var days = DefecateDays
-					.Where(x => x.Date >= startDate && x.Date < startDate.AddMonths(1) &&
-								 x.TotalWips > 0)
+					.Where(x => x.Date >= startDate && x.Date < startDate.AddMonths(1) /* &&
+								 x.TotalWips > 0 */)
 					.ToList();
 				if (days.Count() == 0)
 				{

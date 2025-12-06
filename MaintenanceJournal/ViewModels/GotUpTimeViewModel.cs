@@ -79,11 +79,15 @@ namespace MaintenanceJournal.ViewModels
 
 		/// <summary>
 		/// The data is used for both report and graph.
+		/// Limited to 5 years.
 		/// </summary>
 		private void CollectData()
 		{
+			DateTime _LimitDate = DateTime.Now.AddYears(-5);
+
 			_Journals = VM.Journals
-				.Where(x => x.Event == "Opgestaan")
+				.Where(x => x.Event == "Opgestaan" &&
+							 x.DTStart >= _LimitDate)
 				.Select(x => (x.DTStart.Value.Date, x.DTStart.Value.TimeOfDay))
 				.ToList();
 		}
