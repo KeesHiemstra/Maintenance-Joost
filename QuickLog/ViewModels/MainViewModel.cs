@@ -20,6 +20,7 @@ namespace QuickLog.ViewModels
 			{
 				Delimiter = "\t",
 			};
+		private bool CollectBedTimeData = false;
 
 		public List<QLog> Logs { get; set; } = new List<QLog>();
 		public List<string> Items { get; set; } = new List<string>();
@@ -52,6 +53,12 @@ namespace QuickLog.ViewModels
 			View.CalendarOnlyCheckBox.IsChecked = false;
 			View.TimeTextBox.IsEnabled = true;
 			View.TimeTextBox.Focus();
+		}
+
+		internal void BedTimeData()
+		{
+			CollectBedTimeData = true;
+			ClearCalendarOnly();
 		}
 
 		private void UpdateItems()

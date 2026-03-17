@@ -557,5 +557,6 @@ namespace MaintenanceJournal.ViewModels
 		}
 
 		#endregion
+
 	}
 }

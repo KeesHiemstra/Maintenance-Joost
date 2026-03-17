@@ -48,7 +48,11 @@ namespace QuickLog
 				{
 					VM.SetCalendarOnly();
 				}
-				else
+				if (item.ToLower() == "/bedtime")
+				{
+					VM.BedTimeData();
+        }
+        else
 				{
 					VM.QuickLogPath = item;
 				}
