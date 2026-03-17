@@ -7,6 +7,3 @@ The output file is using `csv` (comma separated values) and the delimiter is a `
 #### References
 
  [CsvHelper](https://joshclose.github.io/CsvHelper/getting-started/)
-
-#### Wish list
-- [ ] Rename the QuickLog file.

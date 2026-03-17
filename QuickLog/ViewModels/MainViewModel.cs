@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 
 namespace QuickLog.ViewModels
@@ -20,8 +21,14 @@ namespace QuickLog.ViewModels
 			{
 				Delimiter = "\t",
 			};
-		private bool CollectBedTimeData = false;
 
+		public enum Options
+		{
+			None,
+			Calender,
+			BedTime
+		};
+		public Options Option { get; set; } = Options.None;
 		public List<QLog> Logs { get; set; } = new List<QLog>();
 		public List<string> Items { get; set; } = new List<string>();
 		public string QuickLogPath = "\\\\Rommeldijk\\Data\\QuickLog.csv";
@@ -29,9 +36,9 @@ namespace QuickLog.ViewModels
 		public MainViewModel(MainWindow view)
 		{
 			View = view;
-		}
+    }
 
-		internal void MainViewModel_Loaded()
+    internal void MainViewModel_Loaded()
 		{
 			LoadLogs();
 			if (Logs.Count > 0)
@@ -41,24 +48,29 @@ namespace QuickLog.ViewModels
 			UpdateItems();
 		}
 
-		internal void SetCalendarOnly()
+		internal void ProcessOptionSelection()
 		{
-			View.CalendarOnlyCheckBox.IsChecked = true;
-			View.TimeTextBox.IsEnabled = false;
-			View.MessageTextBox.Focus();
-		}
-
-		internal void ClearCalendarOnly()
-		{
-			View.CalendarOnlyCheckBox.IsChecked = false;
-			View.TimeTextBox.IsEnabled = true;
-			View.TimeTextBox.Focus();
-		}
-
-		internal void BedTimeData()
-		{
-			CollectBedTimeData = true;
-			ClearCalendarOnly();
+			switch (Option)
+			{
+				case Options.None:
+          View.OptionComboBox.SelectedItem = 0;
+          View.TimeTextBox.IsEnabled = true;
+					View.TimeTextBox.Focus();
+					View.MessageTextBox.IsEnabled = true;
+					break;
+				case Options.Calender:
+					View.OptionComboBox.SelectedItem = 1;
+					View.TimeTextBox.IsEnabled = false;
+					View.MessageTextBox.IsEnabled = true;
+					View.MessageTextBox.Focus();
+					break;
+				case Options.BedTime:
+          View.OptionComboBox.SelectedIndex = 2;
+          View.TimeTextBox.IsEnabled = true;
+					View.TimeTextBox.Focus();
+					View.MessageTextBox.IsEnabled = false;
+					break;
+			}
 		}
 
 		private void UpdateItems()
@@ -83,7 +95,7 @@ namespace QuickLog.ViewModels
 				View.EventComboBox.ItemsSource = Items;
 				View.EventComboBox.SelectedItem = Logs.LastOrDefault().Event;
 
-				if (View.CalendarOnlyCheckBox.IsChecked.Value)
+				if (Option == Options.Calender || Option == Options.BedTime)
 				{
 					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.AddDays(1);
 				}
@@ -130,7 +142,7 @@ namespace QuickLog.ViewModels
 
 			UpdateItems();
 
-			if (!View.CalendarOnlyCheckBox.IsChecked.Value)
+			if (Option == Options.None || Option == Options.BedTime)
 			{
 				View.TimeTextBox.Text = "";
 				View.TimeTextBox.Focus();
