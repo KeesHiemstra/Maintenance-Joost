@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31423.177
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11612.153 insiders
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Export-UsedArticles", "Export-UsedArticles\Export-UsedArticles.csproj", "{B994DDB8-6CCD-49DE-8409-4C284604F918}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Export-Huishouden", "Export-Huishouden\Export-Huishouden.csproj", "{4D6B0B8A-6F01-4702-9668-5CF215390237}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-Urine", "Import-Urine\Import-Urine.csproj", "{564D853A-C445-4952-93A2-0023C166CE6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-BedTime", "Import-BedTime\Import-BedTime.csproj", "{60A8DDCC-BBA6-4FD0-935B-EC73F35E6EAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{564D853A-C445-4952-93A2-0023C166CE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{564D853A-C445-4952-93A2-0023C166CE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{564D853A-C445-4952-93A2-0023C166CE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60A8DDCC-BBA6-4FD0-935B-EC73F35E6EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A8DDCC-BBA6-4FD0-935B-EC73F35E6EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A8DDCC-BBA6-4FD0-935B-EC73F35E6EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A8DDCC-BBA6-4FD0-935B-EC73F35E6EAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
