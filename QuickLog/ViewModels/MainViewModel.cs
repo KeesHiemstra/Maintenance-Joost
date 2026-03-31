@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 
 namespace QuickLog.ViewModels
@@ -26,7 +25,8 @@ namespace QuickLog.ViewModels
 		{
 			None,
 			Calender,
-			BedTime
+			BedTime,
+			AfternoonEvent
 		};
 		public Options Option { get; set; } = Options.None;
 		public List<QLog> Logs { get; set; } = new List<QLog>();
@@ -70,6 +70,12 @@ namespace QuickLog.ViewModels
 					View.TimeTextBox.Focus();
 					View.MessageTextBox.IsEnabled = false;
 					break;
+				case Options.AfternoonEvent:
+					View.OptionComboBox.SelectedItem = 3;
+					View.TimeTextBox.IsEnabled = false;
+					View.MessageTextBox.IsEnabled = true;
+					View.MessageTextBox.Focus();
+					break;
 			}
 		}
 
@@ -99,6 +105,11 @@ namespace QuickLog.ViewModels
 				{
 					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.AddDays(1);
 				}
+				if (Option == Options.AfternoonEvent)
+				{
+					View.TimeTextBox.Text = "1200";
+					View.MessageTextBox.Focus();
+				}
 				else
 				{
 					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.Date;
@@ -115,20 +126,29 @@ namespace QuickLog.ViewModels
 		{
 			DateTime time;
 
-			try
+			if (Option == Options.AfternoonEvent)
 			{
-				time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
-					$"{View.TimeTextBox.Text}");
+				time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} 12:00");
+				View.TimeTextBox.Text = "12:00";
+				View.MessageTextBox.Focus();
 			}
-			catch (Exception ex)
+			else
 			{
-				MessageBox.Show(ex.Message,
-					"Process the entered time",
-					MessageBoxButton.OK,
-					MessageBoxImage.Exclamation);
+				try
+				{
+					time = DateTime.Parse($"{View.DateDatePicker.SelectedDate.Value.Date:yyyy-MM-dd} " +
+						$"{View.TimeTextBox.Text}");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message,
+						"Process the entered time",
+						MessageBoxButton.OK,
+						MessageBoxImage.Exclamation);
 
-				View.TimeTextBox.Focus();
-				return;
+					View.TimeTextBox.Focus();
+					return;
+				}
 			}
 
 			View.LogsDataGrid.ItemsSource = null;
@@ -146,6 +166,12 @@ namespace QuickLog.ViewModels
 			{
 				View.TimeTextBox.Text = "";
 				View.TimeTextBox.Focus();
+			}
+			if (Option == Options.AfternoonEvent)
+			{
+				View.DateDatePicker.SelectedDate = View.DateDatePicker.SelectedDate.Value.AddDays(1);
+				View.TimeTextBox.Text = "12:00";
+				View.MessageTextBox.Focus();
 			}
 			else
 			{
@@ -191,6 +217,21 @@ namespace QuickLog.ViewModels
 		/// </summary>
 		internal void SaveLogs()
 		{
+			if (Logs == null || Logs.Count == 0)
+				return;
+
+			if (!File.Exists(QuickLogPath))
+			{
+				FileStream fs = null;
+				try
+				{
+					fs = new FileStream(QuickLogPath, FileMode.CreateNew);
+				}
+				finally
+				{
+					fs?.Dispose();
+				}
+			}
 			using var writer = new StreamWriter(QuickLogPath);
 			using var csv = new CsvWriter(writer, Config);
 			csv.WriteRecords(Logs.OrderBy(x => x.Time));

@@ -34,6 +34,11 @@ namespace Import_QuickLog
 				Database = "Joost";
 			}
 
+			if (args.Length == 1)
+			{
+				InputPath = args[0];
+			}
+
 			ImportQuickLog();
 
 			Console.Write("\nPress any key...");
