@@ -174,13 +174,15 @@ namespace QuickLog
 
 			if (e.Key is Key.OemPlus or Key.Space or Key.Add)
 			{
-				DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(1);
-				DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
+				VM.DateNext(true);
+				e.Handled = true;
+				return;
 			}
 			else if (e.Key is Key.OemMinus or Key.Subtract)
 			{
-				DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(-1);
-				DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
+				VM.DatePrevious(true);
+				e.Handled = true;
+				return;
 			}
 
 			return;
@@ -245,15 +247,13 @@ namespace QuickLog
 			{
 				if (e.Key is Key.OemPlus or Key.Space or Key.Add)
 				{
-					DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(1);
-					DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
+					VM.DateNext(true);
 					e.Handled = true;
 					return;
 				}
 				else if (e.Key is Key.OemMinus or Key.Subtract)
 				{
-					DateDatePicker.SelectedDate = DateDatePicker.SelectedDate.Value.Date.AddDays(-1);
-					DateDatePicker.DisplayDate = DateDatePicker.SelectedDate.Value;
+					VM.DatePrevious(true);
 					e.Handled = true;
 					return;
 				}
@@ -268,6 +268,8 @@ namespace QuickLog
 		private void AddButton_Click(object sender, RoutedEventArgs e)
 		{
 			VM.AddRecord();
+			LogsDataGrid.ItemsSource = null;
+			LogsDataGrid.ItemsSource = VM.Logs;
 		}
 
 		/// <summary>
@@ -297,5 +299,6 @@ namespace QuickLog
 			}
 			VM.ProcessOptionSelection();
 		}
+
 	}
 }

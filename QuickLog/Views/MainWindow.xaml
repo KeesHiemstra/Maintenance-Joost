@@ -31,7 +31,7 @@
       Command="cmd:MainCommands.Exit"
       Executed="ExitCommand_Execute" />
   </Window.CommandBindings>
-
+  
   <Grid Margin="10">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />

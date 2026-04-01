@@ -5,6 +5,7 @@ using Microsoft.Win32;
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace QuickLog.ViewModels
 			{
 				Delimiter = "\t",
 			};
-
+		
 		public enum Options
 		{
 			None,
@@ -29,23 +30,30 @@ namespace QuickLog.ViewModels
 			AfternoonEvent
 		};
 		public Options Option { get; set; } = Options.None;
-		public List<QLog> Logs { get; set; } = new List<QLog>();
+		public ObservableCollection<QLog> Logs { get; set; } = new ObservableCollection<QLog>();
 		public List<string> Items { get; set; } = new List<string>();
 		public string QuickLogPath = "\\\\Rommeldijk\\Data\\QuickLog.csv";
 
 		public MainViewModel(MainWindow view)
 		{
 			View = view;
-    }
+		}
 
-    internal void MainViewModel_Loaded()
+		internal void MainViewModel_Loaded()
 		{
 			LoadLogs();
+
 			if (Logs.Count > 0)
 			{
 				View.DateDatePicker.SelectedDate = Logs.First().Time.Date;
+				if (Option != Options.None)
+				{
+					DateNext();
+				}
 			}
+
 			UpdateItems();
+			ToFocus();
 		}
 
 		internal void ProcessOptionSelection()
@@ -53,28 +61,25 @@ namespace QuickLog.ViewModels
 			switch (Option)
 			{
 				case Options.None:
-          View.OptionComboBox.SelectedItem = 0;
-          View.TimeTextBox.IsEnabled = true;
-					View.TimeTextBox.Focus();
+					View.OptionComboBox.SelectedItem = 0;
+					View.TimeTextBox.IsEnabled = true;
 					View.MessageTextBox.IsEnabled = true;
 					break;
 				case Options.Calender:
 					View.OptionComboBox.SelectedItem = 1;
 					View.TimeTextBox.IsEnabled = false;
 					View.MessageTextBox.IsEnabled = true;
-					View.MessageTextBox.Focus();
 					break;
 				case Options.BedTime:
-          View.OptionComboBox.SelectedIndex = 2;
-          View.TimeTextBox.IsEnabled = true;
-					View.TimeTextBox.Focus();
+					View.OptionComboBox.SelectedIndex = 2;
+					View.TimeTextBox.IsEnabled = true;
 					View.MessageTextBox.IsEnabled = false;
 					break;
 				case Options.AfternoonEvent:
 					View.OptionComboBox.SelectedItem = 3;
 					View.TimeTextBox.IsEnabled = false;
+					View.TimeTextBox.Text = "1200";
 					View.MessageTextBox.IsEnabled = true;
-					View.MessageTextBox.Focus();
 					break;
 			}
 		}
@@ -100,20 +105,6 @@ namespace QuickLog.ViewModels
 			{
 				View.EventComboBox.ItemsSource = Items;
 				View.EventComboBox.SelectedItem = Logs.LastOrDefault().Event;
-
-				if (Option == Options.Calender || Option == Options.BedTime)
-				{
-					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.AddDays(1);
-				}
-				if (Option == Options.AfternoonEvent)
-				{
-					View.TimeTextBox.Text = "1200";
-					View.MessageTextBox.Focus();
-				}
-				else
-				{
-					View.DateDatePicker.SelectedDate = Logs.FirstOrDefault().Time.Date;
-				}
 			}
 
 			View.LogsDataGrid.ItemsSource = Logs;
@@ -162,24 +153,51 @@ namespace QuickLog.ViewModels
 
 			UpdateItems();
 
-			if (Option == Options.None || Option == Options.BedTime)
+			switch (Option)
 			{
-				View.TimeTextBox.Text = "";
-				View.TimeTextBox.Focus();
+				case Options.None:
+					View.DateDatePicker.SelectedDate = time.Date;
+					View.TimeTextBox.Text = "";
+					break;
+				case Options.Calender:
+					DateNext();
+					break;
+				case Options.BedTime:
+					DateNext();
+					View.TimeTextBox.Text = "";
+					break;
+				case Options.AfternoonEvent:
+					DateNext();
+					View.TimeTextBox.Text = "12:00";
+					break;
 			}
-			if (Option == Options.AfternoonEvent)
-			{
-				View.DateDatePicker.SelectedDate = View.DateDatePicker.SelectedDate.Value.AddDays(1);
-				View.TimeTextBox.Text = "12:00";
-				View.MessageTextBox.Focus();
-			}
-			else
-			{
-				View.MessageTextBox.Focus();
-			}
+
+			ToFocus();
 
 			View.LogsDataGrid.ItemsSource = Logs
 				.OrderByDescending(x => x.Time);
+		}
+
+		/// <summary>
+		/// Focus to the correct control based on the selected option.
+		/// </summary>
+		internal void ToFocus()
+		{
+			switch (Option)
+			{
+				case Options.None:
+					View.TimeTextBox.Focus();
+					break;
+				case Options.Calender:
+					View.MessageTextBox.Focus();
+					break;
+				case Options.BedTime:
+					View.TimeTextBox.Focus();
+					break;
+				case Options.AfternoonEvent:
+					View.MessageTextBox.Focus();
+					break;
+			}
 		}
 
 		/// <summary>
@@ -205,11 +223,12 @@ namespace QuickLog.ViewModels
 		private void LoadLogs()
 		{
 			if (!File.Exists(QuickLogPath)) { return; }
+
 			using var reader = new StreamReader(QuickLogPath);
 			using var cvs = new CsvReader(reader, Config);
 			var logs = cvs.GetRecords<QLog>()
 				.OrderByDescending(x => x.Time);
-			Logs = new List<QLog>(logs);
+			Logs = new ObservableCollection<QLog>(logs);
 		}
 
 		/// <summary>
@@ -267,6 +286,38 @@ namespace QuickLog.ViewModels
 					"Error renaming",
 					MessageBoxButton.OK,
 					MessageBoxImage.Error);
+			}
+		}
+
+		public void DateNext(bool ByKey = false)
+		{
+			if (View.DateDatePicker.SelectedDate == null)
+				return;
+
+			if (ByKey)
+			{
+				View.DateDatePicker.SelectedDate = View.DateDatePicker.SelectedDate.Value.Date.AddDays(1);
+				View.DateDatePicker.DisplayDate = View.DateDatePicker.SelectedDate.Value;
+			}
+			else
+			{
+				View.DateDatePicker.SelectedDate = Logs.First().Time.Date.AddDays(1);
+			}
+		}
+
+		public void DatePrevious(bool ByKey = false)
+		{
+			if (View.DateDatePicker.SelectedDate == null)
+				return;
+
+			if (ByKey)
+			{
+				View.DateDatePicker.SelectedDate = View.DateDatePicker.SelectedDate.Value.Date.AddDays(-1);
+				View.DateDatePicker.DisplayDate = View.DateDatePicker.SelectedDate.Value;
+			}
+			else
+			{
+				View.DateDatePicker.SelectedDate = Logs.First().Time.Date.AddDays(-1);
 			}
 		}
 
