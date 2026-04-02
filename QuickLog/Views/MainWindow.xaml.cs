@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -157,14 +158,6 @@ namespace QuickLog
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			//if (VM.Logs != null && VM.Logs.Count > 0)
-			//{
-			//	DateDatePicker.SelectedDate = VM
-			//		.Logs.OrderByDescending(x => x.Time)
-			//		.Last().Time.Date;
-			//	EventComboBox.Text = VM.Logs.Last().Event;
-			//}
-
 			VM.MainViewModel_Loaded();
 		}
 
@@ -188,6 +181,11 @@ namespace QuickLog
 			return;
 		}
 
+		/// <summary>
+		/// Allow only the characters 0-9 and limit the length to 4 characters.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void TimeTextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			//Prevent action if is not focused
@@ -220,6 +218,12 @@ namespace QuickLog
 			}
 		}
 
+		/// <summary>
+		/// Insert a colon in the time text and add zeros if needed.
+		/// For example, 900 becomes 09:00 and 123 becomes 01:23.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void TimeTextBox_LostFocus(object sender, RoutedEventArgs e)
 		{
 			string text = ((TextBox)e.Source).Text;
@@ -277,7 +281,7 @@ namespace QuickLog
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void Window_Closing(object sender, CancelEventArgs e)
 		{
 			//I filled 2 times the logs. It costs a lot, but I didn't use the auto save.
 			VM.SaveLogs();

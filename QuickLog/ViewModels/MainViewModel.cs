@@ -39,6 +39,9 @@ namespace QuickLog.ViewModels
 			View = view;
 		}
 
+		/// <summary>
+		/// Set the date from the first log entry.
+		/// </summary>
 		internal void MainViewModel_Loaded()
 		{
 			LoadLogs();

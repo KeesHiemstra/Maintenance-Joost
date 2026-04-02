@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace Contacts.ViewModels
 	{
 		#region [ Fields ]
 
+		private readonly MainWindow mainView;
 		private static readonly string ContactsPath = "\\\\Rommeldijk\\Data\\Contacts.json";
 		private static readonly string EventsPath = "\\\\Rommeldijk\\Data\\JoostEvents.json";
 
@@ -34,8 +36,22 @@ namespace Contacts.ViewModels
 
 		#region [ Construction ]
 
-		public MainViewModel()
+		public MainViewModel(MainWindow mainWindow)
 		{
+			mainView = mainWindow;
+
+			#region Window Title
+
+			string name = Assembly.GetExecutingAssembly().GetName().Name;
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+#if DEBUG
+      mainView.Title = $"{name} - {version} (Debug)";
+#else
+			mainView.Title = $"{name} - {version}";
+#endif
+
+			#endregion
+
 			LoadContacts();
 			LoadEvents();
 		}

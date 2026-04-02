@@ -1,4 +1,8 @@
-﻿Version 1.0.0.3 (2021-05-23)
+﻿Contacts - History
+Version 1.0.0.4 (2026-04-02)
+* Updated the project to .NET Framework 4.8.1 and C# 9
+
+Version 1.0.0.3 (2021-05-23)
 * Corrected the layout of EditContactWindow; it caused a strange layout if there a lot text.
 
 Version 1.0.0.2 (2021-05-23)

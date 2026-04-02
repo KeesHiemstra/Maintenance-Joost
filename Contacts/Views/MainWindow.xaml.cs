@@ -26,7 +26,7 @@ namespace Contacts
 			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			Title = $"Contacts ({version})";
 
-			VM = new MainViewModel();
+			VM = new MainViewModel(this);
 			DataContext = VM;
 		}
 
