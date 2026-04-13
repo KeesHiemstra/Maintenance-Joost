@@ -89,7 +89,7 @@ namespace Contacts.ViewModels
 			if (!Events.Contains(Contact.Event))
 			{
 				Events.Add(Contact.Event);
-				//ToDo: Save list
+				//Save list
 				VM.SaveEvents();
 			}
 

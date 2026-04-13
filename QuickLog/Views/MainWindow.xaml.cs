@@ -19,6 +19,7 @@ namespace QuickLog
 		public MainViewModel VM { get; set; }
 		public List<string> OptionList { get; set; }
 
+		#region [ Contructors ]
 		public MainWindow()
 		{
 			VM = new MainViewModel(this);
@@ -32,7 +33,7 @@ namespace QuickLog
 #if DEBUG
 			Title = $"{name} - {version} (Debug)";
 #else
-      Title = $"{name} - {version}";
+			Title = $"{name} - {version}";
 #endif
 
 			#endregion
@@ -58,11 +59,9 @@ namespace QuickLog
 			VM.ProcessOptionSelection();
 			#endregion
 
-			//if (LogsDataGrid.ItemsSource != null)
-			{
-				LogsDataGrid.ItemsSource = VM.Logs
-					.OrderByDescending(x => x.Time);
-			}
+			//Order the logs by time, so the latest log is on top.
+			LogsDataGrid.ItemsSource = VM.Logs
+				.OrderByDescending(x => x.Time);
 
 			EventComboBox.ItemsSource = VM.Items;
 
@@ -75,6 +74,7 @@ namespace QuickLog
 				TimeTextBox.Focus();
 			}
 		}
+		#endregion
 
 		private void ProcessCommandLineArgs(string[] args)
 		{
@@ -247,7 +247,8 @@ namespace QuickLog
 			if (sender == null)
 				return;
 
-			if (VM.Option == MainViewModel.Options.AfternoonEvent)
+			if (VM.Option == MainViewModel.Options.Calender ||
+				VM.Option == MainViewModel.Options.AfternoonEvent)
 			{
 				if (e.Key is Key.OemPlus or Key.Space or Key.Add)
 				{
@@ -264,6 +265,11 @@ namespace QuickLog
 			}
 		}
 
+		/// <summary>
+		/// Select all text in the message text box when it gets focus, so the user can easily overwrite it.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void MessageTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
 			((TextBox)e.OriginalSource).SelectAll();
