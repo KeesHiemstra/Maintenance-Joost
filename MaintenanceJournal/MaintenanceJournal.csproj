@@ -85,6 +85,7 @@
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\DefecateReport.cs" />
     <Compile Include="Models\DefecateDetail.cs" />
+    <Compile Include="Models\Garbage.cs" />
     <Compile Include="Models\GotUpTime.cs" />
     <Compile Include="Models\OpenedArticles.cs" />
     <Compile Include="Models\UrineDay.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="ViewModels\DateInfo.cs" />
     <Compile Include="ViewModels\DefecateViewModel.cs" />
     <Compile Include="ViewModels\FallenRainViewModel.cs" />
+    <Compile Include="ViewModels\GarbageViewModel.cs" />
     <Compile Include="ViewModels\GotUpTimeViewModel.cs" />
     <Compile Include="ViewModels\JournalViewModel.cs" />
     <Compile Include="ViewModels\OpenedArticlesViewModel.cs" />
@@ -109,6 +111,9 @@
     </Compile>
     <Compile Include="Views\FallenRainWindow.xaml.cs">
       <DependentUpon>FallenRainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GarbageWindow.xaml.cs">
+      <DependentUpon>GarbageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\GotUpTimeGraphWindow.xaml.cs">
       <DependentUpon>GotUpTimeGraphWindow.xaml</DependentUpon>
@@ -141,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FallenRainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GarbageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

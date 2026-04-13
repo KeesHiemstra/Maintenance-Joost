@@ -1,0 +1,103 @@
+﻿<Window x:Class="MaintenanceJournal.Views.GarbageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaintenanceJournal.Views"
+        mc:Ignorable="d"
+        Title="Garbage report" 
+        Height="450" 
+        Width="800">
+  <Grid>
+    <TabControl 
+      Margin="5">
+
+      <TabItem
+        Header="Gft">
+        <DataGrid
+          x:Name="GftReportDataGrid"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding GftReport}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Count}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Weeks}" Header="Weeks" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+
+      <TabItem
+        Header="Glas">
+        <DataGrid
+          x:Name="GlassReportDataGrid"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding GlassReport}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Count}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Weeks}" Header="Weeks" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+      <TabItem
+        Header="Paper">
+        <DataGrid
+          x:Name="PaperReportDataGrid"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding PaperReport}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Count}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Weeks}" Header="Weeks" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+      <TabItem
+        Header="Plastic">
+        <DataGrid
+          x:Name="PlasticReportDataGrid"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding PlasticReport}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Count}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Weeks}" Header="Weeks" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+      <TabItem
+        Header="Rest">
+        <DataGrid
+          x:Name="RestReportDataGrid"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding RestReport}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Count}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding Date, StringFormat=yyyy-MM-dd}" Header="Date" />
+            <DataGridTextColumn Binding="{Binding Weeks}" Header="Weeks" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+    </TabControl>
+  </Grid>
+</Window>

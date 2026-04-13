@@ -182,6 +182,21 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region ReportGarbage
+
+		private void ReportGarbageCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+			//(VM.Journals.Count(x => x.Event == "Afval") > 0);
+		}
+
+		private void ReportGarbageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ReportGarbage();
+		}
+
+		#endregion
+
 		#region ReportCalendar
 
 		private void ReportCalendarCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

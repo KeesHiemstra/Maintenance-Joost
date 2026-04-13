@@ -51,6 +51,10 @@
       Command="cmd:MainWindowCommands.ReportFallenRain"
       Executed="ReportFallenRainCommand_Executed" />
     <CommandBinding
+      CanExecute="ReportGarbageCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportGarbage"
+      Executed="ReportGarbageCommand_Executed" />
+    <CommandBinding 
       CanExecute="ReportCalendarCommand_CanExecute"
       Command="cmd:MainWindowCommands.ReportCalendar"
       Executed="ReportCalendarCommand_Executed" />
@@ -103,6 +107,7 @@
         <MenuItem Command="cmd:MainWindowCommands.ReportOpenedArticles" />
         <MenuItem Command="cmd:MainWindowCommands.ReportCoffeeUsage" />
         <MenuItem Command="cmd:MainWindowCommands.ReportFallenRain" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportGarbage" />
         <MenuItem Command="cmd:MainWindowCommands.ReportCalendar" />
         <MenuItem Command="cmd:MainWindowCommands.ReportGotUpTime" />
         <MenuItem Command="cmd:MainWindowCommands.ReportUrine" />

@@ -310,6 +310,12 @@ namespace MaintenanceJournal.ViewModels
 			report.ShowReport();
 		}
 
+		internal void ReportGarbage()
+		{
+			GarbageViewModel report = new GarbageViewModel(this);
+			report.ShowReport();
+		}
+
 		internal void ReportFallenRain()
 		{
 			FallenRainViewModel report = new FallenRainViewModel(this);

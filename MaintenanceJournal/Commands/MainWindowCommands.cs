@@ -93,6 +93,15 @@ namespace MaintenanceJournal.Commands
 				new InputGestureCollection() { }
 			);
 
+
+		public static readonly RoutedUICommand ReportGarbage = new RoutedUICommand
+			(
+				"_Garbage",
+				"ReportGarbage",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 		public static readonly RoutedUICommand ReportCalendar = new RoutedUICommand
 			(
 				"Ca_lendar",
