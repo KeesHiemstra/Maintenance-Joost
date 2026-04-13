@@ -1,9 +1,10 @@
-﻿using MaintenanceJournal.Models;
+﻿using CHi.Extensions;
+
+using MaintenanceJournal.Models;
 using MaintenanceJournal.Views;
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace MaintenanceJournal.ViewModels
@@ -102,7 +103,7 @@ namespace MaintenanceJournal.ViewModels
 			{
 				UrineReport urineReport = new UrineReport()
 				{
-					Period = WeekNumber(startDate),
+					Period = startDate.WeekNumber(),
 				};
 
 				var days = UrineDays
@@ -168,34 +169,6 @@ namespace MaintenanceJournal.ViewModels
 
 				startDate = startDate.AddMonths(1);
 			}
-		}
-
-		private string WeekNumber(DateTime date)
-		{
-			DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-			System.Globalization.Calendar cal = dfi.Calendar;
-
-			int year = date.Year;
-			int week = cal.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
-			if (week == 52 && date.Month == 1)
-			{
-				year--;
-			}
-			else if (week == 53)
-			{
-				if (date.Month == 12 && date.DayOfWeek <= DayOfWeek.Wednesday)
-				{
-					week = 1;
-					year++;
-				}
-				else if (date.Month == 1 && date.DayOfWeek >= DayOfWeek.Thursday)
-				{
-					year--;
-				}
-			}
-
-			return $"{year}-w{week:00}";
 		}
 
 	}

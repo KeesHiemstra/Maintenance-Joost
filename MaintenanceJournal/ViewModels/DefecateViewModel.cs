@@ -1,13 +1,11 @@
-﻿using MaintenanceJournal.Models;
+﻿using CHi.Extensions;
+
+using MaintenanceJournal.Models;
 using MaintenanceJournal.Views;
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 
 namespace MaintenanceJournal.ViewModels
 {
@@ -144,7 +142,7 @@ namespace MaintenanceJournal.ViewModels
 			{
 				DefecateReport report = new DefecateReport()
 				{
-					Period = WeekNumber(startDate),
+					Period = startDate.WeekNumber(),
 				};
 
 				var days = DefecateDays 
@@ -178,34 +176,6 @@ namespace MaintenanceJournal.ViewModels
 
 				startDate = startDate.AddDays(7);
 			}
-		}
-
-		private string WeekNumber(DateTime date)
-		{
-			DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-			System.Globalization.Calendar cal = dfi.Calendar;
-
-			int year = date.Year;
-			int week = cal.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
-			if (week == 52 && date.Month == 1)
-			{
-				year--;
-			}
-			else if (week == 53)
-			{
-				if (date.Month == 12 && date.DayOfWeek <= DayOfWeek.Wednesday)
-				{
-					week = 1;
-					year++;
-				}
-				else if (date.Month == 1 && date.DayOfWeek >= DayOfWeek.Thursday)
-				{
-					year--;
-				}
-			}
-
-			return $"{year}-w{week:00}";
 		}
 
 		private void CollectReportDataMonth()

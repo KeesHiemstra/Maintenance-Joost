@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="Garbage report" 
         Height="450" 
-        Width="800">
+        Width="220">
   <Grid>
     <TabControl 
       Margin="5">
 
       <TabItem
-        Header="Gft">
+        Header="Bio">
         <DataGrid
           x:Name="GftReportDataGrid"
           AutoGenerateColumns="False"
@@ -31,7 +31,7 @@
 
 
       <TabItem
-        Header="Glas">
+        Header="Glass">
         <DataGrid
           x:Name="GlassReportDataGrid"
           AutoGenerateColumns="False"

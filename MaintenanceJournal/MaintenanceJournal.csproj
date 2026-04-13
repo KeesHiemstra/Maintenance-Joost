@@ -78,6 +78,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\JournalWindowCommands.cs" />
     <Compile Include="Commands\MainWindowCommands.cs" />
+    <Compile Include="Extentions\DateExtention.cs" />
     <Compile Include="Extentions\Log.cs" />
     <Compile Include="Extentions\PathExtensions.cs" />
     <Compile Include="Models\Calendar.cs" />

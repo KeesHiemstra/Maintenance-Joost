@@ -1,4 +1,10 @@
-﻿Version 2.1.2.32 (2026-04-13)
+﻿Version history of Maintenance Journal.
+Version 2.1.2.33 (2026-04-13)
+* Changed the width of the Garbage report.
+* Changed the tab titles of the Garbage report.
+* Prevent duplicate source of the weeknmubers. 
+
+Version 2.1.2.32 (2026-04-13)
 * Added Garbage report.
 
 Version 2.1.1.31 (2025-12-06)
