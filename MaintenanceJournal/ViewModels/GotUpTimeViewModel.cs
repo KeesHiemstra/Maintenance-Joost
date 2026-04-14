@@ -1,4 +1,6 @@
 ﻿
+using CHi.Extensions;
+
 using MaintenanceJournal.Models;
 using MaintenanceJournal.Views;
 
@@ -125,7 +127,7 @@ namespace MaintenanceJournal.ViewModels
 		private void CollectWeeks()
 		{
 			DateTime startDate = _Journals.Min(x => x.Date);
-			startDate = startDate.AddDays(-((int)startDate.DayOfWeek) + 1);
+			startDate = startDate.WeekStart();
 
 			DateTime endDate = _Journals.Max(x => x.Date.Date);
 			while (startDate < endDate)
@@ -138,7 +140,7 @@ namespace MaintenanceJournal.ViewModels
 
 				if (gotUpTime != null)
 				{
-					gotUpTime.Period = WeekNumber(startDate);
+					gotUpTime.Period = startDate.WeekNumber();
 					Weeks.Insert(0, gotUpTime);
 				}
 
@@ -185,34 +187,6 @@ namespace MaintenanceJournal.ViewModels
 			};
 
 			return result;
-		}
-
-		private string WeekNumber(DateTime date)
-		{
-			DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
-			System.Globalization.Calendar cal = dfi.Calendar;
-
-			int year = date.Year;
-			int week = cal.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
-			if (week == 52 && date.Month == 1)
-			{
-				year--;
-			}
-			else if (week == 53)
-			{
-				if (date.Month == 12 && date.DayOfWeek <= DayOfWeek.Wednesday)
-				{
-					week = 1;
-					year++;
-				}
-				else if (date.Month == 1 && date.DayOfWeek >= DayOfWeek.Thursday)
-				{
-					year--;
-				}
-			}
-
-			return $"{year}-w{week:00}";
 		}
 
 		#endregion

@@ -42,5 +42,56 @@ namespace CHi.Extensions
 			return $"{year}-w{week:00}";
 		}
 
+		/// <summary>
+		/// Returns a string representing the calendar quarter and year of the specified date.
+		/// </summary>
+		/// <param name="date">The date for which to determine the quarter and year.</param>
+		/// <returns>A string in the format "yyyy-qN", where "yyyy" is the year and "N" is the 
+		/// quarter number (1 to 4) corresponding to the specified date.</returns>
+		public static string QuarterNumber(this DateTime date)
+		{
+			int quarter = (date.Month - 1) / 3 + 1;
+			return $"{date.Year}-q{quarter}";
+		}
+
+		/// <summary>
+		/// Returns a new DateTime representing the start of the week for the specified date, 
+		/// using Monday as the first day of the week.
+		/// </summary>
+		/// <remarks>This method treats Monday as the first day of the week, following the 
+		/// ISO 8601 standard. The returned DateTime has its time component set to 00:00:00.</remarks>
+		/// <param name="date">The date for which to determine the start of the week.</param>
+		/// <returns>A DateTime value set to the date of the Monday of the same week as the 
+		/// specified date, with the time component set to midnight.</returns>
+		public static DateTime WeekStart(this DateTime date)
+		{
+			int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
+			return date.AddDays(-diff).Date;
+		}
+
+		/// <summary>
+		/// Returns a new DateTime representing the first day of the month for the specified date.
+		/// </summary>
+		/// <param name="date">The date for which to retrieve the first day of its month.</param>
+		/// <returns>A DateTime set to the first day of the month and the same time component as 
+		/// midnight for the specified date.</returns>
+		public static DateTime MonthStart(this DateTime date)
+		{
+			return new DateTime(date.Year, date.Month, 1);
+		}
+
+		/// <summary>
+		/// Returns a new DateTime representing the first day of the quarter in which the 
+		/// specified date occurs.
+		/// </summary>
+		/// <param name="date">The date for which to determine the start of the quarter.</param>
+		/// <returns>A DateTime set to the first day of the quarter containing the specified date,
+		/// with the same year and time set to midnight.</returns>
+		public static DateTime QuarterStart(this DateTime date)
+		{
+			int quarter = (date.Month - 1) / 3 + 1;
+			int startMonth = (quarter - 1) * 3 + 1;
+			return new DateTime(date.Year, startMonth, 1);
+		}
 	}
 }

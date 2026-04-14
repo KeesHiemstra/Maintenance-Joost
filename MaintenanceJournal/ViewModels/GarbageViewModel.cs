@@ -83,7 +83,7 @@ namespace MaintenanceJournal.ViewModels
 					Date = garbage[i].DTStart.Value,
 					Count = count++,
 					Weeks = (i == 0) ? 0 : 
-						(int)((garbage[i].DTStart.Value - garbage[i - 1].DTStart.Value).TotalDays + 1) / 7
+						(int)((garbage[i].DTStart.Value - garbage[i - 1].DTStart.Value).TotalDays + 4) / 7
 				};
 				report.Insert(0, item);
 			}

@@ -30,7 +30,10 @@ namespace MaintenanceJournal
 			InitializeComponent();
 			Log.Write("Started Journal");
 			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			Title = $"Journal ({version})";
+#if DEBUG
+			version += " (Debug)";
+#endif
+			Title = $"Journal {version}";
 
 			VM = new MainViewModel(this);
 			DataContext = VM;
@@ -253,6 +256,20 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region ReportEjaculation
+
+		private void ReportEjaculationCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
+
+		private void ReportEjaculationCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.ReportEjaculation();
+		}
+
+		#endregion
+
 		#region +Graphs
 
 		#region GraphGotUpTime
@@ -359,5 +376,9 @@ namespace MaintenanceJournal
 
 		#endregion
 
-	}
+		private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+
+        }
+    }
 }

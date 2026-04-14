@@ -106,6 +106,30 @@
         </DataGrid>
 
       </TabItem>
+
+      <TabItem
+        Header="Quarter">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding DefecateQuarters}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalGoings}" Header="Goings" />
+            <DataGridTextColumn Binding="{Binding MinGoings}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgGoings, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxGoings}" Header="Max" />
+            <DataGridTextColumn Binding="{Binding TotalWips}" Header="Total" />
+            <DataGridTextColumn Binding="{Binding MinWips}" Header="Min" />
+            <DataGridTextColumn Binding="{Binding AvgWips, StringFormat=0.0}" Header="Avg" />
+            <DataGridTextColumn Binding="{Binding MaxWips}" Header="Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
     </TabControl>
 
   </Grid>

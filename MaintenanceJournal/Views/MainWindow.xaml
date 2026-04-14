@@ -74,6 +74,10 @@
       CanExecute="ReportDefecateCommand_CanExecute"
       Command="cmd:MainWindowCommands.ReportDefecate"
       Executed="ReportDefecateCommand_Executed" />
+    <CommandBinding
+      CanExecute="ReportEjaculationCommand_CanExecute"
+      Command="cmd:MainWindowCommands.ReportEjaculation"
+      Executed="ReportEjaculationCommand_Executed" />
   </Window.CommandBindings>
 
   <Grid>
@@ -112,6 +116,7 @@
         <MenuItem Command="cmd:MainWindowCommands.ReportGotUpTime" />
         <MenuItem Command="cmd:MainWindowCommands.ReportUrine" />
         <MenuItem Command="cmd:MainWindowCommands.ReportDefecate" />
+        <MenuItem Command="cmd:MainWindowCommands.ReportEjaculation" />
       </MenuItem>
 
       <MenuItem Header="_Graphs">

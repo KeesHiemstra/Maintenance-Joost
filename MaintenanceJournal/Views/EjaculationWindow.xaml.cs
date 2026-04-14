@@ -5,11 +5,11 @@ using System.Windows;
 namespace MaintenanceJournal.Views
 {
 	/// <summary>
-	/// Interaction logic for GarbageWindow.xaml
+	/// Interaction logic for EjaculationWindow.xaml
 	/// </summary>
-	public partial class GarbageWindow : Window
+	public partial class EjaculationWindow : Window
 	{
-		public GarbageWindow(GarbageViewModel garbageViewModel)
+		public EjaculationWindow(EjaculationViewModel ejaculationModelView)
 		{
 			InitializeComponent();
 		}

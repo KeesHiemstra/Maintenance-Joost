@@ -23,6 +23,7 @@ namespace MaintenanceJournal.ViewModels
 		public List<UrineDay> UrineDays { get; set; }
 		public List<UrineReport> UrineWeeks { get; set; }
 		public List<UrineReport> UrineMonths { get; set; }
+		public List<UrineReport> UrineQuarters { get; set; }
 
 		#endregion
 
@@ -89,6 +90,7 @@ namespace MaintenanceJournal.ViewModels
 		{
 			CollectReportDataWeek();
 			CollectReportDataMonth();
+			CollectReportDataQuarter();
 		}
 
 		private void CollectReportDataWeek()
@@ -96,7 +98,7 @@ namespace MaintenanceJournal.ViewModels
 			UrineWeeks = new List<UrineReport>();
 
 			DateTime startDate = UrineDays.Min(x => x.Date.Date);
-			startDate = startDate.AddDays(-((int)startDate.DayOfWeek) + 1);
+			startDate = startDate.WeekStart();
 
 			DateTime endDate = UrineDays.Max(x => x.Date.Date);
 			while (startDate < endDate)
@@ -136,7 +138,7 @@ namespace MaintenanceJournal.ViewModels
 			UrineMonths = new List<UrineReport>();
 
 			DateTime startDate = UrineDays.Min(x => x.Date.Date);
-			startDate = startDate.AddDays(-(startDate.Day) + 1);
+			startDate = startDate.MonthStart();
 
 			DateTime endDate = UrineDays.Max(x => x.Date.Date);
 			while (startDate < endDate)
@@ -168,6 +170,46 @@ namespace MaintenanceJournal.ViewModels
 				UrineMonths.Insert(0, urineReport);
 
 				startDate = startDate.AddMonths(1);
+			}
+		}
+
+		private void CollectReportDataQuarter()
+		{
+			UrineQuarters = new List<UrineReport>();
+
+			DateTime startDate = UrineDays.Min(x => x.Date.Date);
+			startDate = startDate.QuarterStart();
+
+			DateTime endDate = UrineDays.Max(x => x.Date.Date);
+			while (startDate < endDate)
+			{
+				UrineReport urineReport = new UrineReport()
+				{
+					Period = startDate.QuarterNumber(),
+				};
+
+				var days = UrineDays
+					.Where(x => x.Date >= startDate && x.Date < startDate.AddMonths(3))
+					.ToList();
+
+				if (days.Count() == 0)
+				{
+					startDate = startDate.AddMonths(3);
+					continue;
+				}
+				urineReport.TotalMin = days.Min(x => x.Total);
+				urineReport.TotalAvg = days.Average(x => x.Total);
+				urineReport.TotalMax = days.Max(x => x.Total);
+				urineReport.DayMin = days.Min(x => x.Day);
+				urineReport.DayAvg = days.Average(x => x.Day);
+				urineReport.DayMax = days.Max(x => x.Day);
+				urineReport.NightMin = days.Min(x => x.Night);
+				urineReport.NightAvg = days.Average(x => x.Night);
+				urineReport.NightMax = days.Max(x => x.Night);
+
+				UrineQuarters.Insert(0, urineReport);
+
+				startDate = startDate.AddMonths(3);
 			}
 		}
 

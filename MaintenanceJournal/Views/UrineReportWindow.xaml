@@ -88,6 +88,31 @@
         </DataGrid>
 
       </TabItem>
+      
+      <TabItem
+        Header="Quarter">
+
+        <DataGrid
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          IsReadOnly="True"
+          ItemsSource="{Binding UrineQuarters}">
+          <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Period}" Header="Period" />
+            <DataGridTextColumn Binding="{Binding TotalMin}" Header="T Min" />
+            <DataGridTextColumn Binding="{Binding TotalAvg, StringFormat=0.0}" Header="T Avg" />
+            <DataGridTextColumn Binding="{Binding TotalMax}" Header="T Max" />
+            <DataGridTextColumn Binding="{Binding DayMin}" Header="D Min" />
+            <DataGridTextColumn Binding="{Binding DayAvg, StringFormat=0.0}" Header="D Avg" />
+            <DataGridTextColumn Binding="{Binding DayMax}" Header="D Max" />
+            <DataGridTextColumn Binding="{Binding NightMin}" Header="N Min" />
+            <DataGridTextColumn Binding="{Binding NightAvg, StringFormat=0.0}" Header="N Avg" />
+            <DataGridTextColumn Binding="{Binding NightMax}" Header="N Max" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+      </TabItem>
     </TabControl>
   </Grid>
 </Window>

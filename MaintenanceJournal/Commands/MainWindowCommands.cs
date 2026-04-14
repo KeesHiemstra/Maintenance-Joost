@@ -134,6 +134,14 @@ namespace MaintenanceJournal.Commands
 				new InputGestureCollection() { }
 			);
 
+		public static readonly RoutedUICommand ReportEjaculation = new RoutedUICommand
+			(
+				"_Ejaculation",
+				"ReportEjaculation",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
 		#endregion
 
 		#region Graphs

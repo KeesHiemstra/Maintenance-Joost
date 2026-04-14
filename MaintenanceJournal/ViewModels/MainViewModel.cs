@@ -3,8 +3,6 @@ using CHi.Log;
 
 using Joost;
 
-using MaintenanceJournal.Views;
-
 using Newtonsoft.Json;
 
 using System;
@@ -349,6 +347,12 @@ namespace MaintenanceJournal.ViewModels
 		internal void ReportDefecate()
 		{
 			DefecateViewModel report = new DefecateViewModel(this);
+			report.ShowReport();
+		}
+
+		internal void ReportEjaculation()
+		{
+			EjaculationViewModel report = new EjaculationViewModel(this);
 			report.ShowReport();
 		}
 

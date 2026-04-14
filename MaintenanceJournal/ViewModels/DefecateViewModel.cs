@@ -24,6 +24,8 @@ namespace MaintenanceJournal.ViewModels
 		public List<DefecateReport> DefecateDays { get; set; }
 		public List<DefecateReport> DefecateWeeks { get; set; }
 		public List<DefecateReport> DefecateMonths { get; set; }
+		public List<DefecateReport> DefecateQuarters { get; set; }
+
 
 		#endregion
 
@@ -55,7 +57,6 @@ namespace MaintenanceJournal.ViewModels
 		}
 
 		#endregion
-
 
 		private void CollectData()
 		{
@@ -90,6 +91,7 @@ namespace MaintenanceJournal.ViewModels
 			CollectReportDataDay();
 			CollectReportDataWeek();
 			CollectReportDataMonth();
+			CollectReportDataQuarter();
 		}
 
 		private void CollectReportDataDay()
@@ -135,7 +137,7 @@ namespace MaintenanceJournal.ViewModels
 			DefecateWeeks = new List<DefecateReport>();
 
 			DateTime startDate = DefecateDays.Min(x => x.Date);
-			startDate = startDate.AddDays(-((int)startDate.DayOfWeek) + 1);
+			startDate = startDate.WeekStart();
 
 			DateTime endDate = DefecateDays.Max(x => x.Date.Date).AddDays(7);
 			while (startDate < endDate)
@@ -183,7 +185,7 @@ namespace MaintenanceJournal.ViewModels
 			DefecateMonths = new List<DefecateReport>();
 
 			DateTime startDate = DefecateDays.Min(x => x.Date);
-			startDate = startDate.AddDays(-(startDate.Day) + 1);
+			startDate = startDate.MonthStart();
 
 			DateTime endDate = DefecateDays.Max(x => x.Date.Date);
 			while (startDate < endDate)
@@ -215,6 +217,46 @@ namespace MaintenanceJournal.ViewModels
 				DefecateMonths.Insert(0, report);
 
 				startDate = startDate.AddMonths(1);
+			}
+		}
+
+		private void CollectReportDataQuarter()
+		{
+			DefecateQuarters = new List<DefecateReport>();
+
+			DateTime startDate = DefecateDays.Min(x => x.Date);
+			startDate = startDate.QuarterStart();
+
+			DateTime endDate = DefecateDays.Max(x => x.Date.Date);
+			while (startDate < endDate)
+			{
+				DefecateReport report = new DefecateReport()
+				{
+					Period = $"{startDate.QuarterNumber()}",
+				};
+
+				var days = DefecateDays
+					.Where(x => x.Date >= startDate && x.Date < startDate.AddMonths(3) /* &&
+								 x.TotalWips > 0 */)
+					.ToList();
+				if (days.Count() == 0)
+				{
+					startDate = startDate.AddMonths(3);
+					continue;
+				}
+
+				report.TotalGoings = days.Sum(x => x.TotalGoings);
+				report.MinGoings = (byte)days.Min(x => x.TotalGoings);
+				report.AvgGoings = days.Average(x => x.TotalGoings);
+				report.MaxGoings = (byte)days.Max(x => x.TotalGoings);
+				report.TotalWips = days.Sum(x => x.TotalWips);
+				report.MinWips = (byte)days.Min(x => x.MinWips);
+				report.AvgWips = days.Average(x => x.AvgWips);
+				report.MaxWips = (byte)days.Max(x => x.MaxWips);
+
+				DefecateQuarters.Insert(0, report);
+
+				startDate = startDate.AddMonths(3);
 			}
 		}
 
