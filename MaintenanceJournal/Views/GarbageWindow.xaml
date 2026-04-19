@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Garbage report" 
         Height="450" 
-        Width="220">
+        Width="220"
+        KeyUp="Window_KeyUp">
   <Grid>
     <TabControl 
       Margin="5">

@@ -22,5 +22,14 @@ namespace MaintenanceJournal.Views
 				FallenRainDataGrid.Columns[i].MinWidth = 50;
 			}
 		}
+
+		private void Window_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+		{
+			if (e.Key == System.Windows.Input.Key.Escape)
+			{
+				this.Close();
+			}
+		}
+
 	}
 }

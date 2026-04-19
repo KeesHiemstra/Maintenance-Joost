@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Ejaculation report" 
         Height="450" 
-        Width="250">
+        Width="250"
+        KeyUp="Window_KeyUp">
   <Grid>
 
     <TabControl

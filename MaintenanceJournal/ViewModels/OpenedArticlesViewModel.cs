@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MaintenanceJournal.ViewModels
 {
@@ -29,8 +30,8 @@ namespace MaintenanceJournal.ViewModels
 
 		#region [ Properties ]
 
-		public int Count 
-		{ 
+		public int Count
+		{
 			get => count;
 			set
 			{
@@ -41,8 +42,8 @@ namespace MaintenanceJournal.ViewModels
 				}
 			}
 		}
-		public double Avg 
-		{ 
+		public double Avg
+		{
 			get => avg;
 			set
 			{
@@ -53,9 +54,9 @@ namespace MaintenanceJournal.ViewModels
 				}
 			}
 		}
-		public int Min 
-		{ 
-			get => min; 
+		public int Min
+		{
+			get => min;
 			set
 			{
 				if (min != value)
@@ -65,8 +66,8 @@ namespace MaintenanceJournal.ViewModels
 				}
 			}
 		}
-		public int Max 
-		{ 
+		public int Max
+		{
 			get => max;
 			set
 			{
@@ -145,6 +146,27 @@ namespace MaintenanceJournal.ViewModels
 			CollectDetailedReport(((ComboBox)e.Source).SelectedValue.ToString().SplitArticle().Article);
 		}
 
+		internal void ArticleDoubleClicked(object sender, RoutedEventArgs e)
+		{
+			if (sender == null) { return; }
+
+			OpenedArticles Article = ((DataGrid)e.Source).SelectedItem as OpenedArticles;
+			View.ArticleComboBox.SelectedValue = Article.Article;
+			CollectDetailedReport(Article.Article);
+		}
+
+		internal void ArticleKeyUp(object sender, KeyEventArgs e)
+		{
+			if (sender == null) { return; }
+
+			if (e.Key == Key.Enter)
+			{
+				OpenedArticles Article = ((DataGrid)e.Source).SelectedItem as OpenedArticles;
+				View.ArticleComboBox.SelectedValue = Article.Article;
+				CollectDetailedReport(Article.Article);
+			}
+		}
+
 		private List<Journal> GetArticles(string article)
 		{
 			//Mix of opened and closes articles
@@ -156,6 +178,10 @@ namespace MaintenanceJournal.ViewModels
 					.ToList();
 		}
 
+		/// <summary>
+		/// First collect the overview report with all articles, 
+		/// then show the detailed report when an article is selected.
+		/// </summary>
 		private void CollectOverviewReport()
 		{
 			View.ReportDataGrid.ItemsSource = null;
@@ -195,7 +221,7 @@ namespace MaintenanceJournal.ViewModels
 			{
 				View.ReportDataGrid.Columns[i].Visibility = Visibility.Visible;
 			}
-			for (int i = 5; i < 8; i++)
+			for (int i = 5; i <= 8; i++)
 			{
 				View.ReportDataGrid.Columns[i].Visibility = Visibility.Collapsed;
 			}
@@ -243,7 +269,7 @@ namespace MaintenanceJournal.ViewModels
 							{
 								Closed = articles[i + 1].DTStart,
 								Opened = articles[i].DTStart,
-								Days = (int)((articles[i + 1]).DTStart.Value.Date - 
+								Days = (int)((articles[i + 1]).DTStart.Value.Date -
 									articles[i].DTStart.Value.Date).TotalDays,
 								Number = Extensions.SplitArticle(articles[i + 1].Message).Number,
 							});
@@ -256,7 +282,7 @@ namespace MaintenanceJournal.ViewModels
 							{
 								Closed = articles[i + 1].DTStart.Value.Date.AddDays(-1),
 								Opened = articles[i].DTStart,
-								Days = (int)(articles[i + 1].DTStart.Value.Date.AddDays(-1) - 
+								Days = (int)(articles[i + 1].DTStart.Value.Date.AddDays(-1) -
 									articles[i].DTStart.Value.Date).TotalDays,
 								Number = Extensions.SplitArticle(articles[i + 1].Message).Number,
 							});
@@ -268,25 +294,25 @@ namespace MaintenanceJournal.ViewModels
 			#region Show/hide columns
 
 			View.OverviewBorder.Visibility = Visibility.Collapsed;
-			
+
 			for (int i = 0; i < 5; i++)
 			{
 				View.ReportDataGrid.Columns[i].Visibility = Visibility.Collapsed;
 			}
-			for (int i = 5; i < 7; i++)
+			for (int i = 5; i <= 8; i++)
 			{
 				View.ReportDataGrid.Columns[i].Visibility = Visibility.Visible;
 			}
 			//Number column
 			View.ReportDataGrid.Columns[7].Visibility = Visibility.Collapsed;
-			
+
 			if (Report.Count > 0)
 			{
 				if (Report[0].Number != "")
 				{
 					View.ReportDataGrid.Columns[7].Visibility = Visibility.Visible;
 				}
-			
+
 				if (Report[0].Number == "")
 				{
 					//Summary
@@ -294,12 +320,12 @@ namespace MaintenanceJournal.ViewModels
 					Avg = Report.Average(x => x.Days);
 					Min = Report.Min(x => x.Days);
 					Max = Report.Max(x => x.Days);
-			
+
 					//Show summary
 					View.OverviewBorder.Visibility = Visibility.Visible;
 				}
 			}
-			
+
 			#endregion
 
 			//Add just opened article
@@ -317,6 +343,8 @@ namespace MaintenanceJournal.ViewModels
 		}
 
 	}
+
+	#region [ Helpers ]
 
 	public static class Extensions
 	{
@@ -338,4 +366,6 @@ namespace MaintenanceJournal.ViewModels
 		}
 
 	}
+
+	#endregion
 }

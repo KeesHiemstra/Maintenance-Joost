@@ -30,5 +30,14 @@ namespace MaintenanceJournal.Views
 		{
 
 		}
+
+		private void Window_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Escape)
+			{ 
+				Close(); 
+			}
+		}
+
 	}
 }

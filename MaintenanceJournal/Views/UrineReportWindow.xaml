@@ -6,7 +6,8 @@
         mc:Ignorable="d"
         Title="Urine report" 
         Height="450" 
-        Width="500">
+        Width="500"
+        KeyUp="Window_KeyUp">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />

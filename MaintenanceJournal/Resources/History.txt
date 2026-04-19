@@ -1,5 +1,8 @@
 ﻿Version history of Maintenance Journal.
 ----------------------------------------
+Version 2.1.3.35 (2026-04-19)
+* Subwindows can be closed with the Escape key.
+
 Version 2.1.3.34 (2026-04-14)
 * Added Quarterly column in Urine report and Defect report.
 * Added the Ejaculation report.

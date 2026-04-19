@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Defecate report" 
         Height="450" 
-        Width="400">
+        Width="400"
+        KeyUp="Window_KeyUp">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
