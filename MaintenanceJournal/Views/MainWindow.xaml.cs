@@ -89,7 +89,7 @@ namespace MaintenanceJournal
 		private void RestoreCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = File.Exists(VM.Options.RestoreFile.TranslatePath()) &&
-				Assembly.GetEntryAssembly().Location.ToLower() != 
+				Assembly.GetEntryAssembly().Location.ToLower() !=
 					@"%OneDrive\Bin\MaintenanceJournal.exe%".ToLower() &&
 					VM.Options.DbName.ToLower() != "joost";
 		}
@@ -290,17 +290,21 @@ namespace MaintenanceJournal
 
 		#endregion
 
+		#region +Context menu
+
+		private void RecordAgeCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = VM.Journals.Count() > 0;
+		}
+
+		private void RecordAgeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+		{
+			VM.RecordAge(sender, e);
+		}
+
 		#endregion
 
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			VM.CloseWindow();
-		}
-
-		internal void UpdateDatabaseConnection()
-		{
-			VM.UpdateDatabaseConnection();
-		}
+		#endregion
 
 		#region Search buttons
 
@@ -335,11 +339,6 @@ namespace MaintenanceJournal
 		}
 
 		#endregion
-
-		private void MainDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			VM.DoubleClickDataGrid(sender, e);
-		}
 
 		#region Acting on filters
 
@@ -376,9 +375,20 @@ namespace MaintenanceJournal
 
 		#endregion
 
-		private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
+			VM.CloseWindow();
+		}
 
-        }
-    }
+		internal void UpdateDatabaseConnection()
+		{
+			VM.UpdateDatabaseConnection();
+		}
+
+		private void MainDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			VM.DoubleClickDataGrid(sender, e);
+		}
+
+	}
 }

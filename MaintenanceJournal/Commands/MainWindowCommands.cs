@@ -4,6 +4,9 @@ namespace MaintenanceJournal.Commands
 {
 	public static class MainWindowCommands
 	{
+
+		#region File
+		
 		public static readonly RoutedUICommand Exit = new RoutedUICommand
 			(
 				"E_xit",
@@ -66,6 +69,20 @@ namespace MaintenanceJournal.Commands
 					new KeyGesture(Key.N, ModifierKeys.Control)
 				}
 			);
+
+		#endregion
+
+		#region Context menu
+
+		public static readonly RoutedUICommand RecordAge = new RoutedUICommand
+			(
+				"_Age",
+				"RecordAge",
+				typeof(MainWindowCommands),
+				new InputGestureCollection() { }
+			);
+
+		#endregion
 
 		#region Reports
 

@@ -3,6 +3,8 @@ using CHi.Log;
 
 using Joost;
 
+using MaintenanceJournal.Extentions;
+
 using Newtonsoft.Json;
 
 using System;
@@ -567,6 +569,20 @@ namespace MaintenanceJournal.ViewModels
 		}
 
 		#endregion
+
+		internal void RecordAge(object sender, ExecutedRoutedEventArgs e)
+		{
+			if (sender == null) { return; }
+
+			DataGrid record = (DataGrid)e.Source as DataGrid;
+			Journal selectedJournal = record.SelectedItem as Journal;
+			TimeSpan age = DateTime.Now - selectedJournal.DTStart.Value;
+
+			string message = $"{selectedJournal.DTStart.Value.Date.ShowAge()}";
+
+			MessageBox.Show(message, "Record age", MessageBoxButton.OK, MessageBoxImage.Information);
+
+		}
 
 	}
 }

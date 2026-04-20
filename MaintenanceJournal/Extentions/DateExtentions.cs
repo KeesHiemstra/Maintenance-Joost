@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace CHi.Extensions
 {
-	public static class DateExtention
+	public static class DateExtentions
 	{
 		/// <summary>
 		/// Returns the week number of the year for the given date in the format "YYYY-wWW", 
@@ -93,5 +93,67 @@ namespace CHi.Extensions
 			int startMonth = (quarter - 1) * 3 + 1;
 			return new DateTime(date.Year, startMonth, 1);
 		}
+
+		/// <summary>
+		/// Return written past time since now.
+		/// </summary>
+		/// <param name="time"></param>
+		/// <returns></returns>
+		public static string ShowAge(this DateTime time)
+		{
+			string result = string.Empty;
+			DateTime now = DateTime.Now;
+			TimeSpan diff = now - time;
+			DateTime calcDate = time;
+			int years = 0;
+
+			if (time > now)
+				return "In the future";
+
+			// Years
+			if (diff.Days >= 365)
+			{
+				years = (int)(diff.Days / 365.25);
+				diff = diff.Subtract(TimeSpan.FromDays(years * 365.25));
+				calcDate = time.AddYears(years);
+				result = $"{years} year{(years != 1 ? "s" : "")} ";
+			}
+
+			// Months
+			int months = 0;
+			while (calcDate.AddMonths(1) <= now)
+			{
+				months++;
+				calcDate = calcDate.AddMonths(1);
+			}
+			if (months == 12)
+			{
+				years++;
+				result = $"{years} year{(years != 1 ? "s" : "")} ";
+				diff = now - calcDate.AddYears(1);
+				months = 0;
+			}
+			if (months > 0)
+			{
+				result += $"{months} month{(months != 1 ? "s" : "")} ";
+				diff = now - calcDate;
+			}
+
+			// Days
+			if (diff.Days >= 1)
+			{
+				result += $"{diff.Days} day{(diff.Days != 1 ? "s" : "")} ";
+				diff = diff.Subtract(TimeSpan.FromDays(diff.Days));
+			}
+
+			// Hours and Minutes
+			if (diff.Minutes >= 1)
+			{
+				result += $"{diff.Hours} hour{(diff.Hours != 1 ? "s" : "")} {diff.Minutes} minute{(diff.Minutes != 1 ? "s" : "")}";
+			}
+
+			return result;
+		}
+
 	}
 }

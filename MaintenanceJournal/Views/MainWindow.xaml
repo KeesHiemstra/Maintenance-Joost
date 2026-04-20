@@ -78,6 +78,10 @@
       CanExecute="ReportEjaculationCommand_CanExecute"
       Command="cmd:MainWindowCommands.ReportEjaculation"
       Executed="ReportEjaculationCommand_Executed" />
+    <CommandBinding
+      CanExecute="RecordAgeCommand_CanExecute"
+      Command="cmd:MainWindowCommands.RecordAge"
+      Executed="RecordAgeCommand_Executed" />
   </Window.CommandBindings>
 
   <Grid>
@@ -247,6 +251,11 @@
           Binding="{Binding Message}"
           Header="Message" />
       </DataGrid.Columns>
+      <DataGrid.ContextMenu>
+        <ContextMenu>
+          <MenuItem Command="cmd:MainWindowCommands.RecordAge" />
+        </ContextMenu>
+      </DataGrid.ContextMenu>
     </DataGrid>
 
   </Grid>
