@@ -146,10 +146,16 @@ namespace CHi.Extensions
 				diff = diff.Subtract(TimeSpan.FromDays(diff.Days));
 			}
 
+			if (diff.Hours >= 1)
+			{
+				result += $"{diff.Hours} hour{(diff.Hours != 1 ? "s" : "")} ";
+				diff = diff.Subtract(TimeSpan.FromHours(diff.Hours));
+			}
+
 			// Hours and Minutes
 			if (diff.Minutes >= 1)
 			{
-				result += $"{diff.Hours} hour{(diff.Hours != 1 ? "s" : "")} {diff.Minutes} minute{(diff.Minutes != 1 ? "s" : "")}";
+				result += $"{diff.Minutes} minute{(diff.Minutes != 1 ? "s" : "")}";
 			}
 
 			return result;

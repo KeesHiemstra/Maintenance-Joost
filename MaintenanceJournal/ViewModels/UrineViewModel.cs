@@ -101,7 +101,7 @@ namespace MaintenanceJournal.ViewModels
 			startDate = startDate.WeekStart();
 
 			DateTime endDate = UrineDays.Max(x => x.Date.Date);
-			while (startDate < endDate)
+			while (startDate <= endDate)
 			{
 				UrineReport urineReport = new UrineReport()
 				{
@@ -141,7 +141,7 @@ namespace MaintenanceJournal.ViewModels
 			startDate = startDate.MonthStart();
 
 			DateTime endDate = UrineDays.Max(x => x.Date.Date);
-			while (startDate < endDate)
+			while (startDate <= endDate)
 			{
 				UrineReport urineReport = new UrineReport()
 				{
@@ -181,7 +181,7 @@ namespace MaintenanceJournal.ViewModels
 			startDate = startDate.QuarterStart();
 
 			DateTime endDate = UrineDays.Max(x => x.Date.Date);
-			while (startDate < endDate)
+			while (startDate <= endDate)
 			{
 				UrineReport urineReport = new UrineReport()
 				{

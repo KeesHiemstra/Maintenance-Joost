@@ -12,7 +12,8 @@
   <Grid>
 
     <TabControl
-      Margin="5">
+      Margin="5"
+      SelectedIndex="1">
 
       <TabItem
         Header="Day">

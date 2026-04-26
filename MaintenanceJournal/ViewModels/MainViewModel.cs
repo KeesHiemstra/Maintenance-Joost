@@ -3,8 +3,6 @@ using CHi.Log;
 
 using Joost;
 
-using MaintenanceJournal.Extentions;
-
 using Newtonsoft.Json;
 
 using System;
@@ -512,20 +510,6 @@ namespace MaintenanceJournal.ViewModels
 
 		#endregion
 
-		internal void CloseWindow()
-		{
-			Log.Write("Closing Journal");
-		}
-
-		internal void UpdateDatabaseConnection()
-		{
-			View.MainDataGrid.ItemsSource = null;
-			GetJournals();
-			View.MainDataGrid.ItemsSource = Journals;
-			NotifyPropertyChanged("FilteredCount");
-			Log.Write($"Connection is changed to {Options.DbName}");
-		}
-
 		#region GetJournalEvents()
 
 		private void GetJournalEvents()
@@ -570,15 +554,28 @@ namespace MaintenanceJournal.ViewModels
 
 		#endregion
 
+		internal void CloseWindow()
+		{
+			Log.Write("Closing Journal");
+		}
+
+		internal void UpdateDatabaseConnection()
+		{
+			View.MainDataGrid.ItemsSource = null;
+			GetJournals();
+			View.MainDataGrid.ItemsSource = Journals;
+			NotifyPropertyChanged("FilteredCount");
+			Log.Write($"Connection is changed to {Options.DbName}");
+		}
+
 		internal void RecordAge(object sender, ExecutedRoutedEventArgs e)
 		{
 			if (sender == null) { return; }
 
 			DataGrid record = (DataGrid)e.Source as DataGrid;
 			Journal selectedJournal = record.SelectedItem as Journal;
-			TimeSpan age = DateTime.Now - selectedJournal.DTStart.Value;
 
-			string message = $"{selectedJournal.DTStart.Value.Date.ShowAge()}";
+			string message = $"Age: {selectedJournal.DTStart.Value.ShowAge()}";
 
 			MessageBox.Show(message, "Record age", MessageBoxButton.OK, MessageBoxImage.Information);
 

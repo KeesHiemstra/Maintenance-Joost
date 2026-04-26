@@ -8,7 +8,6 @@ using MaintenanceJournal.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace MaintenanceJournal.ViewModels
 {
@@ -96,11 +95,11 @@ namespace MaintenanceJournal.ViewModels
 			DateTime startDate = EjaculationList.Min(x => x.Date).WeekStart();
 			DateTime endDate = EjaculationList.Max(x => x.Date);
 
-			while (startDate < endDate)
+			while (startDate <= endDate)
 			{
-				DateTime weekEnd = startDate.AddDays(6);
+				DateTime weekEnd = startDate.AddDays(7);
 				int total = EjaculationList
-					.Where(x => x.Date >= startDate && x.Date <= weekEnd)
+					.Where(x => x.Date >= startDate && x.Date < weekEnd)
 					.Sum(x => x.Total);
 				ejaculationList.Insert(0, new EjaculationReport	
 				{
@@ -122,7 +121,7 @@ namespace MaintenanceJournal.ViewModels
 			DateTime startDate = EjaculationList.Min(x => x.Date).MonthStart();
 			DateTime endDate = EjaculationList.Max(x => x.Date);
 
-			while (startDate < endDate)
+			while (startDate <= endDate)
 			{
 				DateTime monthEnd = startDate.AddMonths(1).AddDays(-1);
 				int total = EjaculationList
@@ -148,7 +147,7 @@ namespace MaintenanceJournal.ViewModels
 			DateTime startDate = EjaculationList.Min(x => x.Date).QuarterStart();
 			DateTime endDate = EjaculationList.Max(x => x.Date);
 
-			while (startDate < endDate)
+			while (startDate <= endDate)
 			{
 				DateTime quarterEnd = startDate.AddMonths(3).AddDays(-1);
 				int total = EjaculationList

@@ -9,6 +9,7 @@ namespace MaintenanceJournal.Views
 	/// </summary>
 	public partial class EjaculationWindow : Window
 	{
+
 		public EjaculationWindow(EjaculationViewModel ejaculationModelView)
 		{
 			InitializeComponent();
